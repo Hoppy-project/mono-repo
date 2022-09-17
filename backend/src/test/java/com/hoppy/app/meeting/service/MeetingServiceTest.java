@@ -6,12 +6,17 @@ import com.hoppy.app.meeting.dto.UpdateMeetingDto;
 import com.hoppy.app.meeting.repository.MeetingRepository;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
+import com.hoppy.app.search.dto.MeetingSearchListDto;
 import com.hoppy.app.utility.EntityUtility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,6 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 2022-09-11        Kim       최초 생성
  */
 @SpringBootTest
+@DisplayName("모임 통합 테스트")
 public class MeetingServiceTest {
 
     @Autowired
@@ -60,5 +66,18 @@ public class MeetingServiceTest {
         assertThat(meeting.getTitle()).isEqualTo("update-title");
         assertThat(meeting.getContent()).isEqualTo("update-content");
         assertThat(meeting.getUrl()).isNotNull();
+    }
+
+    @DisplayName("🔎 모임 검색 테스트")
+    @Test
+    void searchMeetingTest() {
+        // given
+        // noting
+
+        // when
+        MeetingSearchListDto dto = meetingService.searchMeetings("title", 0);
+
+        // then
+        assertThat(dto.getNextPagingUrl()).isEqualTo("end");
     }
 }

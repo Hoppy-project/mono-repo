@@ -28,15 +28,24 @@ public class EntityUtility {
                 .username("test-name")
                 .build();
     }
-    public static Meeting testMeeting(Member owner, Category category) {
+    public static Meeting testMeeting(Member owner, String url, String title, String content, Category category, Integer limit) {
         return Meeting.builder()
                 .owner(owner)
-                .url("test-url")
-                .title("title-" + UUID.randomUUID().toString().substring(0,5))
-                .content("test-content")
+                .url(url)
+                .title(title)
+                .content(content)
                 .category(category)
-                .memberLimit(10)
+                .memberLimit(limit)
                 .build();
+    }
+    public static Meeting testMeeting(Member owner, Category category) {
+        return testMeeting(owner,
+                "test-url",
+                "test-title-" + UUID.randomUUID().toString().substring(0,5),
+                "test-content",
+                category,
+                10
+        );
     }
     public static Meeting testHealthMeeting(Member owner) {
         return testMeeting(owner, Category.HEALTH);

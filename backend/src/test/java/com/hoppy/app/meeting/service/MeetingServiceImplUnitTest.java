@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.given;
 
 import com.hoppy.app.meeting.Category;
 import com.hoppy.app.meeting.domain.Meeting;
+import com.hoppy.app.meeting.dto.PagingMeetingDto;
 import com.hoppy.app.meeting.dto.ParticipantDto;
 import com.hoppy.app.meeting.repository.MeetingRepository;
 import com.hoppy.app.member.domain.Member;
@@ -176,10 +177,10 @@ class MeetingServiceImplUnitTest {
         given(meetingRepository.infiniteScrollPaging(category, Long.MAX_VALUE, pageable)).willReturn(new ArrayList<>());
 
         // when
-        BusinessException exception = assertThrows(BusinessException.class,
-                () -> meetingInquiryService.pagingMeeting(REQ_CATEGORY_NUM, REQ_LAST_ID, REQ_MEMBER_ID));
+        PagingMeetingDto dto = meetingInquiryService.pagingMeeting(REQ_CATEGORY_NUM, REQ_LAST_ID, REQ_MEMBER_ID);
 
         // then
-        assertEquals(ErrorCode.NO_MORE_MEETING.getMessage(), exception.getMessage());
+        assertThat(dto.getMeetingList()).isEmpty();
+        assertThat(dto.getNextPagingUrl()).isEqualTo("end");
     }
 }

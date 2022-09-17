@@ -402,4 +402,18 @@ class MeetingControllerTest {
         ))
         .andDo(print());
     }
+
+    @DisplayName("모임 검색 테스트")
+    @Test
+    @WithMockCustomUser(id = "1", password = "secret-key", role = Role.USER, socialType = SocialType.KAKAO)
+    void meetingSearchTest() throws Exception {
+        // given
+        Member member = memberService.findById(1L);
+
+        // when
+        ResultActions resultActions = RequestUtility.getRequest(mockMvc, "/search/meeting/이런제목은없을걸");
+
+        // then
+        resultActions.andDo(print());
+    }
 }

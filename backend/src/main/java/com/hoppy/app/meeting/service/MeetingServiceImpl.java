@@ -12,11 +12,12 @@ import com.hoppy.app.member.repository.MemberMeetingRepository;
 import com.hoppy.app.member.service.MemberService;
 import com.hoppy.app.response.error.exception.BusinessException;
 import com.hoppy.app.response.error.exception.ErrorCode;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
+
+import com.hoppy.app.search.dto.MeetingSearchDto;
+import com.hoppy.app.search.dto.MeetingSearchListDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -109,7 +110,10 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Override
     public long getLastId(List<Meeting> meetingList) {
-        return meetingList.get(meetingList.size() - 1).getId();
+
+        if(meetingList.isEmpty()) return 0;
+
+        return meetingList.get(meetingList.size() - 1).getId() - 1;
     }
 
     @Override
@@ -118,15 +122,18 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
-    public String createNextPagingUrl(int categoryNumber, long lastId) {
-        if(lastId >= 0)
+    public String createNextSearchPagingUrl(int categoryNumber, long lastId, int size) {
+        if(lastId > 0 && size > 0)
             return "https://hoppy.kro.kr/api/meeting?categoryNumber=" + categoryNumber + "&lastId=" + lastId;
-        else
-            return "end";
+        return "end";
     }
 
     @Override
     public List<MeetingDto> listToDtoList(List<Meeting> meetingList, long memberId) {
+        if(meetingList.isEmpty()) {
+            return new ArrayList<>();
+        }
+
         List<Long> meetingLikes = memberService.getMeetingLikes(memberId);
 
         Map<Long, Boolean> likedMap = meetingLikes.stream()
@@ -142,12 +149,9 @@ public class MeetingServiceImpl implements MeetingService {
         lastId = validCheckLastId(lastId);
         Category category = Category.intToCategory(categoryNumber);
         List<Meeting> meetingList = pagingMeetingList(category, lastId);
-        if(meetingList.isEmpty()) {
-            throw new BusinessException(ErrorCode.NO_MORE_MEETING);
-        }
 
         lastId = getLastId(meetingList);
-        String nextPagingUrl = createNextPagingUrl(categoryNumber, lastId);
+        String nextPagingUrl = createNextSearchPagingUrl(categoryNumber, lastId, meetingList.size());
         List<MeetingDto> meetingDtoList = listToDtoList(meetingList, memberId);
 
         return PagingMeetingDto.of(meetingDtoList, nextPagingUrl);
@@ -230,6 +234,28 @@ public class MeetingServiceImpl implements MeetingService {
     @Transactional
     public void dislikeMeeting(long memberId, long meetingId) {
         memberMeetingLikeRepository.deleteByMemberIdAndMeetingId(memberId, meetingId);
+    }
+
+    @Override
+    public String createNextSearchPagingUrl(String keyword, long lastId, int size) {
+        if(lastId > 0 && size > 0)
+            return "https://hoppy.kro.kr/api/meeting/search/" + keyword + "&lastId=" + lastId;
+        return "end";
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public MeetingSearchListDto searchMeetings(String keyword, long lastId) {
+        lastId = validCheckLastId(lastId);
+        List<Meeting> meetingList = meetingRepository.findByTitleLikes(keyword, lastId, PageRequest.of(0, 14));
+
+        lastId = getLastId(meetingList);
+        String nextPagingUrl = createNextSearchPagingUrl(keyword, lastId, meetingList.size());
+        List<MeetingSearchDto> meetingSearchDtos = meetingList.stream()
+                .map(M -> MeetingSearchDto.meetingToMeetingSearchDto(M))
+                .collect(Collectors.toList());
+
+        return MeetingSearchListDto.of(meetingSearchDtos, nextPagingUrl);
     }
 
     @Override
