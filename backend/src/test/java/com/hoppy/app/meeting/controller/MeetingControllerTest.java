@@ -411,9 +411,14 @@ class MeetingControllerTest {
         Member member = memberService.findById(1L);
 
         // when
-        ResultActions resultActions = RequestUtility.getRequest(mockMvc, "/search/meeting/이런제목은없을걸");
+        ResultActions resultActions = RequestUtility.getRequest(mockMvc, "/search/meeting/title");
 
         // then
-        resultActions.andDo(print());
+        resultActions.andExpect(jsonPath("$.data.meetingList.size()", is(14)))
+                .andDo(document("meeting-search-request",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ))
+                .andDo(print());
     }
 }
