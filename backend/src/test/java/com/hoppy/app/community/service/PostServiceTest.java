@@ -256,7 +256,7 @@ class PostServiceTest {
         // then
         Post findPost = postService.findById(post.getId());
         assertThat(findPost.getTitle()).isEqualTo("update");
-        assertThat(findPost.getImageUrl()).isEqualTo(post.getImageUrl());
+        assertThat(findPost.getUrl()).isEqualTo(post.getUrl());
         assertThat(findPost.getContent()).isEqualTo(post.getContent());
     }
 }

@@ -35,7 +35,7 @@ public class MeetingController {
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         Member member = memberService.findById(userDetails.getId());
-        Meeting meeting = meetingService.createMeeting(dto, member.getId());
+        Meeting meeting = meetingService.createMeeting(dto, member);
         meetingService.createAndSaveMemberMeetingData(meeting, member);
         return responseService.successResult(SuccessCode.CREATE_MEETING_SUCCESS);
     }

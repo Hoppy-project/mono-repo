@@ -160,7 +160,7 @@ class PostControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("message", is("게시물 조회 완료")))
                 .andExpect(jsonPath("$.data.authorName", is("testName")))
-                .andExpect(jsonPath("$.data.authorProfileUrl", is("testProfileUrl")))
+                .andExpect(jsonPath("$.data.profileImageUrl", is("testProfileUrl")))
                 .andExpect(jsonPath("$.data.replyCount", is(REPLY_COUNT + (REPLY_COUNT * RE_REPLY_COUNT))))
                 .andDo(document("post-detail",
                         preprocessRequest(prettyPrint()),
@@ -180,6 +180,7 @@ class PostControllerTest {
                 .meetingId(meeting.getId())
                 .title("test-title")
                 .content("test-content")
+                .url("https://picsum.photos/500/500")
                 .build();
 
         String content = objectMapper.writeValueAsString(createPostDto);

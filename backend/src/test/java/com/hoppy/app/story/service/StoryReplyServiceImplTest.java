@@ -89,7 +89,7 @@ class StoryReplyServiceImplTest {
         assertThat(reply.getReReplies().size()).isEqualTo(0);
 
         StoryReReplyRequestDto dto = StoryReReplyRequestDto.builder().content("ReReply").build();
-        StoryReReply reReply = storyReplyService.uploadStoryReReply(member.getId(), 1L, dto);
+        StoryReReply reReply = storyReplyService.uploadStoryReReply(member.getId(), reply.getId(), dto);
 
         assertThat(reReply.getContent()).isEqualTo("ReReply");
     }

@@ -12,7 +12,7 @@ public interface MeetingService {
 
     void createAndSaveMemberMeetingData(Meeting meeting, Member member);
     boolean checkTitleDuplicate(String name);
-    Meeting createMeeting(CreateMeetingDto dto, long ownerId);
+    Meeting createMeeting(CreateMeetingDto dto, Member owner);
     Meeting findById(long id);
     Meeting findByIdWithParticipants(long id);
     void updateMeeting(UpdateMeetingDto dto, long memberId, long meetingId);

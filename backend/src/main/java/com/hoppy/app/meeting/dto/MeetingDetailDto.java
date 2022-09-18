@@ -18,6 +18,10 @@ public class MeetingDetailDto {
 
     private Long id;
 
+    private String profileImageUrl;
+
+    private String ownerName;
+
     private String title;
 
     private String content;
@@ -31,6 +35,8 @@ public class MeetingDetailDto {
     public static MeetingDetailDto of(Meeting meeting, List<ParticipantDto> participantList, Boolean liked) {
         return MeetingDetailDto.builder()
                 .id(meeting.getId())
+                .profileImageUrl(meeting.getOwner().getProfileImageUrl())
+                .ownerName(meeting.getOwner().getUsername())
                 .title(meeting.getTitle())
                 .content(meeting.getContent())
                 .url(meeting.getUrl())
