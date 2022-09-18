@@ -1,7 +1,6 @@
 package com.hoppy.app.meeting.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -28,5 +27,5 @@ public class UpdateMeetingDto {
     @Length(max = 256, message = "글자 제한을 초과하였습니다")
     String content;
 
-    String filename;
+    String url;
 }

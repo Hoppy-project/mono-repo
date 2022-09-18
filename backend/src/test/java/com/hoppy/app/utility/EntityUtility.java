@@ -40,7 +40,7 @@ public class EntityUtility {
     }
     public static Meeting testMeeting(Member owner, Category category) {
         return testMeeting(owner,
-                "test-url",
+                "https://picsum.photos/500/500",
                 "test-title-" + UUID.randomUUID().toString().substring(0,5),
                 "test-content",
                 category,
@@ -58,7 +58,7 @@ public class EntityUtility {
         return Post.builder()
                 .title("test-title")
                 .content("test-content")
-                .imageUrl("test-imageUrl")
+                .url("https://picsum.photos/500/500")
                 .author(author)
                 .build();
     }

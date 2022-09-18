@@ -45,8 +45,7 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Override
     @Transactional
-    public Meeting createMeeting(CreateMeetingDto dto, long ownerId) throws BusinessException {
-        Member owner = memberService.findById(ownerId);
+    public Meeting createMeeting(CreateMeetingDto dto, Member owner) throws BusinessException {
         if(checkTitleDuplicate(dto.getTitle())) {
             throw new BusinessException(ErrorCode.TITLE_DUPLICATE);
         }
@@ -178,7 +177,7 @@ public class MeetingServiceImpl implements MeetingService {
 
         if(dto.getTitle() != null && !dto.getTitle().isEmpty()) meeting.setTitle(dto.getTitle());
         if(dto.getContent() != null && !dto.getContent().isEmpty()) meeting.setContent(dto.getContent());
-        if(dto.getFilename() != null && !dto.getFilename().isEmpty()) meeting.setUrl(dto.getFilename());
+        if(dto.getUrl() != null && !dto.getUrl().isEmpty()) meeting.setUrl(dto.getUrl());
     }
 
     @Override

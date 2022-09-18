@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoppy.app.community.domain.Post;
 import com.hoppy.app.community.repository.PostRepository;
@@ -146,7 +145,7 @@ class MeetingControllerTest {
     void createMeetingTest() throws Exception {
 
         CreateMeetingDto createMeetingDto = CreateMeetingDto.builder()
-                .filename("testFile.png")
+                .url("https://picsum.photos/500/500")
                 .title("testTitle")
                 .content("testContent")
                 .memberLimit(10)
