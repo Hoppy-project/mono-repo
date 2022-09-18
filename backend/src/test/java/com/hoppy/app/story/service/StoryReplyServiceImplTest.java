@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoppy.app.like.repository.MemberStoryLikeRepository;
+import com.hoppy.app.login.WithMockCustomUser;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
 import com.hoppy.app.member.service.MemberService;
@@ -13,6 +14,8 @@ import com.hoppy.app.story.domain.story.StoryReReply;
 import com.hoppy.app.story.domain.story.StoryReply;
 import com.hoppy.app.story.dto.StoryReReplyRequestDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
+import com.hoppy.app.story.dto.UpdateStoryReReplyDto;
+import com.hoppy.app.story.dto.UpdateStoryReplyDto;
 import com.hoppy.app.story.repository.StoryReReplyRepository;
 import com.hoppy.app.story.repository.StoryReplyRepository;
 import com.hoppy.app.story.repository.StoryRepository;
@@ -68,7 +71,50 @@ class StoryReplyServiceImplTest {
         storyRepository.deleteAll();
         memberRepository.deleteAll();
     }
-    
+
+    @Test
+    @DisplayName("스토리 댓글 수정 테스트")
+    @WithMockCustomUser(id = "8669")
+    void updateStoryReply() {
+        Member member = memberRepository.save(
+                Member.builder().id(8669L).profileImageUrl("test.com").build()
+        );
+        Story story = storyRepository.save(
+                Story.builder().content("this is test story").title("first").member(member).build()
+        );
+        storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member).content("Before").build()
+        );
+        Long replyId = storyReplyRepository.findAll().get(0).getId();
+        UpdateStoryReplyDto dto = UpdateStoryReplyDto.builder().content("After").build();
+        storyReplyService.updateStoryReply(8669L, replyId, dto);
+        StoryReply tmpReply = storyReplyRepository.findById(replyId).get();
+        assertThat(tmpReply.getContent()).isEqualTo("After");
+    }
+
+    @Test
+    @DisplayName("스토리 대댓글 수정 테스트")
+    @WithMockCustomUser(id = "8669")
+    void updateStoryReReply() {
+        Member member = memberRepository.save(
+                Member.builder().id(8669L).profileImageUrl("test.com").build()
+        );
+        Story story = storyRepository.save(
+                Story.builder().content("this is test story").title("first").member(member).build()
+        );
+        StoryReply reply = storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member).content("Before").build()
+        );
+        storyReReplyRepository.save(
+                StoryReReply.builder().reply(reply).content("Before").member(member).build()
+        );
+        Long reReplyId = storyReReplyRepository.findAll().get(0).getId();
+        UpdateStoryReReplyDto dto = UpdateStoryReReplyDto.builder().content("After").build();
+        storyReplyService.updateStoryReReply(8669L, reReplyId, dto);
+        StoryReReply tmpReReply = storyReReplyRepository.findById(reReplyId).get();
+        assertThat(tmpReReply.getContent()).isEqualTo("After");
+    }
+
     @Test
     @DisplayName("스토리 대댓글 업로드 테스트")
     void uploadStoryReReply() {

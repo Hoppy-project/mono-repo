@@ -1,5 +1,6 @@
 package com.hoppy.app.story.service;
 
+import com.hoppy.app.community.domain.Reply;
 import com.hoppy.app.like.domain.MemberStoryReReplyLike;
 import com.hoppy.app.like.domain.MemberStoryReplyLike;
 import com.hoppy.app.like.repository.MemberStoryLikeRepository;
@@ -15,6 +16,8 @@ import com.hoppy.app.story.domain.story.StoryReply;
 import com.hoppy.app.story.dto.StoryReReplyDto;
 import com.hoppy.app.story.dto.StoryReReplyRequestDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
+import com.hoppy.app.story.dto.UpdateStoryReReplyDto;
+import com.hoppy.app.story.dto.UpdateStoryReplyDto;
 import com.hoppy.app.story.repository.StoryReReplyRepository;
 import com.hoppy.app.story.repository.StoryReplyRepository;
 import com.hoppy.app.story.repository.StoryRepository;
@@ -61,6 +64,18 @@ public class StoryReplyServiceImpl implements StoryReplyService {
             storyReReplyRepository.deleteAllByList(idList);
         }
         storyReplyRepository.delete(reply);
+    }
+
+    @Override
+    @Transactional
+    public void updateStoryReply(Long memberId, Long replyId, UpdateStoryReplyDto dto) {
+        StoryReply reply = findByReplyId(replyId);
+/*        if(reply.getMember().getId() != memberId) {
+            throw new BusinessException(ErrorCode.PERMISSION_ERROR);
+        }*/
+        if(dto.getContent() != null) {
+            reply.setContent(dto.getContent());
+        }
     }
 
     @Override
@@ -121,6 +136,19 @@ public class StoryReplyServiceImpl implements StoryReplyService {
                         .orElseThrow(() -> new BusinessException(ErrorCode.REPLY_NOT_FOUND))
         );
     }
+
+    @Override
+    @Transactional
+    public void updateStoryReReply(Long memberId, Long reReplyId, UpdateStoryReReplyDto dto) {
+        StoryReReply reReply = findByReReplyId(reReplyId);
+//        if(reReply.getMember().getId() != memberId) {
+//            throw new BusinessException(ErrorCode.PERMISSION_ERROR);
+//        }
+        if(dto.getContent() != null) {
+            reReply.setContent(dto.getContent());
+        }
+    }
+
 
     @Override
     public void likeOrDisLikeStoryReReply(Long memberId, Long reReplyId) {
