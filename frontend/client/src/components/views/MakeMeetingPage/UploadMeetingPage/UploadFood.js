@@ -119,7 +119,7 @@ function UploadFood() {
         title: UploadTitle,
         content: UploadContent,
         memberLimit: UploadMemberLimit,
-        filename: FileName,
+        url: FileImage,
       };
 
       const headers = {
