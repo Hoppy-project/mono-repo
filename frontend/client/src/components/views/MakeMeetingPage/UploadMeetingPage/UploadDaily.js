@@ -140,6 +140,7 @@ function UploadDaily() {
         })
         .catch((error) => {
           console.log("form error>>>>>", error);
+          alert("모임이 생성되지 않았습니다. 다시 시도해주세요!");
         });
     }
   };
