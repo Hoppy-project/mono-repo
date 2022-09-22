@@ -1,6 +1,7 @@
 package com.hoppy.app.like.repository;
 
 import com.hoppy.app.like.domain.MemberStoryLike;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -23,4 +24,8 @@ public interface MemberStoryLikeRepository extends JpaRepository<MemberStoryLike
             @Param("memberId") Long memberId,
             @Param("storyId") Long storyId
     );
+
+    @Modifying
+    @Query("delete from MemberStoryLike s where s.id in :idList")
+    void deleteAllByList(@Param("idList") List<Long> idList);
 }

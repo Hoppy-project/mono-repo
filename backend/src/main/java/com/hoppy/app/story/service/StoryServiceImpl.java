@@ -2,6 +2,8 @@ package com.hoppy.app.story.service;
 
 import com.hoppy.app.like.domain.MemberStoryLike;
 import com.hoppy.app.like.repository.MemberStoryLikeRepository;
+import com.hoppy.app.like.repository.MemberStoryReReplyLikeRepository;
+import com.hoppy.app.like.repository.MemberStoryReplyLikeRepository;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.service.MemberService;
 import com.hoppy.app.response.error.exception.BusinessException;
@@ -14,8 +16,10 @@ import com.hoppy.app.story.dto.SaveStoryDto;
 import com.hoppy.app.story.dto.StoryDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
 import com.hoppy.app.story.dto.UploadStoryDto;
+import com.hoppy.app.story.repository.StoryReReplyRepository;
 import com.hoppy.app.story.repository.StoryReplyRepository;
 import com.hoppy.app.story.repository.StoryRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,9 +34,17 @@ public class StoryServiceImpl implements StoryService {
 
     private final StoryRepository storyRepository;
 
+    private final StoryReplyRepository storyReplyRepository;
+
+    private final StoryReReplyRepository storyReReplyRepository;
+
     private final MemberStoryLikeRepository memberStoryLikeRepository;
 
+    private final MemberStoryReplyLikeRepository memberStoryReplyLikeRepository;
+
+    private final MemberStoryReReplyLikeRepository memberStoryReReplyLikeRepository;
     private final MemberService memberService;
+
 
     @Override
     public Story findByStoryId(Long storyId) {
@@ -50,11 +62,13 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    @Transactional
     public Story uploadStory(UploadStoryDto dto, Member member) {
         return Story.of(dto, member);
     }
 
     @Override
+    @Transactional
     public Story updateStory(UploadStoryDto dto, Long storyId) {
         Story story = findByStoryId(storyId);
         if(dto.getTitle() != null) {
@@ -70,12 +84,39 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    @Transactional
     public void deleteStory(Long storyId) {
-        Optional<Story> optStory = storyRepository.findById(storyId);
-        if(optStory.isEmpty()) {
-            throw new BusinessException(ErrorCode.STORY_NOT_FOUND);
+        Story story = findByStoryId(storyId);
+        if(!story.getLikes().isEmpty()) {
+            List<Long> likeList = new ArrayList<>();
+            for(var l : story.getLikes()) {
+                likeList.add(l.getId());
+            }
+            memberStoryLikeRepository.deleteAllByList(likeList);
         }
-        storyRepository.deleteById(storyId);
+        if(!story.getReplies().isEmpty()) {
+            List<Long> replyList = new ArrayList<>();
+            List<Long> reReplyList = new ArrayList<>();
+            List<Long> replyLikeList = new ArrayList<>();
+            List<Long> reReplyLikeList = new ArrayList<>();
+            for(var r : story.getReplies()) {
+                replyList.add(r.getId());
+                for (var l : r.getLikes()) {
+                    replyLikeList.add(l.getId());
+                }
+                for (var rr : r.getReReplies()) {
+                    reReplyList.add(rr.getId());
+                    for (var ll : rr.getLikes()) {
+                        reReplyLikeList.add(ll.getId());
+                    }
+                }
+            }
+            if (!reReplyLikeList.isEmpty()) memberStoryReReplyLikeRepository.deleteAllByList(reReplyLikeList);
+            storyReReplyRepository.deleteAllByList(reReplyList);
+            if (!replyLikeList.isEmpty()) memberStoryReplyLikeRepository.deleteAllByList(replyLikeList);
+            storyReplyRepository.deleteAllByList(replyList);
+        }
+        storyRepository.delete(story);
     }
 
     @Override
@@ -87,6 +128,7 @@ public class StoryServiceImpl implements StoryService {
 
 
     @Override
+    @Transactional
     public PagingStoryDto pagingStory(Long lastId) {
         lastId = validCheckLastId(lastId);
         List<Story> storyList = storyRepository.findNextStoryOrderByIdDesc(lastId, PageRequest.of(0, 10));

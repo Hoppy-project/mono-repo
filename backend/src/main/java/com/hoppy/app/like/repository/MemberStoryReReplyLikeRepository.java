@@ -25,4 +25,8 @@ public interface MemberStoryReReplyLikeRepository extends JpaRepository<MemberSt
             @Param("memberId") Long memberId,
             @Param("reReplyId") Long reReplyId
     );
+
+    @Modifying
+    @Query("delete from MemberStoryReReplyLike s where s.id in :idList")
+    void deleteAllByList(@Param("idList") List<Long> idList);
 }
