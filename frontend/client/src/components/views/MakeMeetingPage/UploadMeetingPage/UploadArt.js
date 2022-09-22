@@ -134,7 +134,8 @@ function UploadArt() {
         .then((response) => {
           if (response.data.status === 200) {
             alert("모임이 생성되었습니다.");
-            // 운동 모임 모집 글로 매칭
+            // 공예 모임 모집 글로 매칭
+            window.location.href = "/artMeeting";
           }
           console.log("form submit>>>>>", response);
         })

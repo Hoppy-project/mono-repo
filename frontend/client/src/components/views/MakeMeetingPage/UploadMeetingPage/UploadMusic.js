@@ -133,8 +133,8 @@ function UploadMusic() {
         .then((response) => {
           if (response.data.status === 200) {
             alert("모임이 생성되었습니다.");
-            // 운동 모임 모집 글로 매칭
-            window.location.href("/");
+            // 음악 모임 모집 글로 매칭
+            window.location.href = "/musicMeeting";
           }
           console.log("form submit>>>>>", response);
         })
