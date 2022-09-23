@@ -139,4 +139,35 @@ class StoryReplyServiceImplTest {
 
         assertThat(reReply.getContent()).isEqualTo("ReReply");
     }
+
+    @Test
+    @DisplayName("스토리 댓글 삭제 테스트")
+    void deleteStoryReply() {
+        Member member1 = memberRepository.save(Member.builder()
+                .id(8669L)
+                .build());
+        Member member2 = memberRepository.save(Member.builder()
+                .id(7601L)
+                .build());
+        Story story = storyRepository.save(Story.builder()
+                .title("Story Like Test")
+                .content("This is Test")
+                .member(member1)
+                .build()
+        );
+        Long storyId = story.getId();
+        StoryReply reply = storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member1).content("Reply").build()
+        );
+        StoryReply reply1 = storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member2).content("Reply").build()
+        );
+        StoryReReply reReply = storyReReplyRepository.save(
+                StoryReReply.builder().reply(reply).member(member1).content("ReReply").build()
+        );
+//        storyReplyService.likeOrDislikeStoryReply(member2.getId(), reply.getId());
+        storyReplyService.likeOrDisLikeStoryReReply(member2.getId(), reReply.getId());
+        storyReplyService.deleteStoryReReply(member1.getId(), reReply.getId());
+//        storyReplyService.deleteStoryReply(member1.getId(), reply.getId());
+    }
 }
