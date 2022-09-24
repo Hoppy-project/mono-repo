@@ -119,25 +119,16 @@ class StoryReplyServiceImplTest {
     @DisplayName("스토리 대댓글 업로드 테스트")
     void uploadStoryReReply() {
         Member member = memberRepository.save(
-                Member.builder().id(8669L).profileImageUrl("test.com").build()
-        );
+                Member.builder().id(8669L).profileImageUrl("test.com").build());
         Story story = storyRepository.save(
-                Story.builder().content("this is test story").title("first").member(member).build()
-        );
-        StoryReplyRequestDto storyReplyRequestDto =
-                StoryReplyRequestDto.builder().content("reply").build();
+                Story.builder().content("this is test story").title("first").member(member).build());
+        StoryReply reply = storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member).content("Test").build());
+        StoryReReplyRequestDto dto = StoryReReplyRequestDto.builder().content("Upload").build();
 
-        Story tmpStory = storyRepository.findAll().get(0);
-        Long storyId = tmpStory.getId();
-        System.out.println("storyId = " + storyId);
-        StoryReply reply = storyReplyService.uploadStoryReply(member.getId(), storyId, storyReplyRequestDto);
+        StoryReReply reReply = storyReplyService.uploadStoryReReply(member.getId(), reply.getId(), dto);
 
-        assertThat(reply.getReReplies().size()).isEqualTo(0);
-
-        StoryReReplyRequestDto dto = StoryReReplyRequestDto.builder().content("ReReply").build();
-        StoryReReply reReply = storyReplyService.uploadStoryReReply(member.getId(), 1L, dto);
-
-        assertThat(reReply.getContent()).isEqualTo("ReReply");
+        assertThat(reReply.getContent()).isEqualTo("Upload");
     }
 
     @Test
