@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoppy.app.community.domain.Post;
 import com.hoppy.app.community.repository.PostRepository;
@@ -146,7 +145,7 @@ class MeetingControllerTest {
     void createMeetingTest() throws Exception {
 
         CreateMeetingDto createMeetingDto = CreateMeetingDto.builder()
-                .filename("testFile.png")
+                .url("https://picsum.photos/500/500")
                 .title("testTitle")
                 .content("testContent")
                 .memberLimit(10)
@@ -401,5 +400,24 @@ class MeetingControllerTest {
                 preprocessResponse(prettyPrint())
         ))
         .andDo(print());
+    }
+
+    @DisplayName("모임 검색 테스트")
+    @Test
+    @WithMockCustomUser(id = "1", password = "secret-key", role = Role.USER, socialType = SocialType.KAKAO)
+    void meetingSearchTest() throws Exception {
+        // given
+        Member member = memberService.findById(1L);
+
+        // when
+        ResultActions resultActions = RequestUtility.getRequest(mockMvc, "/search/meeting/title");
+
+        // then
+        resultActions.andExpect(jsonPath("$.data.meetingList.size()", is(14)))
+                .andDo(document("meeting-search-request",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ))
+                .andDo(print());
     }
 }

@@ -21,13 +21,15 @@ public class PostDto {
     * */
     private long id;
 
-    private String ownerProfileUrl;
+    private String profileImageUrl;
 
     private String ownerName;
 
     private String title;
 
     private String content;
+
+    private String url;
 
     private boolean liked;
 
@@ -38,10 +40,11 @@ public class PostDto {
     public static PostDto postToPostDto(Post post, boolean liked, int likeCount, int replyCount) {
         return PostDto.builder()
                 .id(post.getId())
-                .ownerProfileUrl(post.getAuthor().getProfileImageUrl())
+                .profileImageUrl(post.getAuthor().getProfileImageUrl())
                 .ownerName(post.getAuthor().getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .url(post.getUrl())
                 .liked(liked)
                 .likeCount(likeCount)
                 .replyCount(replyCount)

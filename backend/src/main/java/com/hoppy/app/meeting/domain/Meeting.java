@@ -100,7 +100,7 @@ public class Meeting {
     public static Meeting of(CreateMeetingDto dto, Member owner) {
         return Meeting.builder()
                 .owner(owner)
-                .url(dto.getFilename())
+                .url(dto.getUrl())
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .memberLimit(dto.getMemberLimit())

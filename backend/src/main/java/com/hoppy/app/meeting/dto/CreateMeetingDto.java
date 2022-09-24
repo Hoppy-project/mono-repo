@@ -32,5 +32,5 @@ public class CreateMeetingDto {
     @Max(value = 20, message = "최대 인원은 20명 입니다")
     int memberLimit;
 
-    String filename;
+    String url;
 }

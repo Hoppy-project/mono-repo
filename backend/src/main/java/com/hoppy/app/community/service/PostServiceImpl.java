@@ -59,7 +59,7 @@ public class PostServiceImpl implements PostService {
                 .title(createPostDto.getTitle())
                 .content(createPostDto.getContent())
                 .author(author)
-                .imageUrl(createPostDto.getFilename())
+                .url(createPostDto.getUrl())
                 .meeting(meeting)
                 .build()
         );
@@ -72,7 +72,7 @@ public class PostServiceImpl implements PostService {
 
         if(post.getAuthor().getId() != memberId) throw new BusinessException(ErrorCode.PERMISSION_ERROR);
 
-        if(dto.getFilename() != null && !dto.getFilename().isEmpty()) post.setImageUrl(dto.getFilename());
+        if(dto.getUrl() != null && !dto.getUrl().isEmpty()) post.setUrl(dto.getUrl());
         if(dto.getContent() != null && !dto.getContent().isEmpty()) post.setContent(dto.getContent());
         if(dto.getTitle() != null && !dto.getTitle().isEmpty()) post.setTitle(dto.getTitle());
     }

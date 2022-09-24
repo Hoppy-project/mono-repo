@@ -13,8 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
 import lombok.*;
 import lombok.Builder.Default;
@@ -45,7 +43,7 @@ public class Post {
     private String content;
 
     @Setter
-    private String imageUrl;
+    private String url;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @Exclude

@@ -4,13 +4,15 @@ import com.hoppy.app.meeting.Category;
 import com.hoppy.app.meeting.domain.Meeting;
 import com.hoppy.app.meeting.dto.*;
 import com.hoppy.app.member.domain.Member;
+import com.hoppy.app.search.dto.MeetingSearchListDto;
+
 import java.util.List;
 
 public interface MeetingService {
 
     void createAndSaveMemberMeetingData(Meeting meeting, Member member);
     boolean checkTitleDuplicate(String name);
-    Meeting createMeeting(CreateMeetingDto dto, long ownerId);
+    Meeting createMeeting(CreateMeetingDto dto, Member owner);
     Meeting findById(long id);
     Meeting findByIdWithParticipants(long id);
     void updateMeeting(UpdateMeetingDto dto, long memberId, long meetingId);
@@ -23,7 +25,7 @@ public interface MeetingService {
     void checkJoinedMemberV2(List<ParticipantDto> participants, long memberId);
     long validCheckLastId(long lastId);
     long getLastId(List<Meeting> meetingList);
-    String createNextPagingUrl(int categoryNumber, long lastId);
+    String createNextSearchPagingUrl(int categoryNumber, long lastId, int size);
     List<Meeting> pagingMeetingList(Category category, long lastId);
     List<MeetingDto> listToDtoList(List<Meeting> meetingList, long memberId);
     PagingMeetingDto pagingMeeting(int categoryNumber, long lastId, long memberId);
@@ -33,4 +35,6 @@ public interface MeetingService {
 
     void likeMeeting(long memberId, long meetingId);
     void dislikeMeeting(long memberId, long meetingId);
+    String createNextSearchPagingUrl(String keyword, long lastId, int size);
+    MeetingSearchListDto searchMeetings(String keyword, long lastId);
 }

@@ -125,7 +125,6 @@ class StoryReplyServiceImplTest {
         StoryReply reply = storyReplyRepository.save(
                 StoryReply.builder().story(story).member(member).content("Test").build());
         StoryReReplyRequestDto dto = StoryReReplyRequestDto.builder().content("Upload").build();
-
         StoryReReply reReply = storyReplyService.uploadStoryReReply(member.getId(), reply.getId(), dto);
 
         assertThat(reReply.getContent()).isEqualTo("Upload");

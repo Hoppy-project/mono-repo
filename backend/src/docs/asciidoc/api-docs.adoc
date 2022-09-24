@@ -4,7 +4,8 @@
 :sectlinks:
 
 ----
-[❗] 모든 request body의 필드는 누락되면 안됩니다.
+[❗] 요구하는 request body의 필드는 누락되면 안됩니다.
+[🛠️] 다만, 수정하기 API의 request body 필드는 수정하고 싶은 필드만 채워주시면 됩니다.
 ----
 
 == 점검 API
@@ -28,6 +29,18 @@ GET /api/upload/presigned?filename={name}&contentType={type}
 include::{snippets}/get-presigned-url/request-body.adoc[]
 .response body
 include::{snippets}/get-presigned-url/response-body.adoc[]
+
+== 검색 API
+=== 모임 검색하기
+.request url
+----
+최초 요청 시
+GET /api/search/meeting/{keyword}
+----
+.request body
+include::{snippets}/meeting-search-request/http-request.adoc[]
+.response body
+include::{snippets}/meeting-search-request/response-body.adoc[]
 
 == 모임 API
 === 모임 생성하기

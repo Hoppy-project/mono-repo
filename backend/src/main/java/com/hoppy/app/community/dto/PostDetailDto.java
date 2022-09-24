@@ -22,11 +22,13 @@ public class PostDetailDto {
 
     private String authorName;
 
-    private String authorProfileUrl;
+    private String profileImageUrl;
 
     private String title;
 
     private String content;
+
+    private String url;
 
     private boolean liked;
 
@@ -39,10 +41,11 @@ public class PostDetailDto {
     public static PostDetailDto of(Post post, boolean liked, int likeCount, int replyCount, List<ReplyDto> replies) {
         return PostDetailDto.builder()
                 .id(post.getId())
-                .authorProfileUrl(post.getAuthor().getProfileImageUrl())
+                .profileImageUrl(post.getAuthor().getProfileImageUrl())
                 .authorName(post.getAuthor().getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .url(post.getUrl())
                 .liked(liked)
                 .likeCount(likeCount)
                 .replyCount(replyCount)

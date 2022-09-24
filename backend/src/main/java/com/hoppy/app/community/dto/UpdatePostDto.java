@@ -1,12 +1,9 @@
 package com.hoppy.app.community.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
 
 /**
  * packageName    : com.hoppy.app.community.dto
@@ -30,5 +27,5 @@ public class UpdatePostDto {
     @Length(max = 256, message = "글자 제한을 초과하였습니다")
     String content;
 
-    String filename;
+    String url;
 }

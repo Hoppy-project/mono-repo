@@ -30,6 +30,7 @@ public enum SuccessCode {
     JOIN_MEETING_SUCCESS("모임 참가 완료", 200),
     WITHDRAW_MEETING_SUCCESS("모임 탈퇴 완료", 200),
     INQUIRY_COMMUNITY_POSTS_SUCCESS("커뮤니티 게시물 조회 완료", 200),
+    SEARCH_MEETING_SUCCESS("모임 검색 완료", 200),
 
     // post
     GET_POST_DETAIL_SUCCESS("게시물 조회 완료", 200),
