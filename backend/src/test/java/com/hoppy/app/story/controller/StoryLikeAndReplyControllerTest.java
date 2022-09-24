@@ -1,5 +1,6 @@
 package com.hoppy.app.story.controller;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
@@ -16,9 +17,13 @@ import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
 import com.hoppy.app.member.service.MemberService;
 import com.hoppy.app.story.domain.story.Story;
+import com.hoppy.app.story.domain.story.StoryReReply;
+import com.hoppy.app.story.domain.story.StoryReply;
 import com.hoppy.app.story.dto.StoryDetailDto;
 import com.hoppy.app.story.dto.StoryReReplyRequestDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
+import com.hoppy.app.story.dto.UpdateStoryReReplyDto;
+import com.hoppy.app.story.dto.UpdateStoryReplyDto;
 import com.hoppy.app.story.repository.StoryReReplyRepository;
 import com.hoppy.app.story.repository.StoryReplyRepository;
 import com.hoppy.app.story.repository.StoryRepository;
@@ -27,6 +32,7 @@ import com.hoppy.app.story.service.StoryService;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.print.attribute.standard.Media;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -126,7 +132,7 @@ public class StoryLikeAndReplyControllerTest {
         memberRepository.deleteAll();
     }
 
-    @DisplayName("스토리 좋아요 및 좋아요 취소 컨트롤러 테스트")
+    @DisplayName("스토리 좋아요 및 좋아요 취소 컨트롤러")
     @Test
     @WithMockCustomUser(id = "8669")
     void storyLikeTest() throws Exception {
@@ -147,7 +153,7 @@ public class StoryLikeAndReplyControllerTest {
                 ));
     }
 
-    @DisplayName("스토리 댓글 등록 테스트")
+    @DisplayName("스토리 댓글 등록 컨트롤러")
     @Test
     @WithMockCustomUser(id = "8669")
     void uploadStoryReplyTest() throws Exception {
@@ -170,7 +176,40 @@ public class StoryLikeAndReplyControllerTest {
                 ));
     }
 
-    @DisplayName("스토리 댓글 삭제 테스트")
+    @DisplayName("스토리 댓글 수정 컨트롤러")
+    @Test
+    @WithMockCustomUser(id = "8669")
+    void updateStoryReplyTest() throws Exception {
+        Story story = storyRepository.findAll().get(0);
+        Member member = story.getMember();
+
+        StoryReply reply = storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member).content("Test").build()
+        );
+
+        UpdateStoryReplyDto dto = UpdateStoryReplyDto.builder().content("Update").build();
+        String content = objectMapper.writeValueAsString(dto);
+
+        ResultActions result = mvc.perform(MockMvcRequestBuilders
+                .put("/story/reply")
+                .param("id", String.valueOf(reply.getId()))
+                .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8))
+        );
+
+        result.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("story-reply-update",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
+
+        reply = storyReplyService.findByReplyId(reply.getId());
+        assertThat(reply.getContent()).isEqualTo("Update");
+    }
+
+    @DisplayName("스토리 댓글 삭제 컨트롤러")
     @Test
     @WithMockCustomUser(id = "8669")
     void deleteStoryReplyTest() throws Exception {
@@ -207,7 +246,7 @@ public class StoryLikeAndReplyControllerTest {
                 ));
     }
 
-    @DisplayName("스토리 댓글 좋아요 테스트")
+    @DisplayName("스토리 댓글 좋아요 컨트롤러")
     @Test
     @WithMockCustomUser(id = "8669")
     void likeOrDislikeStoryReplyTest() throws Exception {
@@ -237,7 +276,7 @@ public class StoryLikeAndReplyControllerTest {
                 ));
     }
 
-    @DisplayName("스토리 대댓글 업로드 테스트")
+    @DisplayName("스토리 대댓글 업로드 컨트롤러")
     @Test
     @WithMockCustomUser(id = "8669")
     void uploadStoryReReplyTest() throws Exception {
@@ -263,11 +302,44 @@ public class StoryLikeAndReplyControllerTest {
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
                 ));
-
-
     }
 
-    @DisplayName("스토리 대댓글 삭제 테스트")
+    @DisplayName("스토리 대댓글 수정 컨트롤러")
+    @Test
+    @WithMockCustomUser(id = "8669")
+    void updateStoryReReplyTest() throws Exception {
+        Story story = storyRepository.findAll().get(0);
+        Member member = story.getMember();
+
+        StoryReply reply = storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member).content("Test").build());
+
+        StoryReReply reReply = storyReReplyRepository.save(
+                StoryReReply.builder().reply(reply).content("Test").member(member).build());
+
+        UpdateStoryReReplyDto dto = UpdateStoryReReplyDto.builder().content("Update").build();
+        String content = objectMapper.writeValueAsString(dto);
+
+        ResultActions result = mvc.perform(MockMvcRequestBuilders
+                .put("/story/reply/re")
+                .param("id", String.valueOf(reReply.getId()))
+                .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8))
+        );
+
+        result.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("story-reReply-update",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
+
+        reReply = storyReplyService.findByReReplyId(reReply.getId());
+        assertThat(reReply.getContent()).isEqualTo("Update");
+    }
+
+    @DisplayName("스토리 대댓글 삭제 컨트롤러")
     @Test
     @WithMockCustomUser(id = "8669")
     void deleteStoryReReplyTest() throws Exception {
@@ -299,7 +371,7 @@ public class StoryLikeAndReplyControllerTest {
                 ));
     }
 
-    @DisplayName("스토리 대댓글 좋아요 테스트")
+    @DisplayName("스토리 대댓글 좋아요 컨트롤러")
     @Test
     @WithMockCustomUser(id = "8669")
     void likeOrDislikeStoryReReplyTest() throws Exception {

@@ -21,6 +21,7 @@ import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.ToString.Exclude;
 import org.hibernate.annotations.BatchSize;
@@ -38,6 +39,7 @@ public class StoryReply extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = false)
+    @Setter
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)

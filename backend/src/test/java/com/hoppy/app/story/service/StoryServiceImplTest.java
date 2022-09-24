@@ -14,8 +14,14 @@ import com.hoppy.app.member.service.MemberService;
 import com.hoppy.app.response.error.exception.BusinessException;
 import com.hoppy.app.response.error.exception.ErrorCode;
 import com.hoppy.app.story.domain.story.Story;
+import com.hoppy.app.story.domain.story.StoryReReply;
+import com.hoppy.app.story.domain.story.StoryReply;
 import com.hoppy.app.story.dto.PagingStoryDto;
+import com.hoppy.app.story.dto.StoryReReplyRequestDto;
+import com.hoppy.app.story.dto.StoryReplyRequestDto;
 import com.hoppy.app.story.dto.UploadStoryDto;
+import com.hoppy.app.story.repository.StoryReReplyRepository;
+import com.hoppy.app.story.repository.StoryReplyRepository;
 import com.hoppy.app.story.repository.StoryRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +62,16 @@ class StoryServiceImplTest {
     StoryRepository storyRepository;
 
     @Autowired
+    StoryReplyRepository storyReplyRepository;
+
+    @Autowired
+    StoryReReplyRepository storyReReplyRepository;
+
+    @Autowired
     StoryService storyService;
+
+    @Autowired
+    StoryReplyService storyReplyService;
 
     @Autowired
     MockMvc mvc;
@@ -67,6 +82,8 @@ class StoryServiceImplTest {
     @AfterEach
     void clean() {
         memberStoryLikeRepository.deleteAll();
+        storyReReplyRepository.deleteAll();
+        storyReplyRepository.deleteAll();
         storyRepository.deleteAll();
         memberRepository.deleteAll();
     }
@@ -88,33 +105,32 @@ class StoryServiceImplTest {
         memberStoryLikeRepository.save(MemberStoryLike.of(member, story));
     }
 
-/*    @Test
-    @DisplayName("스토리 수정 테스트")
-    void updateStory() {
-        storyRepository.save(Story.builder().title("Story").content("Save").filePath("jpg").build());
-        UploadStoryDto dto = UploadStoryDto.builder().content("Update").filename("avi").build();
-        Story story = storyService.updateStory(dto, 1L);
-        assertThat(story.getTitle()).isEqualTo("Story");
-        assertThat(story.getContent()).isEqualTo(dto.getContent());
-
-    }*/
-
-
-    
-/*  
-    // 더 이상 조회할 스토리가 없을 시 예외 확인
-    // Mock 관련 오류 발생하는 듯. 수정 필요
+    @DisplayName("스토리 삭제 테스트")
     @Test
-    void no_more_story_exception() {
-        final var lastId = 0L;
-        Pageable pageable = PageRequest.of(0, 3);
-
-        List<Story> storyList = storyRepository.findNextStoryOrderByIdDesc(Long.MAX_VALUE, pageable);
-        assertThat(storyList.isEmpty()).isTrue();
-
-        given(storyRepository.findNextStoryOrderByIdDesc(Long.MAX_VALUE, pageable)).willReturn(new ArrayList<>());
-        BusinessException exception = org.junit.jupiter.api.Assertions.assertThrows(BusinessException.class,
-                () -> storyService.pagingStory(lastId));
-        org.junit.jupiter.api.Assertions.assertEquals(ErrorCode.NO_MORE_STORY, exception.getMessage());
-    }*/
+    void deleteStory() {
+        Member member = memberRepository.save(Member.builder()
+                .id(8669L)
+                .build()
+        );
+        Story story = storyRepository.save(Story.builder()
+                .title("Story Like Test")
+                .content("This is Test")
+                .member(member)
+                .build()
+        );
+        Long storyId = story.getId();
+        StoryReply reply = storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member).content("Reply").build()
+        );
+        StoryReReply reReply = storyReReplyRepository.save(
+                StoryReReply.builder().reply(reply).member(member).content("ReReply").build()
+        );
+        storyService.likeOrDislikeStory(member.getId(), storyId);
+        storyReplyService.likeOrDislikeStoryReply(member.getId(), reply.getId());
+        storyReplyService.likeOrDisLikeStoryReReply(member.getId(), reReply.getId());
+        storyService.deleteStory(storyId);
+        assertThat(storyReReplyRepository.findAll()).isEmpty();
+        assertThat(storyReplyRepository.findAll()).isEmpty();
+        assertThat(storyRepository.findAll()).isEmpty();
+    }
 }

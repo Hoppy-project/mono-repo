@@ -1,5 +1,6 @@
 package com.hoppy.app.story.service;
 
+import com.hoppy.app.community.domain.Reply;
 import com.hoppy.app.like.domain.MemberStoryReReplyLike;
 import com.hoppy.app.like.domain.MemberStoryReplyLike;
 import com.hoppy.app.like.repository.MemberStoryLikeRepository;
@@ -15,9 +16,12 @@ import com.hoppy.app.story.domain.story.StoryReply;
 import com.hoppy.app.story.dto.StoryReReplyDto;
 import com.hoppy.app.story.dto.StoryReReplyRequestDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
+import com.hoppy.app.story.dto.UpdateStoryReReplyDto;
+import com.hoppy.app.story.dto.UpdateStoryReplyDto;
 import com.hoppy.app.story.repository.StoryReReplyRepository;
 import com.hoppy.app.story.repository.StoryReplyRepository;
 import com.hoppy.app.story.repository.StoryRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,12 +59,32 @@ public class StoryReplyServiceImpl implements StoryReplyService {
     public void deleteStoryReply(Long memberId, Long replyId) {
         StoryReply reply = checkStoryReReplies(memberId, replyId);
         if(!reply.getReReplies().isEmpty()) {
-            memberStoryReplyLikeRepository.deleteByMemberIdAndReplyId(memberId, replyId);
-            List<Long> idList = reply.getReReplies().stream().map(R -> R.getId()).collect(
-                    Collectors.toList());
-            storyReReplyRepository.deleteAllByList(idList);
+            List<Long> reReplyIdList = new ArrayList<>();
+            List<Long> reReplyLikeList = new ArrayList<>();
+            for (var R: reply.getReReplies()) {
+                reReplyIdList.add(R.getId());
+                for(var RR: R.getLikes()) {
+                    reReplyLikeList.add(RR.getId());
+                }
+            }
+            if (!reReplyLikeList.isEmpty()) memberStoryReReplyLikeRepository.deleteAllByList(reReplyLikeList);
+            storyReReplyRepository.deleteAllByList(reReplyIdList);
         }
+        List<Long> replyLikeList = reply.getLikes().stream().map(L -> L.getId()).collect(Collectors.toList());
+        if (!replyLikeList.isEmpty())  memberStoryReplyLikeRepository.deleteAllByList(replyLikeList);
         storyReplyRepository.delete(reply);
+    }
+
+    @Override
+    @Transactional
+    public void updateStoryReply(Long memberId, Long replyId, UpdateStoryReplyDto dto) {
+        StoryReply reply = findByReplyId(replyId);
+/*        if(reply.getMember().getId() != memberId) {
+            throw new BusinessException(ErrorCode.PERMISSION_ERROR);
+        }*/
+        if(dto.getContent() != null) {
+            reply.setContent(dto.getContent());
+        }
     }
 
     @Override
@@ -115,12 +139,28 @@ public class StoryReplyServiceImpl implements StoryReplyService {
     @Override
     @Transactional
     public void deleteStoryReReply(Long memberId, Long reReplyId) {
-        memberStoryReReplyLikeRepository.deleteByMemberIdAndReReplyId(memberId, reReplyId);
+        StoryReReply reReply = findByReReplyId(reReplyId);
+        List<Long> reReplyLikeList = reReply.getLikes().stream().map(L -> L.getId()).collect(
+                Collectors.toList());
+        if (!reReplyLikeList.isEmpty()) memberStoryReReplyLikeRepository.deleteAllByList(reReplyLikeList);
         storyReReplyRepository.delete(
                 storyReReplyRepository.findByIdAndMemberId(reReplyId, memberId)
                         .orElseThrow(() -> new BusinessException(ErrorCode.REPLY_NOT_FOUND))
         );
     }
+
+    @Override
+    @Transactional
+    public void updateStoryReReply(Long memberId, Long reReplyId, UpdateStoryReReplyDto dto) {
+        StoryReReply reReply = findByReReplyId(reReplyId);
+//        if(reReply.getMember().getId() != memberId) {
+//            throw new BusinessException(ErrorCode.PERMISSION_ERROR);
+//        }
+        if(dto.getContent() != null) {
+            reReply.setContent(dto.getContent());
+        }
+    }
+
 
     @Override
     public void likeOrDisLikeStoryReReply(Long memberId, Long reReplyId) {

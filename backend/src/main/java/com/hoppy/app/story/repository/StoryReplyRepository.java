@@ -26,7 +26,7 @@ public interface StoryReplyRepository extends JpaRepository<StoryReply, Long> {
     );
 
     @Modifying
-    @Query("delete from StoryReply s where s.id in : idList")
+    @Query("delete from StoryReply s where s.id in :idList")
     void deleteAllByList(@Param("idList") List<Long> idList);
 
     @Query("select s from StoryReply s "

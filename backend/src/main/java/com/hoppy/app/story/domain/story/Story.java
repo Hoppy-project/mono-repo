@@ -57,13 +57,15 @@ public class Story extends BaseTimeEntity {
     private Member member;
 
     // TODO: cascade = CascadeType.REMOVE로 인한 삭제 시 N+1 문제 고려
-    @OneToMany(mappedBy = "story", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    @OneToMany(mappedBy = "story", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "story", fetch = FetchType.LAZY)
     @BatchSize(size = 100)
     @Default
     @Exclude
     private Set<StoryReply> replies = new HashSet<>();
 
-    @OneToMany(mappedBy = "story", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    @OneToMany(mappedBy = "story", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "story", fetch = FetchType.LAZY)
     @BatchSize(size = 100)
     @Default
     @Exclude
