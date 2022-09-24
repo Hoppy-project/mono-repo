@@ -14,6 +14,8 @@ import com.hoppy.app.story.dto.StoryDetailDto;
 import com.hoppy.app.story.dto.StoryDto;
 import com.hoppy.app.story.dto.StoryReReplyRequestDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
+import com.hoppy.app.story.dto.UpdateStoryReReplyDto;
+import com.hoppy.app.story.dto.UpdateStoryReplyDto;
 import com.hoppy.app.story.dto.UploadStoryDto;
 import com.hoppy.app.story.service.StoryReplyService;
 import com.hoppy.app.story.service.StoryService;
@@ -94,6 +96,14 @@ public class StoryController {
         return responseService.successResult(SuccessCode.INQUIRY_STORY_SUCCESS, StoryDetailDto.from(story));
     }
 
+    @PutMapping("/reply")
+    public ResponseEntity<ResponseDto> updateReply(@RequestParam(value = "id") Long id,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @RequestBody UpdateStoryReplyDto dto) {
+        storyReplyService.updateStoryReply(userDetails.getId(), id, dto);
+        return responseService.ok();
+    }
+
     @DeleteMapping("/reply")
     public ResponseEntity<ResponseDto> deleteReply(
             @RequestParam(value = "id") Long replyId,
@@ -116,6 +126,14 @@ public class StoryController {
             @AuthenticationPrincipal CustomUserDetails userDetails,
             @RequestBody StoryReReplyRequestDto dto) {
         storyReplyService.uploadStoryReReply(userDetails.getId(), id, dto);
+        return responseService.ok();
+    }
+
+    @PutMapping("/reply/re")
+    public ResponseEntity<ResponseDto> updateReReply(@RequestParam(value = "id") Long id,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @RequestBody UpdateStoryReReplyDto dto) {
+        storyReplyService.updateStoryReReply(userDetails.getId(), id, dto);
         return responseService.ok();
     }
 
