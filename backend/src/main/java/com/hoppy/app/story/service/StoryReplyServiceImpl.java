@@ -142,7 +142,7 @@ public class StoryReplyServiceImpl implements StoryReplyService {
         StoryReReply reReply = findByReReplyId(reReplyId);
         List<Long> reReplyLikeList = reReply.getLikes().stream().map(L -> L.getId()).collect(
                 Collectors.toList());
-        memberStoryReReplyLikeRepository.deleteAllByList(reReplyLikeList);
+        if (!reReplyLikeList.isEmpty()) memberStoryReReplyLikeRepository.deleteAllByList(reReplyLikeList);
         storyReReplyRepository.delete(
                 storyReReplyRepository.findByIdAndMemberId(reReplyId, memberId)
                         .orElseThrow(() -> new BusinessException(ErrorCode.REPLY_NOT_FOUND))
