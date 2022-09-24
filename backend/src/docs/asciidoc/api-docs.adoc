@@ -466,6 +466,18 @@ include::{snippets}/story-reply-upload/request-body.adoc[]
 .response body
 include::{snippets}/story-reply-upload/response-body.adoc[]
 
+=== 스토리 댓글 수정
+.request url
+----
+PUT /api/story/reply?id={replyId}
+----
+.request body
+include::{snippets}/story-reply-update/request-body.adoc[]
+----
+NOTE: response body 없음
+HTTP/1.1 200 OK
+----
+
 === 스토리 댓글 삭제
 .request url
 ----
@@ -495,6 +507,18 @@ POST /api/story/reply/re?id={replyId}
 .request body
 include::{snippets}/story-reReply-upload/request-body.adoc[]
 .response header
+----
+NOTE: response body 없음
+HTTP/1.1 200 OK
+----
+
+=== 스토리 대댓글 수정
+.request url
+----
+PUT /api/story/reply/re?id={reReplyId}
+----
+.request body
+include::{snippets}/story-reReply-update/request-body.adoc[]
 ----
 NOTE: response body 없음
 HTTP/1.1 200 OK
