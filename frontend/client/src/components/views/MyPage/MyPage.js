@@ -15,11 +15,12 @@ function MyPage() {
     console.log('token', token)
 
     useEffect(() => {
-      dispatch(getUser()).then(response => {
-        console.log('res>>>', response)
-        setUserInfo(response.payload.data)
-      })
+        dispatch(getUser()).then(response => {
+            console.log('res>>>', response)
+            setUserInfo(response.payload.data)
+        })
     }, [dispatch, setUserInfo])
+  
     
     const Intro = UserInfo.intro
     const ProfileUrl = UserInfo.profileUrl
