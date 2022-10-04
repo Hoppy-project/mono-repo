@@ -32,6 +32,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         log.info("Authorization Bearer " + token);
         response.setHeader("Authorization", "Bearer " + token);
-        response.sendRedirect("http://localhost:8888/login/auth/kakao?token=" + token);
+//        response.sendRedirect("http://localhost:8888/login/auth/kakao?token=" + token);
+        response.sendRedirect("https://hoppy.kro.kr/login/auth/kakao?token=" + token);
     }
 }
