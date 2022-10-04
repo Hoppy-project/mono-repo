@@ -20,8 +20,7 @@ import com.hoppy.app.login.auth.SocialType;
 import com.hoppy.app.member.Role;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
-import com.hoppy.app.utility.EntityUtility;
-import com.hoppy.app.utility.RequestUtility;
+import com.hoppy.app.utils.EntityUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,23 +29,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Optional;
 
-import static com.hoppy.app.utility.RequestUtility.*;
+import static com.hoppy.app.utils.RequestUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * packageName    : com.hoppy.app.community.controller
@@ -110,8 +103,8 @@ class ReplyControllerTest {
     void likeReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
 
         // when
         ResultActions result = getRequest(mockMvc, "/reply/like/" + reply.getId());
@@ -127,8 +120,8 @@ class ReplyControllerTest {
     void dislikeReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
         memberReplyLikeRepository.save(MemberReplyLike.of(member, reply));
 
         // when
@@ -145,8 +138,8 @@ class ReplyControllerTest {
     void likeReReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member));
 
         // when
         ResultActions result = getRequest(mockMvc, "/reply/re/like/" + reReply.getId());
@@ -162,8 +155,8 @@ class ReplyControllerTest {
     void dislikeReReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member));
         memberReReplyLikeRepository.save(MemberReReplyLike.of(member, reReply));
 
         // when
@@ -180,8 +173,8 @@ class ReplyControllerTest {
     void createReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Post post = postRepository.save(EntityUtil.testPost(member));
         CreateReplyDto createReplyDto = CreateReplyDto.builder()
                 .postId(post.getId())
                 .content("content")
@@ -199,8 +192,8 @@ class ReplyControllerTest {
     void createReReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
         CreateReReplyDto createReReplyDto = CreateReReplyDto.builder()
                 .replyId(reply.getId())
                 .content("content")
@@ -218,8 +211,8 @@ class ReplyControllerTest {
     void deleteReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
 
         // when
         ResultActions result = deleteRequest(mockMvc, "/reply/" + reply.getId());
@@ -235,8 +228,8 @@ class ReplyControllerTest {
     void deleteReReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member));
 
         // when
         ResultActions result = deleteRequest(mockMvc, "/reply/re/" + reReply.getId());
@@ -252,8 +245,8 @@ class ReplyControllerTest {
     void updateReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
 
         UpdateReplyDto updateReplyDto = new UpdateReplyDto("new-content");
         String content = objectMapper.writeValueAsString(updateReplyDto);
@@ -272,8 +265,8 @@ class ReplyControllerTest {
     void updateReReply() throws Exception {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member));
 
         UpdateReplyDto updateReplyDto = new UpdateReplyDto("new-content");
         String content = objectMapper.writeValueAsString(updateReplyDto);

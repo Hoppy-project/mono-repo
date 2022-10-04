@@ -1,4 +1,4 @@
-package com.hoppy.app.utility;
+package com.hoppy.app.utils;
 
 import com.hoppy.app.community.domain.Post;
 import com.hoppy.app.community.domain.ReReply;
@@ -20,7 +20,7 @@ import java.util.UUID;
  * -----------------------------------------------------------
  * 2022-08-29        Kim       최초 생성
  */
-public class EntityUtility {
+public class EntityUtil {
 
     public static Member testMember(long id) {
         return Member.builder()

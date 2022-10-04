@@ -1,4 +1,4 @@
-package com.hoppy.app.utility;
+package com.hoppy.app.utils;
 
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * -----------------------------------------------------------
  * 2022-09-02        Kim       최초 생성
  */
-public class RequestUtility {
+public class RequestUtil {
 
     public static ResultActions getRequest(MockMvc mvc, String url) throws Exception {
         return mvc.perform(MockMvcRequestBuilders

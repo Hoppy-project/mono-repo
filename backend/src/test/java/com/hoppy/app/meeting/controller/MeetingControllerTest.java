@@ -36,8 +36,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.hoppy.app.member.service.MemberService;
-import com.hoppy.app.utility.EntityUtility;
-import com.hoppy.app.utility.RequestUtility;
+import com.hoppy.app.utils.EntityUtil;
+import com.hoppy.app.utils.RequestUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -214,8 +214,8 @@ class MeetingControllerTest {
     @WithMockCustomUser(id = "1", password = "secret-key", role = Role.USER, socialType = SocialType.KAKAO)
     void meetingJoinTest() throws Exception {
         //given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        Meeting meeting = meetingRepository.save(EntityUtility.testHealthMeeting(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        Meeting meeting = meetingRepository.save(EntityUtil.testHealthMeeting(member));
 
         MeetingJoinDto meetingJoinDto = MeetingJoinDto.builder()
                 .meetingId(meeting.getId())
@@ -246,7 +246,7 @@ class MeetingControllerTest {
         //given
         List<Meeting> meetingList = meetingRepository.findAll();
         Meeting meeting = meetingList.get(0);
-        Member member = memberRepository.save(EntityUtility.testMember(99L));
+        Member member = memberRepository.save(EntityUtil.testMember(99L));
         memberMeetingRepository.save(MemberMeeting.of(member, meeting));
 
         MeetingWithdrawalDto meetingWithdrawalDto = MeetingWithdrawalDto.builder()
@@ -280,7 +280,7 @@ class MeetingControllerTest {
         assert optionalMember.isPresent() : "NOT_FOUND_MEMBER";
 
         Member author = optionalMember.get();
-        Meeting meeting = meetingRepository.save(EntityUtility.testHealthMeeting(author));
+        Meeting meeting = meetingRepository.save(EntityUtil.testHealthMeeting(author));
         memberMeetingRepository.save(MemberMeeting.of(author, meeting));
 
         final int POST_COUNT = 20;
@@ -326,7 +326,7 @@ class MeetingControllerTest {
         assert optionalMember.isPresent() : "NOT_FOUND_MEMBER";
 
         Member member = optionalMember.get();
-        Meeting meeting = meetingRepository.save(EntityUtility.testHealthMeeting(member));
+        Meeting meeting = meetingRepository.save(EntityUtil.testHealthMeeting(member));
 
         // when
         mockMvc.perform(MockMvcRequestBuilders
@@ -355,7 +355,7 @@ class MeetingControllerTest {
         assert optionalMember.isPresent() : "NOT_FOUND_MEMBER";
 
         Member member = optionalMember.get();
-        Meeting meeting = meetingRepository.save(EntityUtility.testHealthMeeting(member));
+        Meeting meeting = meetingRepository.save(EntityUtil.testHealthMeeting(member));
         memberMeetingLikeRepository.save(MemberMeetingLike.of(member, meeting));
 
         // when
@@ -382,12 +382,12 @@ class MeetingControllerTest {
     void meetingUpdateTest() throws Exception {
         // given
         Member member = memberService.findById(1L);
-        Meeting meeting = meetingRepository.save(EntityUtility.testMeeting(member, Category.HEALTH));
+        Meeting meeting = meetingRepository.save(EntityUtil.testMeeting(member, Category.HEALTH));
         UpdateMeetingDto dto = new UpdateMeetingDto("update-title", "update-content", null);
         String content = objectMapper.writeValueAsString(dto);
 
         // when
-        ResultActions resultActions = RequestUtility.patchRequest(mockMvc, "/meeting/" + meeting.getId(), content);
+        ResultActions resultActions = RequestUtil.patchRequest(mockMvc, "/meeting/" + meeting.getId(), content);
 
         // then
         meeting = meetingService.findById(meeting.getId());
@@ -410,7 +410,7 @@ class MeetingControllerTest {
         Member member = memberService.findById(1L);
 
         // when
-        ResultActions resultActions = RequestUtility.getRequest(mockMvc, "/search/meeting/title");
+        ResultActions resultActions = RequestUtil.getRequest(mockMvc, "/search/meeting/title");
 
         // then
         resultActions.andExpect(jsonPath("$.data.meetingList.size()", is(14)))

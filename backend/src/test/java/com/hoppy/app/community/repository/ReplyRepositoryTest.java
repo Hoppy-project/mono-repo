@@ -8,7 +8,7 @@ import com.hoppy.app.like.repository.MemberReReplyLikeRepository;
 import com.hoppy.app.like.repository.MemberReplyLikeRepository;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
@@ -61,8 +61,8 @@ public class ReplyRepositoryTest {
     void replyLikeTest() {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
         memberReplyLikeRepository.save(MemberReplyLike.of(member, reply));
         em.flush();
         em.clear();
@@ -79,8 +79,8 @@ public class ReplyRepositoryTest {
     void replyDislikeTest() {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
         memberReplyLikeRepository.save(MemberReplyLike.of(member, reply));
         em.flush();
         em.clear();
@@ -104,8 +104,8 @@ public class ReplyRepositoryTest {
     void reReplyLikeTest() {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member));
         memberReReplyLikeRepository.save(MemberReReplyLike.of(member, reReply));
         em.flush();
         em.clear();
@@ -122,8 +122,8 @@ public class ReplyRepositoryTest {
     void reReplyDislikeTest() {
         // given
         final long TEST_MEMBER_ID = 1L;
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member));
         memberReReplyLikeRepository.save(MemberReReplyLike.of(member, reReply));
         em.flush();
         em.clear();

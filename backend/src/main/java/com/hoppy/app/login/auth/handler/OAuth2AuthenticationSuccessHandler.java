@@ -33,7 +33,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String token = authTokenProvider.createUserAuthToken(userDetails.getId().toString()).getToken();
 
-        log.info("Authorization Bearer " + token);
         response.setHeader("Authorization", "Bearer " + token);
 
         if(isNotEmpty(request.getHeader("X-DUMMY-DEV")))

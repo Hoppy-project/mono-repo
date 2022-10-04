@@ -30,7 +30,7 @@ import com.hoppy.app.meeting.repository.MeetingRepository;
 import com.hoppy.app.member.Role;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -174,8 +174,8 @@ class PostControllerTest {
     @WithMockCustomUser(id = "1", password = "pass-word", role = Role.USER, socialType = SocialType.KAKAO)
     void createPostTest() throws Exception {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Meeting meeting = meetingRepository.save(EntityUtility.testArtMeeting(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Meeting meeting = meetingRepository.save(EntityUtil.testArtMeeting(member));
         CreatePostDto createPostDto = CreatePostDto.builder()
                 .meetingId(meeting.getId())
                 .title("test-title")
@@ -205,8 +205,8 @@ class PostControllerTest {
     @WithMockCustomUser(id = "1", password = "pass-word", role = Role.USER, socialType = SocialType.KAKAO)
     void likePostTest() throws Exception {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Post post = postRepository.save(EntityUtil.testPost(member));
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/post/like/" + post.getId())
@@ -226,8 +226,8 @@ class PostControllerTest {
     @WithMockCustomUser(id = "1", password = "pass-word", role = Role.USER, socialType = SocialType.KAKAO)
     void dislikePostTest() throws Exception {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Post post = postRepository.save(EntityUtil.testPost(member));
         memberPostLikeRepository.save(MemberPostLike.of(member, post));
 
         // when
@@ -253,8 +253,8 @@ class PostControllerTest {
     @WithMockCustomUser(id = "1", password = "pass-word", role = Role.USER, socialType = SocialType.KAKAO)
     void deletePostTest() throws Exception {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Post post = postRepository.save(EntityUtil.testPost(member));
 
         // when
         mockMvc.perform(MockMvcRequestBuilders
@@ -280,8 +280,8 @@ class PostControllerTest {
     @WithMockCustomUser(id = "1", password = "pass-word", role = Role.USER, socialType = SocialType.KAKAO)
     void patchPostTest() throws Exception {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Post post = postRepository.save(EntityUtil.testPost(member));
 
         UpdatePostDto updatePostDto = new UpdatePostDto("update", null, null);
         String content = objectMapper.writeValueAsString(updatePostDto);

@@ -3,11 +3,10 @@ package com.hoppy.app.meeting.repository;
 import com.hoppy.app.meeting.Category;
 import com.hoppy.app.meeting.domain.Meeting;
 import java.util.List;
-import javax.transaction.Transactional;
 
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,10 +37,10 @@ class MeetingRepositoryTest {
         * HEALTH 카테고리 모임은 0과 짝수번째에 생성되며 총 10개가 생성된다.
         * 그 외에는 LIFE 카테고리 모임이 생성된다.
         * */
-        Member owner = memberRepository.save(EntityUtility.testMember(1L));
+        Member owner = memberRepository.save(EntityUtil.testMember(1L));
         for(int i = 0; i < 20; i++) {
-            if(i % 2 == 0) meetingRepository.save(EntityUtility.testHealthMeeting(owner));
-            else meetingRepository.save(EntityUtility.testArtMeeting(owner));
+            if(i % 2 == 0) meetingRepository.save(EntityUtil.testHealthMeeting(owner));
+            else meetingRepository.save(EntityUtil.testArtMeeting(owner));
         }
     }
 
