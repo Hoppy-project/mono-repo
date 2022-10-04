@@ -28,5 +28,5 @@ public class KakaoOAuth2UserInfoDto {
     private long socialId;
 
     private String email;
-    private String profile_url;
+    private String profileUrl;
 }

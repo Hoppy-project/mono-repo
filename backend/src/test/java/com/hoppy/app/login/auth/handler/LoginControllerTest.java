@@ -58,7 +58,7 @@ class LoginControllerTest {
         KakaoOAuth2UserInfoDto dto = KakaoOAuth2UserInfoDto.builder()
                 .socialId(9999)
                 .email("test@kakao.com")
-                .profile_url(null)
+                .profileUrl(null)
                 .build();
 
         String content = objectMapper.writeValueAsString(dto);
@@ -80,7 +80,7 @@ class LoginControllerTest {
         KakaoOAuth2UserInfoDto dto = KakaoOAuth2UserInfoDto.builder()
                 .socialId(9999)
                 .email("test@gmail.com")
-                .profile_url(null)
+                .profileUrl(null)
                 .build();
 
         String content = objectMapper.writeValueAsString(dto);

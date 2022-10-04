@@ -112,7 +112,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                         .socialType(socialType)
                         .id(dto.getSocialId())
                         .email(dto.getEmail())
-                        .profileImageUrl(dto.getProfile_url())
+                        .profileImageUrl(dto.getProfileUrl())
                         .username(createUsername("해피_" + UUID.randomUUID().toString().substring(0, 5)))
                         .role(Role.USER)
                         .deleted(false)
