@@ -8,11 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 @Component
 @RequiredArgsConstructor
@@ -32,7 +35,10 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         log.info("Authorization Bearer " + token);
         response.setHeader("Authorization", "Bearer " + token);
-//        response.sendRedirect("http://localhost:8888/login/auth/kakao?token=" + token);
-        response.sendRedirect("https://hoppy.kro.kr/login/auth/kakao?token=" + token);
+
+        if(isNotEmpty(request.getHeader("X-DUMMY-DEV")))
+            response.sendRedirect("http://localhost:8888/login/auth/kakao?token=" + token);
+        else
+            response.sendRedirect("https://hoppy.kro.kr/login/auth/kakao?token=" + token);
     }
 }
