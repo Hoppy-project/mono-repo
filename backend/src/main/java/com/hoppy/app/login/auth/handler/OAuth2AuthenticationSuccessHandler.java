@@ -35,9 +35,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         response.setHeader("Authorization", "Bearer " + token);
 
-        if(isNotEmpty(request.getHeader("X-DUMMY-DEV")))
-            response.sendRedirect("http://localhost:8888/login/auth/kakao?token=" + token);
-        else
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null) ip = request.getRemoteAddr();
+        log.info("_______________________________리다이렉트 요청한 ip {}", ip);
+
+        if(StringUtils.equals(ip, ""))
             response.sendRedirect("https://hoppy.kro.kr/login/auth/kakao?token=" + token);
+        else
+            response.sendRedirect("http://localhost:8888/login/auth/kakao?token=" + token);
     }
 }
