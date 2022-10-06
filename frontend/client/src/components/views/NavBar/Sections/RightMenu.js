@@ -13,15 +13,15 @@ function RightMenu(props) {
         </Menu>
       )
     } else {
-      return (
-        <Menu mode={props.mode}>
-          <Menu.Item key="logout">
-            <a href="https://kauth.kakao.com/oauth/logout?client_id=e1ec33bfac22318d6629869f6bf7bc7a&logout_redirect_uri=http://localhost:8888/logout">
-              로그아웃 ▷
-            </a>
-          </Menu.Item>
-        </Menu>
-      )
+        return (
+          <Menu mode={props.mode}>
+            <Menu.Item key="logout">
+              <a href='/auth/logout'>
+                로그아웃 ▷
+              </a>
+            </Menu.Item>
+          </Menu>
+        )
     }
 }
 
