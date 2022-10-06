@@ -28,8 +28,6 @@ import TripMeetingPage from "./views/TripMeetingPage/TripMeetingPage";
 
 import HobbyStoryPage from "./views/HobbyStoryPage/HobbyStoryPage";
 import MakeStoryPage from "./views/MakeStoryPage/MakeStoryPage";
-import DetailStoryPage from "./views/HobbyStoryPage/DetailStoryPage.js";
-import EditDetailStoryPage from "./views/HobbyStoryPage/EditDetailStoryPage.js";
 import ViewUserPage from "./views/ViewUserPage/ViewUserPage";
 
 import MakeMeetingPage from "./views/MakeMeetingPage/MakeMeetingPage";
