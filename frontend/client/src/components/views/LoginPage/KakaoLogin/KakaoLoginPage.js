@@ -1,5 +1,5 @@
 import React from 'react'
-import { KAKAO_AUTH_URL } from './key'
+import { KAKAO_AUTH_URL, KAKAO_AUTH_URL_LOCAL } from './key'
 import Logo from './img/Logo.png'
 import kakaoLoginButton from './img/kakaoLoginButton.png'
 
@@ -8,7 +8,7 @@ function KakaoLoginPage() {
     const loginhandler = () => {
         if (window.location.href === 'http://localhost:8888/login') {
             return <>
-                <a href={KAKAO_AUTH_URL}>
+                <a href={KAKAO_AUTH_URL_LOCAL}>
                     <img src={kakaoLoginButton} alt='img' style={{height: '50%'}}/>
                 </a>
             </>
