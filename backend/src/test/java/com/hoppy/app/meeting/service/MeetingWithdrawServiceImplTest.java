@@ -9,7 +9,7 @@ import com.hoppy.app.member.repository.MemberMeetingRepository;
 import com.hoppy.app.member.repository.MemberRepository;
 import com.hoppy.app.response.error.exception.BusinessException;
 import com.hoppy.app.response.error.exception.ErrorCode;
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -59,8 +59,8 @@ class MeetingWithdrawServiceImplTest {
     @Test
     void withdrawMeetingTest1() {
         // given
-        Member owner = memberRepository.save(EntityUtility.testMember(99L));
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
+        Member owner = memberRepository.save(EntityUtil.testMember(99L));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
         Meeting meeting = meetingRepository.save(
                 Meeting.builder()
                         .owner(owner)
@@ -86,8 +86,8 @@ class MeetingWithdrawServiceImplTest {
     @Test
     void withdrawMeetingTest2() {
         // given
-        Member owner = memberRepository.save(EntityUtility.testMember(99L));
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
+        Member owner = memberRepository.save(EntityUtil.testMember(99L));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
         Meeting meeting = meetingRepository.save(
                 Meeting.builder()
                         .owner(owner)
@@ -112,8 +112,8 @@ class MeetingWithdrawServiceImplTest {
     @Test
     void withdrawMeetingTest3() {
         // given
-        Member owner = memberRepository.save(EntityUtility.testMember(99L));
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
+        Member owner = memberRepository.save(EntityUtil.testMember(99L));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
         Meeting meeting = meetingRepository.save(
                 Meeting.builder()
                         .owner(owner)

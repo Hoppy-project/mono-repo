@@ -11,7 +11,7 @@ import com.hoppy.app.community.repository.ReReplyRepository;
 import com.hoppy.app.community.repository.ReplyRepository;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +61,8 @@ class ReplyServiceTest {
     @Test
     void createReply() {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        Post post = postRepository.save(EntityUtil.testPost(member));
         CreateReplyDto createReplyDto = CreateReplyDto.builder()
                 .postId(post.getId())
                 .content("content")
@@ -78,8 +78,8 @@ class ReplyServiceTest {
     @Test
     void createReReply() {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
         CreateReReplyDto createReReplyDto = CreateReReplyDto.builder()
                 .replyId(reply.getId())
                 .content("content")
@@ -95,11 +95,11 @@ class ReplyServiceTest {
     @Test
     void deleteReply() {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
 
         for(int i = 0; i < 10; i++) {
-            reReplyRepository.save(EntityUtility.testReReply(member, reply, "test"));
+            reReplyRepository.save(EntityUtil.testReReply(member, reply, "test"));
         }
 
         // when
@@ -113,8 +113,8 @@ class ReplyServiceTest {
     @Test
     void deleteReReply() {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member));
 
         // when
         replyService.deleteReReply(member.getId(), reReply.getId());
@@ -127,8 +127,8 @@ class ReplyServiceTest {
     @Test
     void updateReplyTest() {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        Reply reply = replyRepository.save(EntityUtility.testReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        Reply reply = replyRepository.save(EntityUtil.testReply(member));
 
         // when
         UpdateReplyDto updateReplyDto = new UpdateReplyDto("update");
@@ -142,8 +142,8 @@ class ReplyServiceTest {
     @Test
     void updateReReplyTest() {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member));
 
         // when
         UpdateReplyDto updateReplyDto = new UpdateReplyDto("update");

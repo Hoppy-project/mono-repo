@@ -6,13 +6,12 @@ import com.hoppy.app.like.repository.MemberPostLikeRepository;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.persistence.EntityManager;
 
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -58,7 +57,7 @@ public class PostServiceLikeConcurrencyTest {
                 .id(1L)
                 .build()
         );
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Post post = postRepository.save(EntityUtil.testPost(member));
 
         final int REQUEST_COUNT = 10;
         CountDownLatch countDownLatch = new CountDownLatch(REQUEST_COUNT);

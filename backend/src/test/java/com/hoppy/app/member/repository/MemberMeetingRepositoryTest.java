@@ -8,7 +8,7 @@ import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.domain.MemberMeeting;
 import java.util.Optional;
 
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -48,8 +48,8 @@ class MemberMeetingRepositoryTest {
     void deleteMemberMeetingByMeetingIdAndMemberId() {
 
         //given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        Meeting meeting = meetingRepository.save(EntityUtility.testArtMeeting(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        Meeting meeting = meetingRepository.save(EntityUtil.testArtMeeting(member));
         memberMeetingRepository.save(
                 MemberMeeting.builder()
                         .member(member)

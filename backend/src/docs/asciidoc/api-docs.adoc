@@ -19,6 +19,16 @@ include::{snippets}/health-check/request-body.adoc[]
 .response body
 include::{snippets}/health-check/response-body.adoc[]
 
+== ios
+=== kakao login api
+----
+POST /api/login/kakao
+----
+.request body
+include::{snippets}/kakao-login-request/request-body.adoc[]
+.response body
+include::{snippets}/kakao-login-request/response-body.adoc[]
+
 == 업로드 API
 === PresignedURL 발급받기
 .request url

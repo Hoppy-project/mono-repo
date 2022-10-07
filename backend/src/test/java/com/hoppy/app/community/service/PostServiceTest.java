@@ -21,7 +21,7 @@ import com.hoppy.app.member.repository.MemberRepository;
 import java.util.List;
 import java.util.Optional;
 
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -81,8 +81,8 @@ class PostServiceTest {
         final int RE_REPLY_COUNT = 5;
         final int PAGING_SIZE = 8;
 
-        Member member = memberRepository.save(EntityUtility.testMember(TEST_MEMBER_ID));
-        Meeting meeting = meetingRepository.save(EntityUtility.testHealthMeeting(member));
+        Member member = memberRepository.save(EntityUtil.testMember(TEST_MEMBER_ID));
+        Meeting meeting = meetingRepository.save(EntityUtil.testHealthMeeting(member));
         for(int i = 0; i < POST_COUNT; i++) {
             Post post = postRepository.save(
                 Post.builder()
@@ -215,14 +215,14 @@ class PostServiceTest {
     @Test
     void postDeleteTest() {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        Post post = postRepository.save(EntityUtil.testPost(member));
 
         for(int i = 0; i < 5; i++) {
-            Reply reply = replyRepository.save(EntityUtility.testReply(member, post, "test"));
+            Reply reply = replyRepository.save(EntityUtil.testReply(member, post, "test"));
 
             for(int j = 0; j < 5; j++) {
-                ReReply reReply = reReplyRepository.save(EntityUtility.testReReply(member, reply, "test"));
+                ReReply reReply = reReplyRepository.save(EntityUtil.testReReply(member, reply, "test"));
             }
         }
 
@@ -245,8 +245,8 @@ class PostServiceTest {
     @Test
     void postUpdateTest() {
         // given
-        Member member = memberRepository.save(EntityUtility.testMember(1L));
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Member member = memberRepository.save(EntityUtil.testMember(1L));
+        Post post = postRepository.save(EntityUtil.testPost(member));
 
         UpdatePostDto updatePostDto = new UpdatePostDto("update", null, null);
 

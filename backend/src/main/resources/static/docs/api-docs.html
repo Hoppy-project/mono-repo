@@ -450,6 +450,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_서버_상태_확인하기">서버 상태 확인하기</a></li>
 </ul>
 </li>
+<li><a href="#_ios">ios</a>
+<ul class="sectlevel2">
+<li><a href="#_kakao_login_api">kakao login api</a></li>
+</ul>
+</li>
 <li><a href="#_업로드_api">업로드 API</a>
 <ul class="sectlevel2">
 <li><a href="#_presignedurl_발급받기">PresignedURL 발급받기</a></li>
@@ -573,6 +578,35 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
+<h2 id="_ios"><a class="link" href="#_ios">ios</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_kakao_login_api"><a class="link" href="#_kakao_login_api">kakao login api</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre>POST /api/login/kakao</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">request body</div>
+<div class="content">
+<pre class="highlight nowrap"><code>{
+  "socialId" : 9999,
+  "email" : "test@gmail.com",
+  "profileUrl" : null
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response body</div>
+<div class="content">
+<pre class="highlight nowrap"><code>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5OTk5IiwiUk9MRV8iOiJVU0VSIiwiZXhwIjoxNjY0OTA5NjAzfQ.anUrMEM3mXKG3w31ERfsukFm_aP_HMWM_lidtaToSII</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_업로드_api"><a class="link" href="#_업로드_api">업로드 API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -596,7 +630,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   "status" : 200,
   "message" : "URL 발급 완료",
   "data" : {
-    "url" : "https://hoppyservice.s3.ap-northeast-2.amazonaws.com/test.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20220924T075252Z&amp;X-Amz-SignedHeaders=content-type%3Bhost&amp;X-Amz-Expires=300&amp;X-Amz-Credential=accessKey%2F20220924%2Fap-northeast-2%2Fs3%2Faws4_request&amp;X-Amz-Signature=95e8195022e04d8d0447edbfa72c0bac7df29104072cc5410ea90f325b652516"
+    "url" : "https://hoppyservice.s3.ap-northeast-2.amazonaws.com/test.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20221004T145328Z&amp;X-Amz-SignedHeaders=content-type%3Bhost&amp;X-Amz-Expires=300&amp;X-Amz-Credential=accessKey%2F20221004%2Fap-northeast-2%2Fs3%2Faws4_request&amp;X-Amz-Signature=7340a9b444eea2db8e5f59e59b1c7466837eca8af0c2be7006ff8000cf7765d2"
   }
 }</code></pre>
 </div>
@@ -633,77 +667,77 @@ Host: localhost:8080</code></pre>
   "message" : "모임 검색 완료",
   "data" : {
     "meetingList" : [ {
-      "id" : 216,
+      "id" : 210,
       "url" : "default-url",
       "title" : "20-title",
       "content" : "20-content"
     }, {
-      "id" : 215,
+      "id" : 209,
       "url" : "default-url",
       "title" : "19-title",
       "content" : "19-content"
     }, {
-      "id" : 214,
+      "id" : 208,
       "url" : "default-url",
       "title" : "18-title",
       "content" : "18-content"
     }, {
-      "id" : 213,
+      "id" : 207,
       "url" : "default-url",
       "title" : "17-title",
       "content" : "17-content"
     }, {
-      "id" : 212,
+      "id" : 206,
       "url" : "default-url",
       "title" : "16-title",
       "content" : "16-content"
     }, {
-      "id" : 211,
+      "id" : 205,
       "url" : "default-url",
       "title" : "15-title",
       "content" : "15-content"
     }, {
-      "id" : 210,
+      "id" : 204,
       "url" : "default-url",
       "title" : "14-title",
       "content" : "14-content"
     }, {
-      "id" : 209,
+      "id" : 203,
       "url" : "default-url",
       "title" : "13-title",
       "content" : "13-content"
     }, {
-      "id" : 208,
+      "id" : 202,
       "url" : "default-url",
       "title" : "12-title",
       "content" : "12-content"
     }, {
-      "id" : 207,
+      "id" : 201,
       "url" : "default-url",
       "title" : "11-title",
       "content" : "11-content"
     }, {
-      "id" : 206,
+      "id" : 200,
       "url" : "default-url",
       "title" : "10-title",
       "content" : "10-content"
     }, {
-      "id" : 205,
+      "id" : 199,
       "url" : "default-url",
       "title" : "9-title",
       "content" : "9-content"
     }, {
-      "id" : 204,
+      "id" : 198,
       "url" : "default-url",
       "title" : "8-title",
       "content" : "8-content"
     }, {
-      "id" : 203,
+      "id" : 197,
       "url" : "default-url",
       "title" : "7-title",
       "content" : "7-content"
     } ],
-    "nextPagingUrl" : "https://hoppy.kro.kr/api/meeting/search/title&amp;lastId=202"
+    "nextPagingUrl" : "https://hoppy.kro.kr/api/meeting/search/title&amp;lastId=196"
   }
 }</code></pre>
 </div>
@@ -797,7 +831,7 @@ memberLimit: 최소 2 최대 20 입니다.</pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
-  "meetingId" : 176
+  "meetingId" : 170
 }</code></pre>
 </div>
 </div>
@@ -829,7 +863,7 @@ memberLimit: 최소 2 최대 20 입니다.</pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
-  "meetingId" : 177
+  "meetingId" : 171
 }</code></pre>
 </div>
 </div>
@@ -875,105 +909,105 @@ liked: 현재 사용자가 좋아요를 눌렀는지 여부를 나타냄</pre>
   "message" : "모임 조회 완료",
   "data" : {
     "meetingList" : [ {
-      "id" : 51,
+      "id" : 45,
       "url" : "default-url",
       "title" : "20-title",
       "content" : "20-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 50,
+      "id" : 44,
       "url" : "default-url",
       "title" : "19-title",
       "content" : "19-content",
       "participants" : 1,
       "liked" : true
     }, {
-      "id" : 49,
+      "id" : 43,
       "url" : "default-url",
       "title" : "18-title",
       "content" : "18-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 48,
+      "id" : 42,
       "url" : "default-url",
       "title" : "17-title",
       "content" : "17-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 47,
+      "id" : 41,
       "url" : "default-url",
       "title" : "16-title",
       "content" : "16-content",
       "participants" : 1,
       "liked" : true
     }, {
-      "id" : 46,
+      "id" : 40,
       "url" : "default-url",
       "title" : "15-title",
       "content" : "15-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 45,
+      "id" : 39,
       "url" : "default-url",
       "title" : "14-title",
       "content" : "14-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 44,
+      "id" : 38,
       "url" : "default-url",
       "title" : "13-title",
       "content" : "13-content",
       "participants" : 1,
       "liked" : true
     }, {
-      "id" : 43,
+      "id" : 37,
       "url" : "default-url",
       "title" : "12-title",
       "content" : "12-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 42,
+      "id" : 36,
       "url" : "default-url",
       "title" : "11-title",
       "content" : "11-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 41,
+      "id" : 35,
       "url" : "default-url",
       "title" : "10-title",
       "content" : "10-content",
       "participants" : 1,
       "liked" : true
     }, {
-      "id" : 40,
+      "id" : 34,
       "url" : "default-url",
       "title" : "9-title",
       "content" : "9-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 39,
+      "id" : 33,
       "url" : "default-url",
       "title" : "8-title",
       "content" : "8-content",
       "participants" : 1,
       "liked" : false
     }, {
-      "id" : 38,
+      "id" : 32,
       "url" : "default-url",
       "title" : "7-title",
       "content" : "7-content",
       "participants" : 1,
       "liked" : true
     } ],
-    "nextPagingUrl" : "https://hoppy.kro.kr/api/meeting?categoryNumber=2&amp;lastId=37"
+    "nextPagingUrl" : "https://hoppy.kro.kr/api/meeting?categoryNumber=2&amp;lastId=31"
   }
 }</code></pre>
 </div>
@@ -990,7 +1024,7 @@ liked: 현재 사용자가 좋아요를 눌렀는지 여부를 나타냄</pre>
 <div class="listingblock">
 <div class="title">request header</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /meeting/73 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /meeting/67 HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1002,7 +1036,7 @@ Host: localhost:8080</code></pre>
   "status" : 200,
   "message" : "모임 상세 페이지 조회 완료",
   "data" : {
-    "id" : 73,
+    "id" : 67,
     "profileImageUrl" : "profile-url",
     "ownerName" : "tae-kyoung",
     "title" : "1-title",
@@ -1031,7 +1065,7 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="title">request header</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /meeting/like/113 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /meeting/like/107 HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1055,7 +1089,7 @@ HTTP/1.1 200 OK</pre>
 <div class="listingblock">
 <div class="title">request header</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /meeting/like/155 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /meeting/like/149 HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1080,7 +1114,7 @@ GET /api/meeting/posts?meetingId={id}</pre>
 <div class="listingblock">
 <div class="title">request header</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /meeting/posts?meetingId=72 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /meeting/posts?meetingId=66 HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1093,7 +1127,7 @@ Host: localhost:8080</code></pre>
   "message" : "커뮤니티 게시물 조회 완료",
   "data" : {
     "postList" : [ {
-      "id" : 20,
+      "id" : 42,
       "profileImageUrl" : "profile-url",
       "ownerName" : "tae-kyoung",
       "title" : "20-title",
@@ -1103,7 +1137,7 @@ Host: localhost:8080</code></pre>
       "likeCount" : 0,
       "replyCount" : 0
     }, {
-      "id" : 19,
+      "id" : 41,
       "profileImageUrl" : "profile-url",
       "ownerName" : "tae-kyoung",
       "title" : "19-title",
@@ -1113,7 +1147,7 @@ Host: localhost:8080</code></pre>
       "likeCount" : 1,
       "replyCount" : 0
     }, {
-      "id" : 18,
+      "id" : 40,
       "profileImageUrl" : "profile-url",
       "ownerName" : "tae-kyoung",
       "title" : "18-title",
@@ -1123,7 +1157,7 @@ Host: localhost:8080</code></pre>
       "likeCount" : 0,
       "replyCount" : 0
     }, {
-      "id" : 17,
+      "id" : 39,
       "profileImageUrl" : "profile-url",
       "ownerName" : "tae-kyoung",
       "title" : "17-title",
@@ -1133,7 +1167,7 @@ Host: localhost:8080</code></pre>
       "likeCount" : 1,
       "replyCount" : 0
     }, {
-      "id" : 16,
+      "id" : 38,
       "profileImageUrl" : "profile-url",
       "ownerName" : "tae-kyoung",
       "title" : "16-title",
@@ -1143,7 +1177,7 @@ Host: localhost:8080</code></pre>
       "likeCount" : 0,
       "replyCount" : 0
     }, {
-      "id" : 15,
+      "id" : 37,
       "profileImageUrl" : "profile-url",
       "ownerName" : "tae-kyoung",
       "title" : "15-title",
@@ -1153,7 +1187,7 @@ Host: localhost:8080</code></pre>
       "likeCount" : 1,
       "replyCount" : 0
     }, {
-      "id" : 14,
+      "id" : 36,
       "profileImageUrl" : "profile-url",
       "ownerName" : "tae-kyoung",
       "title" : "14-title",
@@ -1163,7 +1197,7 @@ Host: localhost:8080</code></pre>
       "likeCount" : 0,
       "replyCount" : 0
     }, {
-      "id" : 13,
+      "id" : 35,
       "profileImageUrl" : "profile-url",
       "ownerName" : "tae-kyoung",
       "title" : "13-title",
@@ -1173,7 +1207,7 @@ Host: localhost:8080</code></pre>
       "likeCount" : 1,
       "replyCount" : 0
     } ],
-    "nextPagingUrl" : "https://hoppy.kro.kr/api/meeting/posts?meetingId=72&amp;lastId=12"
+    "nextPagingUrl" : "https://hoppy.kro.kr/api/meeting/posts?meetingId=66&amp;lastId=34"
   }
 }</code></pre>
 </div>
@@ -1193,7 +1227,7 @@ Host: localhost:8080</code></pre>
 <div class="title">request body</div>
 <div class="content">
 <pre class="highlight nowrap"><code>{
-  "meetingId" : 223,
+  "meetingId" : 2,
   "title" : "test-title",
   "content" : "test-content",
   "url" : "https://picsum.photos/500/500"
@@ -1251,7 +1285,7 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="title">request header</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /post/22 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /post/2 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Host: localhost:8080</code></pre>
@@ -1279,7 +1313,7 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="title">request header</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /post/25 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /post/5 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Host: localhost:8080</code></pre>
@@ -1292,7 +1326,7 @@ Host: localhost:8080</code></pre>
   "status" : 200,
   "message" : "게시물 조회 완료",
   "data" : {
-    "id" : 25,
+    "id" : 5,
     "authorName" : "testName",
     "profileImageUrl" : "testProfileUrl",
     "title" : "0-title",
@@ -1302,28 +1336,6 @@ Host: localhost:8080</code></pre>
     "likeCount" : 1,
     "replyCount" : 6,
     "replies" : [ {
-      "id" : 2,
-      "authorProfileUrl" : "testProfileUrl",
-      "authorName" : "testName",
-      "content" : "1-content",
-      "liked" : false,
-      "likeCount" : 0,
-      "replies" : [ {
-        "id" : 3,
-        "authorProfileUrl" : "testProfileUrl",
-        "authorName" : "testName",
-        "content" : "0-content",
-        "liked" : false,
-        "likeCount" : 0
-      }, {
-        "id" : 4,
-        "authorProfileUrl" : "testProfileUrl",
-        "authorName" : "testName",
-        "content" : "1-content",
-        "liked" : false,
-        "likeCount" : 0
-      } ]
-    }, {
       "id" : 1,
       "authorProfileUrl" : "testProfileUrl",
       "authorName" : "testName",
@@ -1331,14 +1343,36 @@ Host: localhost:8080</code></pre>
       "liked" : false,
       "likeCount" : 0,
       "replies" : [ {
+        "id" : 1,
+        "authorProfileUrl" : "testProfileUrl",
+        "authorName" : "testName",
+        "content" : "0-content",
+        "liked" : false,
+        "likeCount" : 0
+      }, {
         "id" : 2,
         "authorProfileUrl" : "testProfileUrl",
         "authorName" : "testName",
         "content" : "1-content",
         "liked" : false,
         "likeCount" : 0
+      } ]
+    }, {
+      "id" : 2,
+      "authorProfileUrl" : "testProfileUrl",
+      "authorName" : "testName",
+      "content" : "1-content",
+      "liked" : false,
+      "likeCount" : 0,
+      "replies" : [ {
+        "id" : 4,
+        "authorProfileUrl" : "testProfileUrl",
+        "authorName" : "testName",
+        "content" : "1-content",
+        "liked" : false,
+        "likeCount" : 0
       }, {
-        "id" : 1,
+        "id" : 3,
         "authorProfileUrl" : "testProfileUrl",
         "authorName" : "testName",
         "content" : "0-content",
@@ -1362,7 +1396,7 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="title">request header</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /post/like/24 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /post/like/4 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Host: localhost:8080</code></pre>
@@ -1387,7 +1421,7 @@ HTTP/1.1 200 OK</pre>
 <div class="listingblock">
 <div class="title">request header</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /post/like/23 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /post/like/3 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Host: localhost:8080</code></pre>
@@ -1416,7 +1450,7 @@ HTTP/1.1 200 OK</pre>
 <div class="title">request body</div>
 <div class="content">
 <pre class="highlight nowrap"><code>{
-  "postId" : 27,
+  "postId" : 7,
   "content" : "content"
 }</code></pre>
 </div>
@@ -1688,7 +1722,7 @@ HTTP/1.1 200 OK</pre>
     "profileUrl" : "www.changing-url.com",
     "intro" : "회원 정보 수정 테스트",
     "deleted" : false,
-    "myMeetingsId" : [ 6, 3, 9 ]
+    "myMeetingsId" : [ 218, 224, 221 ]
   }
 }</code></pre>
 </div>
@@ -1720,40 +1754,40 @@ HTTP/1.1 200 OK</pre>
     "content" : "This is 5th Story",
     "username" : "강해상",
     "filename" : "5.jpg",
-    "createdDate" : "2022-09-24T16:52:27.933637",
-    "modifiedDate" : "2022-09-24T16:52:27.933637"
+    "createdDate" : "2022-10-04T23:53:25.289888",
+    "modifiedDate" : "2022-10-04T23:53:25.289888"
   }, {
     "id" : 4,
     "title" : "4th Story",
     "content" : "This is 4th Story",
     "username" : "강해상",
     "filename" : "4.jpg",
-    "createdDate" : "2022-09-24T16:52:27.924934",
-    "modifiedDate" : "2022-09-24T16:52:27.924934"
+    "createdDate" : "2022-10-04T23:53:25.288888",
+    "modifiedDate" : "2022-10-04T23:53:25.288888"
   }, {
     "id" : 3,
     "title" : "3th Story",
     "content" : "This is 3th Story",
     "username" : "강해상",
     "filename" : "3.jpg",
-    "createdDate" : "2022-09-24T16:52:27.914209",
-    "modifiedDate" : "2022-09-24T16:52:27.914209"
+    "createdDate" : "2022-10-04T23:53:25.287888",
+    "modifiedDate" : "2022-10-04T23:53:25.287888"
   }, {
     "id" : 2,
     "title" : "2th Story",
     "content" : "This is 2th Story",
     "username" : "강해상",
     "filename" : "2.jpg",
-    "createdDate" : "2022-09-24T16:52:27.905201",
-    "modifiedDate" : "2022-09-24T16:52:27.905201"
+    "createdDate" : "2022-10-04T23:53:25.285888",
+    "modifiedDate" : "2022-10-04T23:53:25.285888"
   }, {
     "id" : 1,
     "title" : "1th Story",
     "content" : "This is 1th Story",
     "username" : "강해상",
     "filename" : "1.jpg",
-    "createdDate" : "2022-09-24T16:52:27.837296",
-    "modifiedDate" : "2022-09-24T16:52:27.837296"
+    "createdDate" : "2022-10-04T23:53:25.263884",
+    "modifiedDate" : "2022-10-04T23:53:25.263884"
   } ]
 }</code></pre>
 </div>
@@ -1783,7 +1817,7 @@ HTTP/1.1 200 OK</pre>
     "username" : "마석도",
     "profileUrl" : "www.changing-url.com",
     "intro" : "회원 정보 수정 테스트",
-    "meetingsId" : [ 9, 3, 6 ]
+    "meetingsId" : [ 218, 224, 221 ]
   }
 }</code></pre>
 </div>
@@ -1877,13 +1911,13 @@ HTTP/1.1 200 OK</pre>
   "status" : 200,
   "message" : "스토리 업로드 완료",
   "data" : {
-    "id" : 107,
+    "id" : 66,
     "title" : "Story Upload Test",
     "content" : "This is Test code",
     "username" : "최대한",
     "filename" : "example.jpg",
-    "createdDate" : "2022-09-24T16:52:44.740524",
-    "modifiedDate" : "2022-09-24T16:52:44.740524"
+    "createdDate" : "2022-10-04T23:53:25.5738858",
+    "modifiedDate" : "2022-10-04T23:53:25.5738858"
   }
 }</code></pre>
 </div>
@@ -1914,13 +1948,13 @@ HTTP/1.1 200 OK</pre>
   "status" : 200,
   "message" : "스토리 수정 완료",
   "data" : {
-    "id" : 67,
+    "id" : 26,
     "title" : "Update Story Test",
     "content" : "This is updated story",
     "username" : "최대한",
     "filename" : "test_success.wav",
-    "createdDate" : "2022-09-24T16:52:44.493728",
-    "modifiedDate" : "2022-09-24T16:52:44.650301"
+    "createdDate" : "2022-10-04T23:53:25.474885",
+    "modifiedDate" : "2022-10-04T23:53:25.5358872"
   }
 }</code></pre>
 </div>
@@ -1968,7 +2002,7 @@ GET /api/story?lastId={lastId}</pre>
   "message" : "스토리 조회 완료",
   "data" : {
     "storyList" : [ {
-      "id" : 127,
+      "id" : 86,
       "memberId" : 8669,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
@@ -1978,9 +2012,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.840415"
+      "createdDate" : "2022-10-04T23:53:25.604885"
     }, {
-      "id" : 126,
+      "id" : 85,
       "memberId" : 7601,
       "profileUrl" : "seaworld@daum.net",
       "username" : "김태경",
@@ -1990,9 +2024,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.839347"
+      "createdDate" : "2022-10-04T23:53:25.603886"
     }, {
-      "id" : 125,
+      "id" : 84,
       "memberId" : 8669,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
@@ -2002,9 +2036,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.83842"
+      "createdDate" : "2022-10-04T23:53:25.602888"
     }, {
-      "id" : 124,
+      "id" : 83,
       "memberId" : 7601,
       "profileUrl" : "seaworld@daum.net",
       "username" : "김태경",
@@ -2014,9 +2048,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.837283"
+      "createdDate" : "2022-10-04T23:53:25.601887"
     }, {
-      "id" : 123,
+      "id" : 82,
       "memberId" : 8669,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
@@ -2026,9 +2060,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.835887"
+      "createdDate" : "2022-10-04T23:53:25.601887"
     }, {
-      "id" : 122,
+      "id" : 81,
       "memberId" : 7601,
       "profileUrl" : "seaworld@daum.net",
       "username" : "김태경",
@@ -2038,9 +2072,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.83442"
+      "createdDate" : "2022-10-04T23:53:25.600886"
     }, {
-      "id" : 121,
+      "id" : 80,
       "memberId" : 8669,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
@@ -2050,9 +2084,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.832004"
+      "createdDate" : "2022-10-04T23:53:25.600886"
     }, {
-      "id" : 120,
+      "id" : 79,
       "memberId" : 7601,
       "profileUrl" : "seaworld@daum.net",
       "username" : "김태경",
@@ -2062,9 +2096,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.83042"
+      "createdDate" : "2022-10-04T23:53:25.599886"
     }, {
-      "id" : 119,
+      "id" : 78,
       "memberId" : 8669,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
@@ -2074,9 +2108,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.829162"
+      "createdDate" : "2022-10-04T23:53:25.599886"
     }, {
-      "id" : 118,
+      "id" : 77,
       "memberId" : 7601,
       "profileUrl" : "seaworld@daum.net",
       "username" : "김태경",
@@ -2086,9 +2120,9 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-09-24T16:52:44.827643"
+      "createdDate" : "2022-10-04T23:53:25.598886"
     } ],
-    "lastId" : "118"
+    "lastId" : "77"
   }
 }</code></pre>
 </div>
@@ -2115,7 +2149,7 @@ GET /api/story?lastId={lastId}</pre>
   "status" : 200,
   "message" : "스토리 조회 완료",
   "data" : {
-    "id" : 128,
+    "id" : 87,
     "profileUrl" : "seaworld@daum.net",
     "title" : "1th Story",
     "content" : "This is 1th Story",
@@ -2124,13 +2158,13 @@ GET /api/story?lastId={lastId}</pre>
     "liked" : false,
     "likeCount" : 2,
     "replyCount" : 1,
-    "createdDate" : "2022-09-24T16:52:45.105836",
+    "createdDate" : "2022-10-04T23:53:25.698887",
     "replies" : [ {
       "id" : 1,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
       "content" : "Reply",
-      "createdDate" : "2022-09-24T16:52:45.318283",
+      "createdDate" : "2022-10-04T23:53:25.780884",
       "liked" : false,
       "likeCount" : 0,
       "reReplyCount" : 1,
@@ -2139,7 +2173,7 @@ GET /api/story?lastId={lastId}</pre>
         "profileUrl" : "seaworld@daum.net",
         "username" : "김태경",
         "content" : "ReReply",
-        "createdDate" : "2022-09-24T16:52:45.338143",
+        "createdDate" : "2022-10-04T23:53:25.787885",
         "liked" : false,
         "likeCount" : 0
       } ]
@@ -2164,7 +2198,7 @@ GET /api/story?lastId={lastId}</pre>
   "status" : 200,
   "message" : "스토리 조회 완료",
   "data" : {
-    "id" : 178,
+    "id" : 137,
     "memberId" : 7601,
     "profileUrl" : "seaworld@daum.net",
     "username" : "김태경",
@@ -2174,7 +2208,7 @@ GET /api/story?lastId={lastId}</pre>
     "liked" : false,
     "likeCount" : 2,
     "replyCount" : 0,
-    "createdDate" : "2022-09-24T16:52:46.818971"
+    "createdDate" : "2022-10-04T23:53:26.145886"
   }
 }</code></pre>
 </div>
@@ -2203,7 +2237,7 @@ GET /api/story?lastId={lastId}</pre>
   "status" : 200,
   "message" : "스토리 조회 완료",
   "data" : {
-    "id" : 173,
+    "id" : 132,
     "profileUrl" : "seaworld@daum.net",
     "title" : "1th Story",
     "content" : "This is 1th Story",
@@ -2212,13 +2246,13 @@ GET /api/story?lastId={lastId}</pre>
     "liked" : false,
     "likeCount" : 1,
     "replyCount" : 1,
-    "createdDate" : "2022-09-24T16:52:46.74151",
+    "createdDate" : "2022-10-04T23:53:26.112888",
     "replies" : [ {
       "id" : 36,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
       "content" : "This is Story Reply Test",
-      "createdDate" : "2022-09-24T16:52:46.775996",
+      "createdDate" : "2022-10-04T23:53:26.1278866",
       "liked" : false,
       "likeCount" : 0,
       "reReplyCount" : 0,
@@ -2265,8 +2299,34 @@ HTTP/1.1 200 OK</pre>
 <div class="content">
 <pre class="highlight nowrap"><code>{
   "status" : 200,
-  "message" : "댓글 삭제 완료",
-  "data" : [ ]
+  "message" : "스토리 조회 완료",
+  "data" : {
+    "id" : 87,
+    "profileUrl" : "seaworld@daum.net",
+    "title" : "1th Story",
+    "content" : "This is 1th Story",
+    "username" : "김태경",
+    "filename" : "1.jpg",
+    "liked" : false,
+    "likeCount" : 1,
+    "replyCount" : 2,
+    "createdDate" : "2022-09-11T18:25:23.418084",
+    "replies" : [ {
+      "profileUrl" : "korea88@naver.com",
+      "username" : "최대한",
+      "content" : "This is 2th reply",
+      "liked" : false,
+      "likeCount" : 0,
+      "reReplies" : null
+    }, {
+      "profileUrl" : "korea88@naver.com",
+      "username" : "최대한",
+      "content" : "This is 3th reply",
+      "liked" : false,
+      "likeCount" : 0,
+      "reReplies" : null
+    } ]
+  }
 }</code></pre>
 </div>
 </div>
@@ -2389,7 +2449,7 @@ HTTP/1.1 200 OK</pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-09-24 16:51:55 +0900
+Last updated 2022-10-04 23:43:13 +0900
 </div>
 </div>
 </body>

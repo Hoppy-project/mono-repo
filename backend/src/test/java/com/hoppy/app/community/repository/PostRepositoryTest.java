@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 
-import com.hoppy.app.utility.EntityUtility;
+import com.hoppy.app.utils.EntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -207,7 +207,7 @@ class PostRepositoryTest {
                 .build()
         );
 
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Post post = postRepository.save(EntityUtil.testPost(member));
         memberPostLikeRepository.save(MemberPostLike.of(member, post));
         em.flush();
         em.clear();
@@ -229,7 +229,7 @@ class PostRepositoryTest {
                         .id(TEST_MEMBER_ID)
                         .build()
         );
-        Post post = postRepository.save(EntityUtility.testPost(member));
+        Post post = postRepository.save(EntityUtil.testPost(member));
         memberPostLikeRepository.save(MemberPostLike.of(member, post));
         memberPostLikeRepository.deleteByMemberIdAndPostId(member.getId(), post.getId());
         em.flush();
