@@ -28,6 +28,8 @@ import TripMeetingPage from "./views/TripMeetingPage/TripMeetingPage";
 
 import HobbyStoryPage from "./views/HobbyStoryPage/HobbyStoryPage";
 import MakeStoryPage from "./views/MakeStoryPage/MakeStoryPage";
+import DetailStoryPage from "./views/HobbyStoryPage/DetailStoryPage.js";
+import EditDetailStoryPage from "./views/HobbyStoryPage/EditDetailStoryPage.js";
 import ViewUserPage from "./views/ViewUserPage/ViewUserPage";
 
 import MakeMeetingPage from "./views/MakeMeetingPage/MakeMeetingPage";
@@ -37,6 +39,8 @@ import UploadDaily from "./views/MakeMeetingPage/UploadMeetingPage/UploadDaily";
 import UploadFood from "./views/MakeMeetingPage/UploadMeetingPage/UploadFood";
 import UploadMusic from "./views/MakeMeetingPage/UploadMeetingPage/UploadMusic";
 import UploadTrip from "./views/MakeMeetingPage/UploadMeetingPage/UploadTrip";
+
+import ReportPage from "./views/ReportPage/ReportPage.js";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -92,6 +96,11 @@ function App() {
           {/* 스토리 */}
           <Route exact path="/hobbystory" component={(HobbyStoryPage)} />
           <Route exact path="/hobbystory/upload" component={(MakeStoryPage)} />
+          <Route exact path="/hobbystory/:storyId" component={(DetailStoryPage)} />
+          <Route exact path="/hobbystory/:storyId/edit" component={(EditDetailStoryPage)} />
+
+          {/* 신고 페이지 */}
+          <Route exact path="/report" component={(ReportPage)} />
 
           {/* 사용자 프로필 */}
           <Route exact path="/user/:userId" component={(ViewUserPage)} />
