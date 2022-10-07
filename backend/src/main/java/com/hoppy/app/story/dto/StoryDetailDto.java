@@ -21,6 +21,8 @@ public class StoryDetailDto {
 
     private Long id;
 
+    private Long memberId;
+
     private String profileUrl;
 
     private String title;
@@ -44,6 +46,7 @@ public class StoryDetailDto {
     public static StoryDetailDto from(Story story) {
         return StoryDetailDto.builder()
                 .id(story.getId())
+                .memberId(story.getMember().getId())
                 .profileUrl(story.getMember().getProfileImageUrl())
                 .title(story.getTitle())
                 .content(story.getContent())
