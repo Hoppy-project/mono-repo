@@ -77,7 +77,7 @@ function HobbyStoryPage(props) {
         } else {
             return
         }
-        //스토리 사진 나타내기
+        //프로필 사진 나타내기
         const reader = new FileReader();
         reader.onload = () => {
             console.log('reader.readyState', reader)
@@ -94,9 +94,6 @@ function HobbyStoryPage(props) {
         if (!Title && !Content) {
             return alert("제목과 내용을 입력해주세요.")
         }
-
-        console.log('F', FileName)
-
         if (Title && Content && FileName === "") {
             const body = {
                 title: Title,
@@ -136,7 +133,7 @@ function HobbyStoryPage(props) {
                 .post(
                     "https://hoppy.kro.kr/api/story",
                     body,
-                    {headers}
+                    {headers, withCredentials: true}
                 )
                 .then(response => {
                     console.log('res>>>>', response)

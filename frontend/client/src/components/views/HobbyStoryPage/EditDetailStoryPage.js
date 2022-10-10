@@ -142,7 +142,7 @@ function EditDetailStoryPage(props) {
             Axios
                 .put(`https://hoppy.kro.kr/api/story?id=${storyId}`, body, {
                     headers,
-                    withCredentials: false
+                    withCredentials: true
                 })
                 .then(response => {
                     console.log('response >>', response)
@@ -169,7 +169,7 @@ function EditDetailStoryPage(props) {
             Axios
                 .put(`https://hoppy.kro.kr/api/story?id=${storyId}`, body, {
                     headers,
-                    withCredentials: false
+                    withCredentials: true
                 })
                 .then(response => {
                     console.log('response >>', response)
@@ -196,7 +196,7 @@ function EditDetailStoryPage(props) {
             Axios
                 .put(`https://hoppy.kro.kr/api/story?id=${storyId}`, body, {
                     headers,
-                    withCredentials: false
+                    withCredentials: true
                 })
                 .then(response => {
                     console.log('response >>', response)
@@ -223,7 +223,7 @@ function EditDetailStoryPage(props) {
             Axios
                 .put(`https://hoppy.kro.kr/api/story?id=${storyId}`, body, {
                     headers,
-                    withCredentials: false
+                    withCredentials: true
                 })
                 .then(response => {
                     console.log('response >>', response)
@@ -250,7 +250,7 @@ function EditDetailStoryPage(props) {
             Axios
                 .put(`https://hoppy.kro.kr/api/story?id=${storyId}`, body, {
                     headers,
-                    withCredentials: false
+                    withCredentials: true
                 })
                 .then(response => {
                     console.log('response >>', response)
@@ -277,7 +277,7 @@ function EditDetailStoryPage(props) {
             Axios
                 .put(`https://hoppy.kro.kr/api/story?id=${storyId}`, body, {
                     headers,
-                    withCredentials: false
+                    withCredentials: true
                 })
                 .then(response => {
                     console.log('response >>', response)
@@ -304,7 +304,7 @@ function EditDetailStoryPage(props) {
             Axios
                 .put(`https://hoppy.kro.kr/api/story?id=${storyId}`, body, {
                     headers,
-                    withCredentials: false
+                    withCredentials: true
                 })
                 .then(response => {
                     console.log('response >>', response)
