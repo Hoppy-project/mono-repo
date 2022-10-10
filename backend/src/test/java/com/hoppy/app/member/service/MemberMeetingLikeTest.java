@@ -29,6 +29,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,14 @@ public class MemberMeetingLikeTest {
 
     @Autowired
     MeetingService meetingService;
+
+    @AfterEach
+    void afterEach() {
+        memberMeetingLikeRepository.deleteAll();
+        memberMeetingRepository.deleteAll();
+        meetingRepository.deleteAll();
+        memberRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("멤버 프로필 관심 모임 테스트")
