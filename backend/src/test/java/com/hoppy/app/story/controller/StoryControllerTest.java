@@ -182,6 +182,7 @@ class StoryControllerTest {
 
     @DisplayName("스토리 조회 페이징 테스트")
     @Test
+    @WithMockCustomUser(id = "8669")
     void showStoryList() throws Exception {
         List<Story> storyList = storyRepository.findAll();
         for(int i = 0; i < storyList.size(); i++) {

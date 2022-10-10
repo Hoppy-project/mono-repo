@@ -69,8 +69,9 @@ public class StoryController {
     }
 
     @GetMapping
-    public ResponseEntity<ResponseDto> showStoryList(@RequestParam(value = "lastId", defaultValue = "0") Long lastId) {
-        PagingStoryDto pagingStory = storyService.pagingStory(lastId);
+    public ResponseEntity<ResponseDto> showStoryList(@AuthenticationPrincipal CustomUserDetails userDetails,
+            @RequestParam(value = "lastId", defaultValue = "0") Long lastId) {
+        PagingStoryDto pagingStory = storyService.pagingStory(userDetails.getId(), lastId);
         return responseService.successResult(SuccessCode.INQUIRY_STORY_SUCCESS, pagingStory);
     }
 

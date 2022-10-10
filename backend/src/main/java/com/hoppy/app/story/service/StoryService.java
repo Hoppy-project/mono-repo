@@ -22,7 +22,7 @@ public interface StoryService {
 
     public List<SaveStoryDto> showMyStoriesInProfile(Member member);
 
-    public PagingStoryDto pagingStory(Long lastId);
+    public PagingStoryDto pagingStory(Long memberId, Long lastId);
 
     public void likeStory(Long memberId, Long storyId);
 
