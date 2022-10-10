@@ -42,6 +42,8 @@ import UploadTrip from "./views/MakeMeetingPage/UploadMeetingPage/UploadTrip";
 
 import ReportPage from "./views/ReportPage/ReportPage.js";
 
+import MobileImg from "./views/LandingPage/img/mobile.png";
+
 //null   Anyone Can go inside
 //true   only logged in user can go inside
 //false  logged in user can't go inside
@@ -50,8 +52,21 @@ function App() {
   if (isBrowser) {
     return (
       <div style={{ width: "100%" }}>
-        <div style={{ margin: "3rem auto" }}>
-          <h1 style={{ fontSize: "60px" }}>모바일 환경으로 접속해주세요</h1>
+        <div style={{ width: "500px", height: "700px", margin: "5% auto" }}>
+          <img
+            src={MobileImg}
+            style={{ width: "190px", margin: "0 auto", display: "block" }}
+            alt="mobile"
+          />
+          <h1 style={{ fontSize: "30px", marginLeft: "60px" }}>
+            모바일 환경에서 접속해주세요
+          </h1>
+          <p style={{ fontSize: "18px", marginLeft: "80px" }}>
+            현재 모바일 환경에서만 지원하고 있어요
+            <span role="img" aria-label="imogi">
+              😢
+            </span>
+          </p>
         </div>
       </div>
     );
