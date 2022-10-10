@@ -1,10 +1,14 @@
 package com.hoppy.app.member.controller;
 
+import com.hoppy.app.like.domain.MemberMeetingLike;
+import com.hoppy.app.like.repository.MemberMeetingLikeRepository;
 import com.hoppy.app.login.auth.authentication.CustomUserDetails;
 import com.hoppy.app.member.domain.Member;
+import com.hoppy.app.member.domain.MemberMeeting;
 import com.hoppy.app.member.dto.MyProfileDto;
 import com.hoppy.app.member.dto.UpdateMemberDto;
 import com.hoppy.app.member.dto.UserProfileDto;
+import com.hoppy.app.member.repository.MemberMeetingRepository;
 import com.hoppy.app.member.service.MemberService;
 import com.hoppy.app.response.dto.ResponseDto;
 import com.hoppy.app.response.error.exception.BusinessException;
@@ -33,11 +37,16 @@ public class MemberProfileController {
     private final StoryService storyService;
     private final MemberService memberService;
 
+    private final MemberMeetingLikeRepository memberMeetingLikeRepository;
+
+    private final MemberMeetingRepository memberMeetingRepository;
+
     @GetMapping
     public ResponseEntity<ResponseDto> showMyProfile(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        Long memberId = userDetails.getId();
-        Member member = memberService.findById(memberId);
-        MyProfileDto myProfileDto = MyProfileDto.of(member);
+        Member member = memberService.findById(userDetails.getId());
+        List<MemberMeeting> meetingList = memberMeetingRepository.findAllByMember(member);
+        List<MemberMeetingLike> meetingLikeList = memberMeetingLikeRepository.findAllByMember(member);
+        MyProfileDto myProfileDto = MyProfileDto.of(member, meetingList, meetingLikeList);
         return responseService.successResult(SuccessCode.SHOW_PROFILE_SUCCESS, myProfileDto);
     }
 

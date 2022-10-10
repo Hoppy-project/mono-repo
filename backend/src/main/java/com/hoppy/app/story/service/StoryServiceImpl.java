@@ -129,7 +129,7 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     @Transactional
-    public PagingStoryDto pagingStory(Long lastId) {
+    public PagingStoryDto pagingStory(Long memberId, Long lastId) {
         lastId = validCheckLastId(lastId);
         List<Story> storyList = storyRepository.findNextStoryOrderByIdDesc(lastId, PageRequest.of(0, 10));
         if(storyList.isEmpty()) {
@@ -138,12 +138,27 @@ public class StoryServiceImpl implements StoryService {
         lastId = getLastId(storyList);
         String nextPageUrl = getNextPagingUrl(lastId);
         List<StoryDto> storyDtoList = listToDtoList(storyList);
-
-        return PagingStoryDto.of(storyDtoList, nextPageUrl);
+        List<Boolean> likedList = listToLikeList(storyList, memberId);
+        return PagingStoryDto.of(storyDtoList, likedList, nextPageUrl);
     }
 
     public List<StoryDto> listToDtoList(List<Story> storyList) {
         return storyList.stream().map(StoryDto::of).collect(Collectors.toList());
+    }
+
+    public List<Boolean> listToLikeList(List<Story> storyList, Long memberId) {
+        List<Boolean> likeList = new ArrayList<>();
+        for (int i = 0; i < storyList.size(); i++) {
+            Story story = storyList.get(i);
+            Optional<MemberStoryLike> memberStoryLike =
+                    memberStoryLikeRepository.findByMemberIdAndStoryId(memberId, story.getId());
+            if (memberStoryLike.isPresent()) {
+                likeList.add(true);
+            } else {
+                likeList.add(false);
+            }
+        }
+        return likeList;
     }
 
     public Long validCheckLastId(Long lastId) {

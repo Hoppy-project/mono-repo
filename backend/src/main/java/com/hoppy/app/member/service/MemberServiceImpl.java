@@ -44,18 +44,14 @@ public class MemberServiceImpl implements MemberService {
         if(member.isDeleted()) {
             throw new BusinessException(ErrorCode.DELETED_MEMBER);
         }
-        if(dto.getUsername() != null) {
+        if(dto.getUsername() != null && !dto.getUsername().isEmpty()) {
             if(existsByUsername(dto.getUsername()) && dto.getUsername() != member.getUsername()) {
                 throw new BusinessException(ErrorCode.MEMBER_DUPLICATE);
             }
             member.setUsername(dto.getUsername());
         }
-        if(dto.getIntro() != null) {
-            member.setIntro(dto.getIntro());
-        }
-        if(dto.getProfileUrl() != null) {
-            member.setProfileImageUrl(dto.getProfileUrl());
-        }
+        if(dto.getIntro() != null && !dto.getIntro().isEmpty()) member.setIntro(dto.getIntro());
+        if(dto.getProfileUrl() != null && !dto.getProfileUrl().isEmpty()) member.setProfileImageUrl(dto.getProfileUrl());
         /*
         * 22.08.13 -tae
         * isPresent check 누락되어 수정하였음

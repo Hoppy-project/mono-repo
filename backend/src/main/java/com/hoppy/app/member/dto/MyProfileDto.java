@@ -25,7 +25,7 @@ public class MyProfileDto {
     private List<Long> myMeetingsId;
     private List<Long> likeMeetingsId;
 
-    public static MyProfileDto of(Member member) {
+    public static MyProfileDto of(Member member, List<MemberMeeting> meetingList, List<MemberMeetingLike> meetingLikeList) {
 
         return MyProfileDto.builder()
                 .id(member.getId())
@@ -34,9 +34,9 @@ public class MyProfileDto {
                 .profileUrl(member.getProfileImageUrl())
                 .intro(member.getIntro())
                 .deleted(member.isDeleted())
-                .myMeetingsId(member.getMyMeetings().stream().map(MemberMeeting::getMeetingId).collect(
+                .myMeetingsId(meetingList.stream().map(MemberMeeting::getMeetingId).collect(
                         Collectors.toList()))
-                .likeMeetingsId(member.getMeetingLikes().stream().map(MemberMeetingLike::getMeetingId).collect(
+                .likeMeetingsId(meetingLikeList.stream().map(MemberMeetingLike::getMeetingId).collect(
                         Collectors.toList()))
                 .build();
     }
