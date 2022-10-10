@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -23,6 +24,9 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final AuthTokenProvider authTokenProvider;
+
+    @Value("${login.redirect-uri}")
+    private String redirectUri;
     
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -33,6 +37,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String token = authTokenProvider.createUserAuthToken(userDetails.getId().toString()).getToken();
         response.setHeader("Authorization", "Bearer " + token);
-        response.sendRedirect("https://hoppy.kro.kr/login/auth/kakao?token=" + token);
+        response.sendRedirect(redirectUri + token);
     }
 }

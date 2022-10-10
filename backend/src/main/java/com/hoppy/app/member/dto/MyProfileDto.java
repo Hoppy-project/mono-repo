@@ -1,5 +1,6 @@
 package com.hoppy.app.member.dto;
 
+import com.hoppy.app.like.domain.MemberMeetingLike;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.domain.MemberMeeting;
 import java.util.List;
@@ -22,7 +23,7 @@ public class MyProfileDto {
     private String intro;
     private boolean deleted;
     private List<Long> myMeetingsId;
-
+    private List<Long> likeMeetingsId;
 
     public static MyProfileDto of(Member member) {
 
@@ -34,6 +35,8 @@ public class MyProfileDto {
                 .intro(member.getIntro())
                 .deleted(member.isDeleted())
                 .myMeetingsId(member.getMyMeetings().stream().map(MemberMeeting::getMeetingId).collect(
+                        Collectors.toList()))
+                .likeMeetingsId(member.getMeetingLikes().stream().map(MemberMeetingLike::getMeetingId).collect(
                         Collectors.toList()))
                 .build();
     }

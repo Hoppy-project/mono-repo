@@ -4,7 +4,7 @@ import { Button, Icon, Avatar } from 'antd'
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import moment from 'moment'
-import InfiniteScroll from 'react-infinite-scroll-component'
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 function HobbyStoryPage() {
 
@@ -70,13 +70,13 @@ function HobbyStoryPage() {
         key={index}>
         <div>
             <a href={`/user/${story.memberId}`}>
-              <Avatar
-                  size={27}
-                  src={story.profileUrl}
-                  style={{
-                      float: 'left',
-                      marginRight: '8px'
-                  }}/>
+            <Avatar
+                size={27}
+                src={story.profileUrl}
+                style={{
+                    float: 'left',
+                    marginRight: '8px'
+                }}/>
             </a>
             <p
                 style={{
@@ -90,24 +90,28 @@ function HobbyStoryPage() {
                     marginTop: '15px'
                 }}>{date}</p>
         </div>
-        <div
-            style={{
-                display: 'inline-block',
-                width: '100%',
-                whiteSpace: 'pre-wrap',
-                wordBreak: 'break-all'
-            }}>
-            <p
-                style={{
-                    textAlign: 'left',
-                    fontSize: '11px'
-                }}>{story.title}</p>
-            <p
-                style={{
-                    textAlign: 'left',
-                    fontSize: '9px'
-                }}>{story.content}</p>
-                {image()}
+        <div>
+            <a href={`/hobbystory/${story.id}`} style={{textDecoration: 'none', color: '#000'}} >
+                <div
+                    style={{
+                        display: 'inline-block',
+                        width: '100%',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-all'
+                    }}>
+                            <p
+                                style={{
+                                    textAlign: 'left',
+                                    fontSize: '11px'
+                                }}>{story.title}</p>
+                            <p
+                                style={{
+                                    textAlign: 'left',
+                                    fontSize: '9px'
+                                }}>{story.content}</p>
+                        {image()}
+                </div>
+            </a>
         </div>
         <div
             style={{
@@ -115,13 +119,13 @@ function HobbyStoryPage() {
                 width: '100%',
                 justifyContent: 'flex-end',
                 alignItems: 'stretch',
-                gap: '5px',
-                padding: '0px 5px 0px 0px',
+                gap: '7px'
             }}>
             <Icon
                 type='heart'
                 style={{
-                    fontSize: '20px'
+                    fontSize: '16px',
+                    marginTop: '2px'
                 }}/>
             <p>
                 {story.likeCount}
@@ -129,7 +133,8 @@ function HobbyStoryPage() {
             <Icon
                 type='message'
                 style={{
-                    fontSize: '20px'
+                    fontSize: '16px',
+                    marginTop: '2px'
                 }}/>
             <p>
                 {story.replyCount}
@@ -157,7 +162,7 @@ function HobbyStoryPage() {
             })
             .then(response => response.json())
             .then(response => {
-                // console.log('resresres', response)
+                console.log('resresres', response)
                 if (response.code === 'SS002') {
                     console.log(response.message)
                     setFetching(false)
@@ -199,13 +204,13 @@ function HobbyStoryPage() {
                         marginLeft: '27px',
                         fontSize: '16px'
                     }}>취미 스토리</p>
-                    <hr style={{width: '90%', backgroundColor: '#D3BA9C'}} />
-                    <InfiniteScroll
-                        dataLength={StoryList.length}
-                        next={InfinityScroll}
-                        hasMore={MoreLoad}>
-                        {storyCard}
-                    </InfiniteScroll>
+                    <hr style={{width: '90%', backgroundColor: '#D3BA9C', border: 0, height: '1px'}} />
+                        <InfiniteScroll
+                            dataLength={StoryList.length}
+                            next={InfinityScroll}
+                            hasMore={MoreLoad}>
+                            {storyCard}
+                        </InfiniteScroll>
                     <a href='/hobbystory/upload'>
                         <Button shape='circle' style={{background: '#D3BA9C', width: '40px', height: '40px', position: 'fixed', right: 0, bottom: 0, margin: '0px 15px 50px 0px'}}>
                             <Icon type='plus' style={{color: '#fff', fontSize: '20px'}} />
