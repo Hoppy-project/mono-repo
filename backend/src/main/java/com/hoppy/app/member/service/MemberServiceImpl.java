@@ -45,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
             throw new BusinessException(ErrorCode.DELETED_MEMBER);
         }
         if(dto.getUsername() != null) {
-            if(existsByUsername(dto.getUsername())) {
+            if(existsByUsername(dto.getUsername()) && dto.getUsername() != member.getUsername()) {
                 throw new BusinessException(ErrorCode.MEMBER_DUPLICATE);
             }
             member.setUsername(dto.getUsername());
