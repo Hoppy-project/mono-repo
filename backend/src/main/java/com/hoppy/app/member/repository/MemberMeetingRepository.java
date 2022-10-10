@@ -18,4 +18,6 @@ public interface MemberMeetingRepository extends JpaRepository<MemberMeeting, Lo
     void deleteMemberMeetingByMeetingAndMember(@Param("meeting") Meeting meeting, @Param("member") Member member);
 
     List<MemberMeeting> findALlByMeeting(Meeting meeting);
+
+    List<MemberMeeting> findAllByMember(Member member);
 }
