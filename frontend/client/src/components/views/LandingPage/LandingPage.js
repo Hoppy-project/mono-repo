@@ -14,8 +14,8 @@ function LandingPage() {
   const { Search } = Input;
   const onSearch = (value) => console.log(value);
 
-  const token = localStorage.getItem("Authorization");
-  console.log("token is >>>", token);
+  const token = localStorage.getItem('Authorization')
+  console.log('token is >>>', token)
 
   const hobbyBoxStyle = {
     width: "108px",
@@ -72,14 +72,14 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            <div>운동</div>
-            <img src={ExerciseImg} alt="운동" style={hobbyImageStyle} />
+            운동
+            <img src={ExerciseImg} alt='운동' style={hobbyImageStyle} />
           </div>
         </a>
         <a href="/artMeeting" style={{ textDecoration: "none", color: "#000" }}>
           <div style={hobbyBoxStyle}>
-            <div>공예</div>
-            <img src={ArtImg} alt="공예" style={hobbyImageStyle} />
+            공예
+            <img src={ArtImg} alt='공예' style={hobbyImageStyle} />
           </div>
         </a>
         <a
@@ -87,8 +87,8 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            <div>음악</div>
-            <img src={MusicImg} alt="음악" style={hobbyImageStyle} />
+            음악
+            <img src={MusicImg} alt='음악' style={hobbyImageStyle} />
           </div>
         </a>
         <a
@@ -96,8 +96,8 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            <div>일상</div>
-            <img src={DailyImg} alt="일상" style={hobbyImageStyle} />
+            일상
+            <img src={DailyImg} alt='일상' style={hobbyImageStyle} />
           </div>
         </a>
         <a
@@ -105,8 +105,8 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            <div>음식</div>
-            <img src={FoodImg} alt="음식" style={hobbyImageStyle} />
+            음식
+            <img src={FoodImg} alt='음식' style={hobbyImageStyle} />
           </div>
         </a>
         <a
@@ -114,8 +114,8 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            <div>여행</div>
-            <img src={TripImg} alt="여행" style={hobbyImageStyle} />
+            여행
+            <img src={TripImg} alt='여행' style={hobbyImageStyle} />
           </div>
         </a>
 
@@ -170,7 +170,7 @@ function LandingPage() {
           </div>
           <img
             src={CharacterImg}
-            alt="쿼카"
+            alt='쿼카'
             style={{
               width: "126px",
               height: "131px",
@@ -230,13 +230,16 @@ function LandingPage() {
           </div>
           <img
             src={HobbyStoryImg}
-            alt="Hoppy"
+            alt='Hoppy'
             style={{
               width: "126px",
               height: "131px",
               display: "inline-block",
             }}
           />
+        </div>
+        <div>
+          {/* 배너 광고 자리 */}
         </div>
       </div>
     </div>

@@ -119,7 +119,7 @@ function UploadMusic() {
         title: UploadTitle,
         content: UploadContent,
         memberLimit: UploadMemberLimit,
-        url: FileImage,
+        filename: FileName,
       };
 
       const headers = {
@@ -133,14 +133,13 @@ function UploadMusic() {
         .then((response) => {
           if (response.data.status === 200) {
             alert("모임이 생성되었습니다.");
-            // 음악 모임 모집 글로 매칭
-            window.location.href = "/musicMeeting";
+            // 운동 모임 모집 글로 매칭
+            window.location.href("/");
           }
           console.log("form submit>>>>>", response);
         })
         .catch((error) => {
           console.log("form error>>>>>", error);
-          alert("모임이 생성되지 않았습니다. 다시 시도해주세요!");
         });
     }
   };
