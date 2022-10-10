@@ -133,7 +133,7 @@ function HobbyStoryPage(props) {
                 .post(
                     "https://hoppy.kro.kr/api/story",
                     body,
-                    {headers, withCredentials: false}
+                    {headers}
                 )
                 .then(response => {
                     console.log('res>>>>', response)
