@@ -1,4 +1,7 @@
 = Spring REST Docs [Hoppy!]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
 :toc: left
 :toclevels: 4
 :sectlinks:
@@ -8,16 +11,14 @@
 [🛠️] 다만, 수정하기 API의 request body 필드는 수정하고 싶은 필드만 채워주시면 됩니다.
 ----
 
+////
+asciidoc 개선하기
+https://github.com/backtony/blog-code/tree/master/spring-rest-docs
+////
+
 == 점검 API
 === 서버 상태 확인하기
-.request url
-----
-GET /api/health
-----
-.request body
-include::{snippets}/health-check/request-body.adoc[]
-.response body
-include::{snippets}/health-check/response-body.adoc[]
+operation::health-check[snippets='http-request,response-body,response-fields']
 
 == ios
 === kakao login api

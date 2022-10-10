@@ -29,6 +29,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.core.Is.is;
@@ -58,13 +60,17 @@ class HealthControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders
                     .get("/health")
-                    .with(SecurityMockMvcRequestPostProcessors.csrf())
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("message", is("정상 동작 중")))
                 .andDo(document("health-check",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())
+                        responseFields(
+                                fieldWithPath("status").description("status"),
+                                fieldWithPath("message").description("message"),
+                                fieldWithPath("data").description("data")
+                        )
+//                        preprocessRequest(prettyPrint()),
+//                        preprocessResponse(prettyPrint())
                 ));
     }
 }
