@@ -72,13 +72,13 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            운동
+            <div>운동</div>
             <img src={ExerciseImg} alt='운동' style={hobbyImageStyle} />
           </div>
         </a>
         <a href="/artMeeting" style={{ textDecoration: "none", color: "#000" }}>
           <div style={hobbyBoxStyle}>
-            공예
+            <div>공예</div>
             <img src={ArtImg} alt='공예' style={hobbyImageStyle} />
           </div>
         </a>
@@ -87,7 +87,7 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            음악
+            <div>음악</div>
             <img src={MusicImg} alt='음악' style={hobbyImageStyle} />
           </div>
         </a>
@@ -96,7 +96,7 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            일상
+            <div>일상</div>
             <img src={DailyImg} alt='일상' style={hobbyImageStyle} />
           </div>
         </a>
@@ -105,7 +105,7 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            음식
+            <div>음식</div>
             <img src={FoodImg} alt='음식' style={hobbyImageStyle} />
           </div>
         </a>
@@ -114,7 +114,7 @@ function LandingPage() {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div style={hobbyBoxStyle}>
-            여행
+            <div>여행</div>
             <img src={TripImg} alt='여행' style={hobbyImageStyle} />
           </div>
         </a>
