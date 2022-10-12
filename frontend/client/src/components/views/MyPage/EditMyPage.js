@@ -118,8 +118,8 @@ function EditMyPage(props) {
         if (EditUserName && !EditIntro && !EditProfileUrl) {
             const body = {
                 username: EditUserName,
-                profileUrl: ProfileUrl,
-                intro: Intro
+                profileUrl: '',
+                intro: ''
             }
     
             const headers = {
@@ -143,8 +143,8 @@ function EditMyPage(props) {
                 })
         } else if (EditIntro && !EditProfileUrl && !EditUserName) {
             const body = {
-                username: UserName,
-                profileUrl: ProfileUrl,
+                username: '',
+                profileUrl: '',
                 intro: EditIntro
             }
             const headers = {
@@ -168,9 +168,9 @@ function EditMyPage(props) {
                 })
         } else if (EditProfileUrl && !EditIntro & !EditUserName) {
             const body = {
-                username: UserName,
+                username: '',
                 profileUrl: EditProfileUrl,
-                intro: Intro
+                intro: ''
             }
             const headers = {
                 Authorization: token
@@ -193,7 +193,7 @@ function EditMyPage(props) {
                 })
         } else if (EditProfileUrl && EditIntro && !EditUserName) {
             const body = {
-                username: UserName,
+                username: '',
                 profileUrl: EditProfileUrl,
                 intro: EditIntro
             }
@@ -220,7 +220,7 @@ function EditMyPage(props) {
             const body = {
                 username: EditUserName,
                 profileUrl: EditProfileUrl,
-                intro: Intro
+                intro: ''
             }
             const headers = {
                 Authorization: token
@@ -244,7 +244,7 @@ function EditMyPage(props) {
         } else if (EditIntro && EditUserName && !EditProfileUrl) {
             const body = {
                 username: EditUserName,
-                profileUrl: ProfileUrl,
+                profileUrl: '',
                 intro: EditIntro
             }
             const headers = {
