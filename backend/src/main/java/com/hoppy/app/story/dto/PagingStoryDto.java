@@ -15,13 +15,11 @@ import lombok.NoArgsConstructor;
 public class PagingStoryDto {
 
     private List<StoryDto> storyList;
-    private List<Boolean> likedList;
     private String lastId;
 
-    public static PagingStoryDto of(List<StoryDto> storyList, List<Boolean> likedList, String lastId) {
+    public static PagingStoryDto of(List<StoryDto> storyList, String lastId) {
         return PagingStoryDto.builder()
                 .storyList(storyList)
-                .likedList(likedList)
                 .lastId(lastId)
                 .build();
     }
