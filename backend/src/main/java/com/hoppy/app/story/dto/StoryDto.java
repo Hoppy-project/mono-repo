@@ -2,6 +2,7 @@ package com.hoppy.app.story.dto;
 
 import com.hoppy.app.story.domain.story.Story;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -57,5 +58,9 @@ public class StoryDto {
                 .replyCount(story.getReplies().size())
                 .createdDate(story.getCreatedDate())
                 .build();
+    }
+
+    void setLiked(StoryDto dto, boolean liked) {
+        dto.setLiked(liked);
     }
 }

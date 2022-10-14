@@ -139,7 +139,14 @@ public class StoryServiceImpl implements StoryService {
         String nextPageUrl = getNextPagingUrl(lastId);
         List<StoryDto> storyDtoList = listToDtoList(storyList);
         List<Boolean> likedList = listToLikeList(storyList, memberId);
-        return PagingStoryDto.of(storyDtoList, likedList, nextPageUrl);
+        setStoryDtoLikes(storyDtoList, likedList);
+        return PagingStoryDto.of(storyDtoList, nextPageUrl);
+    }
+
+    public void setStoryDtoLikes(List<StoryDto> dtoList, List<Boolean> likeList) {
+        for (int i = 0; i < dtoList.size(); i++) {
+            dtoList.get(i).setLiked(likeList.get(i));
+        }
     }
 
     public List<StoryDto> listToDtoList(List<Story> storyList) {
