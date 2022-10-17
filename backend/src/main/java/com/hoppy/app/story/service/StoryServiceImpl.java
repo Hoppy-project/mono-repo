@@ -1,6 +1,7 @@
 package com.hoppy.app.story.service;
 
 import com.hoppy.app.like.domain.MemberStoryLike;
+import com.hoppy.app.like.domain.MemberStoryReplyLike;
 import com.hoppy.app.like.repository.MemberStoryLikeRepository;
 import com.hoppy.app.like.repository.MemberStoryReReplyLikeRepository;
 import com.hoppy.app.like.repository.MemberStoryReplyLikeRepository;
@@ -14,6 +15,7 @@ import com.hoppy.app.story.dto.PagingStoryDto;
 import com.hoppy.app.story.dto.StoryDetailDto;
 import com.hoppy.app.story.dto.SaveStoryDto;
 import com.hoppy.app.story.dto.StoryDto;
+import com.hoppy.app.story.dto.StoryReplyDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
 import com.hoppy.app.story.dto.UploadStoryDto;
 import com.hoppy.app.story.repository.StoryReReplyRepository;
@@ -225,6 +227,19 @@ public class StoryServiceImpl implements StoryService {
         StoryDetailDto dto = StoryDetailDto.from(story);
         if (optional.isPresent()) dto.setLiked(true);
         else dto.setLiked(false);
+        List<StoryReplyDto> replyList = story.getReplies().stream().map(StoryReplyDto::of).collect(
+                Collectors.toList());
+        dto.setReplies(replyList);
+        setStoryReplyDtoLikes(memberId, replyList);
         return dto;
+    }
+
+    public void setStoryReplyDtoLikes(Long memberId, List<StoryReplyDto> dtos) {
+        for (int i = 0; i < dtos.size(); i++) {
+            StoryReplyDto reply = dtos.get(i);
+            Optional<MemberStoryReplyLike> opt = memberStoryReplyLikeRepository.findByMemberIdAndReplyId(memberId, reply.getId());
+            if (opt.isPresent()) reply.setLiked(true);
+            else reply.setLiked(false);
+        }
     }
 }
