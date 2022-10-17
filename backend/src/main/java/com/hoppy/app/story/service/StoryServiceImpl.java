@@ -227,19 +227,6 @@ public class StoryServiceImpl implements StoryService {
         StoryDetailDto dto = StoryDetailDto.from(story);
         if (optional.isPresent()) dto.setLiked(true);
         else dto.setLiked(false);
-        List<StoryReplyDto> replyList = story.getReplies().stream().map(StoryReplyDto::of).collect(
-                Collectors.toList());
-        dto.setReplies(replyList);
-        setStoryReplyDtoLikes(memberId, replyList);
         return dto;
-    }
-
-    public void setStoryReplyDtoLikes(Long memberId, List<StoryReplyDto> dtos) {
-        for (int i = 0; i < dtos.size(); i++) {
-            StoryReplyDto reply = dtos.get(i);
-            Optional<MemberStoryReplyLike> opt = memberStoryReplyLikeRepository.findByMemberIdAndReplyId(memberId, reply.getId());
-            if (opt.isPresent()) reply.setLiked(true);
-            else reply.setLiked(false);
-        }
     }
 }

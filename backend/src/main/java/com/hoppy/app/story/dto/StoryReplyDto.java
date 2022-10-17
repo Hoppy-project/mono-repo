@@ -30,8 +30,6 @@ public class StoryReplyDto {
 
     private LocalDateTime createdDate;
 
-    private boolean liked;
-
     private int likeCount;
 
     private int reReplyCount;

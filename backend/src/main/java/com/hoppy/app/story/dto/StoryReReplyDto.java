@@ -27,8 +27,6 @@ public class StoryReReplyDto {
 
     private LocalDateTime createdDate;
 
-    private boolean liked;
-
     private int likeCount;
 
     public static StoryReReplyDto of(StoryReReply storyReReply) {

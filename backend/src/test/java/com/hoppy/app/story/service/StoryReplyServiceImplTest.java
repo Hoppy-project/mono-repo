@@ -177,8 +177,9 @@ class StoryReplyServiceImplTest {
     @DisplayName("스토리 댓글 좋아요 확인 테스트")
     @WithMockCustomUser(id = "8669")
     void storyReplyLikedTest() {
-        Long memberId = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
-        Member member = memberService.findById(memberId);
+        Member member = memberRepository.save(
+                Member.builder().id(8669L).username("ChoiMax").build()
+        );
         Story story = storyRepository.save(
                 Story.builder().content("this is test story").title("first").member(member).build()
         );
@@ -189,7 +190,6 @@ class StoryReplyServiceImplTest {
         storyReplyService.likeOrDislikeStoryReply(member.getId(), reply.getId());
         StoryDetailDto dto = StoryDetailDto.from(story);
         assertThat(dto.getMemberId()).isEqualTo(member.getId());
-        assertThat(dto.getReplies().size()).isEqualTo(1);
         assertThat(dto.getLikeCount()).isEqualTo(0);
     }
 }
