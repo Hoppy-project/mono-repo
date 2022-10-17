@@ -219,8 +219,12 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public StoryDetailDto showStoryDetails(Long storyId) {
+    public StoryDetailDto showStoryDetails(Long memberId, Long storyId) {
         Story story = findByStoryId(storyId);
-        return StoryDetailDto.from(story);
+        Optional<MemberStoryLike> optional = memberStoryLikeRepository.findByMemberIdAndStoryId(memberId, storyId);
+        StoryDetailDto dto = StoryDetailDto.from(story);
+        if (optional.isPresent()) dto.setLiked(true);
+        else dto.setLiked(false);
+        return dto;
     }
 }

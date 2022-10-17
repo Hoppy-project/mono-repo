@@ -30,6 +30,6 @@ public interface StoryService {
 
     public void likeOrDislikeStory(Long memberId, Long storyId);
 
-    public StoryDetailDto showStoryDetails(Long storyId);
+    public StoryDetailDto showStoryDetails(Long memberId, Long storyId);
     // TODO: 스토리 상세 정보 조회 (스토리 클릭 시)
 }
