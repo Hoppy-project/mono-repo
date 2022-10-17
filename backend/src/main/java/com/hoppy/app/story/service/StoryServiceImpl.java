@@ -1,6 +1,7 @@
 package com.hoppy.app.story.service;
 
 import com.hoppy.app.like.domain.MemberStoryLike;
+import com.hoppy.app.like.domain.MemberStoryReplyLike;
 import com.hoppy.app.like.repository.MemberStoryLikeRepository;
 import com.hoppy.app.like.repository.MemberStoryReReplyLikeRepository;
 import com.hoppy.app.like.repository.MemberStoryReplyLikeRepository;
@@ -14,6 +15,7 @@ import com.hoppy.app.story.dto.PagingStoryDto;
 import com.hoppy.app.story.dto.StoryDetailDto;
 import com.hoppy.app.story.dto.SaveStoryDto;
 import com.hoppy.app.story.dto.StoryDto;
+import com.hoppy.app.story.dto.StoryReplyDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
 import com.hoppy.app.story.dto.UploadStoryDto;
 import com.hoppy.app.story.repository.StoryReReplyRepository;
@@ -219,8 +221,12 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public StoryDetailDto showStoryDetails(Long storyId) {
+    public StoryDetailDto showStoryDetails(Long memberId, Long storyId) {
         Story story = findByStoryId(storyId);
-        return StoryDetailDto.from(story);
+        Optional<MemberStoryLike> optional = memberStoryLikeRepository.findByMemberIdAndStoryId(memberId, storyId);
+        StoryDetailDto dto = StoryDetailDto.from(story);
+        if (optional.isPresent()) dto.setLiked(true);
+        else dto.setLiked(false);
+        return dto;
     }
 }

@@ -83,8 +83,9 @@ public class StoryController {
         return responseService.successResult(SuccessCode.INQUIRY_STORY_SUCCESS, StoryDto.of(story));
     }
     @GetMapping("/detail")
-    public ResponseEntity<ResponseDto> showStoryDetails(@RequestParam(value = "id") Long id) {
-        StoryDetailDto storyDetailDto = storyService.showStoryDetails(id);
+    public ResponseEntity<ResponseDto> showStoryDetails(@AuthenticationPrincipal CustomUserDetails userDetails,
+            @RequestParam(value = "id") Long id) {
+        StoryDetailDto storyDetailDto = storyService.showStoryDetails(userDetails.getId(), id);
         return responseService.successResult(SuccessCode.INQUIRY_STORY_SUCCESS, storyDetailDto);
     }
 

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoppy.app.like.repository.MemberStoryLikeRepository;
+import com.hoppy.app.like.repository.MemberStoryReReplyLikeRepository;
+import com.hoppy.app.like.repository.MemberStoryReplyLikeRepository;
 import com.hoppy.app.login.WithMockCustomUser;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.repository.MemberRepository;
@@ -12,6 +14,7 @@ import com.hoppy.app.member.service.MemberService;
 import com.hoppy.app.story.domain.story.Story;
 import com.hoppy.app.story.domain.story.StoryReReply;
 import com.hoppy.app.story.domain.story.StoryReply;
+import com.hoppy.app.story.dto.StoryDetailDto;
 import com.hoppy.app.story.dto.StoryReReplyRequestDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
 import com.hoppy.app.story.dto.UpdateStoryReReplyDto;
@@ -27,6 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +46,12 @@ class StoryReplyServiceImplTest {
 
     @Autowired
     MemberStoryLikeRepository memberStoryLikeRepository;
+
+    @Autowired
+    MemberStoryReplyLikeRepository memberStoryReplyLikeRepository;
+
+    @Autowired
+    MemberStoryReReplyLikeRepository memberStoryReReplyLikeRepository;
 
     @Autowired
     StoryRepository storyRepository;
@@ -65,6 +75,8 @@ class StoryReplyServiceImplTest {
 
     @AfterEach
     void clean() {
+        memberStoryReReplyLikeRepository.deleteAll();
+        memberStoryReplyLikeRepository.deleteAll();
         memberStoryLikeRepository.deleteAll();
         storyReReplyRepository.deleteAll();
         storyReplyRepository.deleteAll();
@@ -159,5 +171,25 @@ class StoryReplyServiceImplTest {
         storyReplyService.likeOrDisLikeStoryReReply(member2.getId(), reReply.getId());
         storyReplyService.deleteStoryReReply(member1.getId(), reReply.getId());
 //        storyReplyService.deleteStoryReply(member1.getId(), reply.getId());
+    }
+
+    @Test
+    @DisplayName("스토리 댓글 좋아요 확인 테스트")
+    @WithMockCustomUser(id = "8669")
+    void storyReplyLikedTest() {
+        Member member = memberRepository.save(
+                Member.builder().id(8669L).username("ChoiMax").build()
+        );
+        Story story = storyRepository.save(
+                Story.builder().content("this is test story").title("first").member(member).build()
+        );
+        StoryReply reply = storyReplyRepository.save(
+                StoryReply.builder().story(story).member(member).content("Before").build()
+        );
+        storyService.likeOrDislikeStory(member.getId(), story.getId());
+        storyReplyService.likeOrDislikeStoryReply(member.getId(), reply.getId());
+        StoryDetailDto dto = StoryDetailDto.from(story);
+        assertThat(dto.getMemberId()).isEqualTo(member.getId());
+        assertThat(dto.getLikeCount()).isEqualTo(0);
     }
 }

@@ -205,6 +205,7 @@ class StoryControllerTest {
 
     @DisplayName("스토리 상세 조회 테스트")
     @Test
+    @WithMockCustomUser(id = "8669")
     void showStoryDetails() throws Exception {
         List<Story> storyList = storyRepository.findAll();
         Long storyId = storyList.get(0).getId();
