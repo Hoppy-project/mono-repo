@@ -27,7 +27,7 @@ function TripMeetingPage() {
   };
 
   // 로그인 확인 알림
-  if (token == "Bearer null") {
+  if (token == null) {
     alert("로그인 후 이용해주세요");
   }
 
