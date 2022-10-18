@@ -140,34 +140,23 @@ public class StoryServiceImpl implements StoryService {
         lastId = getLastId(storyList);
         String nextPageUrl = getNextPagingUrl(lastId);
         List<StoryDto> storyDtoList = listToDtoList(storyList);
-        List<Boolean> likedList = listToLikeList(storyList, memberId);
-        setStoryDtoLikes(storyDtoList, likedList);
+        listToLikeList(storyDtoList, storyList, memberId);
         return PagingStoryDto.of(storyDtoList, nextPageUrl);
-    }
-
-    public void setStoryDtoLikes(List<StoryDto> dtoList, List<Boolean> likeList) {
-        for (int i = 0; i < dtoList.size(); i++) {
-            dtoList.get(i).setLiked(likeList.get(i));
-        }
     }
 
     public List<StoryDto> listToDtoList(List<Story> storyList) {
         return storyList.stream().map(StoryDto::of).collect(Collectors.toList());
     }
 
-    public List<Boolean> listToLikeList(List<Story> storyList, Long memberId) {
-        List<Boolean> likeList = new ArrayList<>();
-        for (int i = 0; i < storyList.size(); i++) {
-            Story story = storyList.get(i);
-            Optional<MemberStoryLike> memberStoryLike =
+    public void listToLikeList(List<StoryDto> storyDtoList, List<Story> storyList, Long memberId) {
+        for (int i = 0; i < storyDtoList.size(); i++) {
+            StoryDto dto = storyDtoList.get(i);
+            Story story = findByStoryId(dto.getId());
+            Optional<MemberStoryLike> like =
                     memberStoryLikeRepository.findByMemberIdAndStoryId(memberId, story.getId());
-            if (memberStoryLike.isPresent()) {
-                likeList.add(true);
-            } else {
-                likeList.add(false);
-            }
+            if (like.isPresent()) dto.setLiked(true);
+            else dto.setLiked(false);
         }
-        return likeList;
     }
 
     public Long validCheckLastId(Long lastId) {
