@@ -50,7 +50,7 @@ function Like(props) {
   return (
     <div>
       <button onClick={clickHeart} style={{backgroundColor: '#fff', border: 0, outline: 0}}>  
-          {Like ? <Icon type='heart' theme='filled' style={{color: '#D66262'}} /> : <Icon type='heart' theme='outlined' />}
+          {!Like ? <Icon type='heart' theme='filled' style={{color: '#D66262'}} /> : <Icon type='heart' theme='outlined' />}
       </button>
     </div>
   )
