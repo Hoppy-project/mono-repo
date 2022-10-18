@@ -254,9 +254,11 @@ function UploadMusic() {
                   />
                   <p
                     style={{
-                      fontSize: "15px",
-                      marginTop: "30px",
                       display: "inline-block",
+                      float: "right",
+                      fontSize: "15px",
+                      marginTop: "33px",
+                      marginRight: "10px",
                     }}
                   >
                     {FileName}

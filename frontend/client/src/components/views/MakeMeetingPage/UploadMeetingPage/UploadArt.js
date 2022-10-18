@@ -254,9 +254,12 @@ function UploadArt() {
                   />
                   <p
                     style={{
+                      width: "190px",
                       fontSize: "15px",
                       marginTop: "30px",
                       display: "inline-block",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
                     }}
                   >
                     {FileName}
@@ -267,7 +270,8 @@ function UploadArt() {
                       display: "inline-block",
                       float: "right",
                       fontSize: "15px",
-                      marginTop: "30px",
+                      marginTop: "33px",
+                      marginRight: "10px",
                     }}
                     onClick={deleteImgHandler}
                   />
