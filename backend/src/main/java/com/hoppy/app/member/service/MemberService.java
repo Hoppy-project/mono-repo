@@ -1,6 +1,7 @@
 package com.hoppy.app.member.service;
 
 import com.hoppy.app.member.domain.Member;
+import com.hoppy.app.member.dto.MyProfileDto;
 import com.hoppy.app.member.dto.UpdateMemberDto;
 import java.util.List;
 import org.springframework.data.domain.PageRequest;
@@ -24,4 +25,6 @@ public interface MemberService {
     public boolean checkMeetingLiked(long memberId, long meetingId);
 
     public boolean existsByUsername(String username);
+
+    public MyProfileDto getMyProfileInfo(Long memberId);
 }

@@ -22,10 +22,13 @@ public class MyProfileDto {
     private String profileUrl;
     private String intro;
     private boolean deleted;
-    private List<Long> myMeetingsId;
-    private List<Long> likeMeetingsId;
+//    private List<Long> myMeetingsId;
+//    private List<Long> likeMeetingsId;
+    private List<MyMeetingsDto> myMeetings;
+    private List<LikeMeetingsDto> likeMeetings;
 
-    public static MyProfileDto of(Member member, List<MemberMeeting> meetingList, List<MemberMeetingLike> meetingLikeList) {
+//    public static MyProfileDto of(Member member, List<MemberMeeting> meetingList, List<MemberMeetingLike> meetingLikeList) {
+    public static MyProfileDto of(Member member, List<MyMeetingsDto> meetingList, List<LikeMeetingsDto> meetingLikeList) {
 
         return MyProfileDto.builder()
                 .id(member.getId())
@@ -34,10 +37,12 @@ public class MyProfileDto {
                 .profileUrl(member.getProfileImageUrl())
                 .intro(member.getIntro())
                 .deleted(member.isDeleted())
-                .myMeetingsId(meetingList.stream().map(MemberMeeting::getMeetingId).collect(
-                        Collectors.toList()))
-                .likeMeetingsId(meetingLikeList.stream().map(MemberMeetingLike::getMeetingId).collect(
-                        Collectors.toList()))
+//                .myMeetingsId(meetingList.stream().map(MemberMeeting::getMeetingId).collect(
+//                        Collectors.toList()))
+//                .likeMeetingsId(meetingLikeList.stream().map(MemberMeetingLike::getMeetingId).collect(
+//                        Collectors.toList()))
+                .myMeetings(meetingList)
+                .likeMeetings(meetingLikeList)
                 .build();
     }
 

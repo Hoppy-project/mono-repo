@@ -12,6 +12,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hoppy.app.like.domain.MemberMeetingLike;
+import com.hoppy.app.like.repository.MemberMeetingLikeRepository;
 import com.hoppy.app.login.WithMockCustomUser;
 import com.hoppy.app.login.auth.SocialType;
 import com.hoppy.app.login.auth.authentication.CustomUserDetails;
@@ -68,6 +70,9 @@ class MemberProfileControllerTest {
     MemberMeetingRepository memberMeetingRepository;
 
     @Autowired
+    MemberMeetingLikeRepository memberMeetingLikeRepository;
+
+    @Autowired
     StoryRepository storyRepository;
 
     @Autowired
@@ -100,8 +105,13 @@ class MemberProfileControllerTest {
                 memberMeetingRepository.save(MemberMeeting.builder()
                         .member(member)
                         .meeting(meeting)
-                        .build()
-                );
+                        .build());
+            }
+            if (i % 4 == 0) {
+                memberMeetingLikeRepository.save(MemberMeetingLike.builder()
+                        .member(member)
+                        .meeting(meeting)
+                        .build());
             }
         }
 
@@ -119,6 +129,7 @@ class MemberProfileControllerTest {
 
     @AfterAll
     void afterAll() {
+        memberMeetingLikeRepository.deleteAll();
         memberMeetingRepository.deleteAll();
         meetingRepository.deleteAll();
         storyRepository.deleteAll();
@@ -126,7 +137,6 @@ class MemberProfileControllerTest {
     }
 
     @Test
-//    @Transactional
     @WithMockCustomUser(id = "9999", password = "secret-key", role = Role.USER, socialType = SocialType.KAKAO)
     void showMyProfile() throws Exception {
         
