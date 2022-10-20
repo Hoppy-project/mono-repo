@@ -251,11 +251,12 @@ function UploadFood() {
                   />
                   <p
                     style={{
-                      display: "inline-block",
-                      float: "right",
+                      width: "190px",
                       fontSize: "15px",
-                      marginTop: "33px",
-                      marginRight: "10px",
+                      marginTop: "30px",
+                      display: "inline-block",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
                     }}
                   >
                     {FileName}
@@ -266,7 +267,8 @@ function UploadFood() {
                       display: "inline-block",
                       float: "right",
                       fontSize: "15px",
-                      marginTop: "30px",
+                      marginTop: "33px",
+                      marginRight: "10px",
                     }}
                     onClick={deleteImgHandler}
                   />

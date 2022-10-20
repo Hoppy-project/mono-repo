@@ -20,7 +20,7 @@ function DailyMeetingPage() {
   const [FetchData, setFetchData] = useState("");
   const [NextpagingUrl, setNextpagingUrl] = useState("");
 
-  const categoryNumber = 1; // 운동 카테고리
+  const categoryNumber = 4; // 일상 카테고리
   const token = localStorage.getItem("Authorization");
   const headers = {
     Authorization: token,
@@ -129,9 +129,12 @@ function DailyMeetingPage() {
         />
         <p
           style={{
+            width: "150px",
             fontSize: "13px",
             margin: "9px ",
             float: "left",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
           }}
         >
           {meeting.title}

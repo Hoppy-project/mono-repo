@@ -129,9 +129,12 @@ function TripMeetingPage() {
         />
         <p
           style={{
+            width: "150px",
             fontSize: "13px",
             margin: "9px ",
             float: "left",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
           }}
         >
           {meeting.title}
