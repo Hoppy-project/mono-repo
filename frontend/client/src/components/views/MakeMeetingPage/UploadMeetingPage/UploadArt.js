@@ -257,6 +257,7 @@ function UploadArt() {
                       display: "inline-block",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
+                      textOverflow: "ellipsis",
                     }}
                   >
                     {FileName}

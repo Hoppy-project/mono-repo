@@ -135,6 +135,7 @@ function ArtMeetingPage() {
             float: "left",
             whiteSpace: "nowrap",
             overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           {meeting.title}
