@@ -8,12 +8,12 @@ import "./UploadMeeting.css";
 function UploadMusic() {
   // 토큰 가져오기
   const token = localStorage.getItem("Authorization");
-  console.log("token>>>>>", token);
+  // console.log("token>>>>>", token);
 
   // 모임 생성 form
   const [UploadTitle, setUploadTitle] = useState("");
   const [UploadContent, setUploadContent] = useState("");
-  const [UploadCategory, setUploadCategory] = useState(1);
+  // const [UploadCategory, setUploadCategory] = useState(1);
   const [UploadMemberLimit, setUploadMemberLimit] = useState(1);
 
   // Img 파일을 미리 볼 수 있게 하는 state
@@ -100,9 +100,6 @@ function UploadMusic() {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    // 음악 카테고리 3번 설정
-    setUploadCategory(3);
-
     // 입력이 안된 항목 예외처리
     if (!UploadTitle) {
       alert("모임 이름을 입력해주세요");
@@ -115,7 +112,7 @@ function UploadMusic() {
     } else {
       //
       const body = {
-        category: UploadCategory,
+        category: 3,
         title: UploadTitle,
         content: UploadContent,
         memberLimit: UploadMemberLimit,
