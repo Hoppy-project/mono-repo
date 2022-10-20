@@ -23,6 +23,7 @@ public interface StoryRepository extends JpaRepository<Story, Long> {
     /**
      * [취미 스토리]에서 보이는 모든 사용자들의 스토리, 최신순 (storyId 내림차순)으로 3개씩 페이지네이션
      */
-    @Query("select s from Story as s join fetch s.member where s.id < :lastId order by s.id desc")
+//    @Query("select s from Story as s join fetch s.member where s.id < :lastId order by s.id desc")
+    @Query("select s from Story as s where s.id < :lastId order by s.id desc")
     List<Story> findNextStoryOrderByIdDesc(@Param("lastId") Long lastId, Pageable pageable);
 }

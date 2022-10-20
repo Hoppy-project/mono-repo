@@ -140,7 +140,7 @@ public class StoryServiceImpl implements StoryService {
         lastId = getLastId(storyList);
         String nextPageUrl = getNextPagingUrl(lastId);
         List<StoryDto> storyDtoList = listToDtoList(storyList);
-        listToLikeList(storyDtoList, storyList, memberId);
+        listToLikeList(storyDtoList, memberId);
         return PagingStoryDto.of(storyDtoList, nextPageUrl);
     }
 
@@ -148,7 +148,7 @@ public class StoryServiceImpl implements StoryService {
         return storyList.stream().map(StoryDto::of).collect(Collectors.toList());
     }
 
-    public void listToLikeList(List<StoryDto> storyDtoList, List<Story> storyList, Long memberId) {
+    public void listToLikeList(List<StoryDto> storyDtoList, Long memberId) {
         for (int i = 0; i < storyDtoList.size(); i++) {
             StoryDto dto = storyDtoList.get(i);
             Story story = findByStoryId(dto.getId());
