@@ -59,6 +59,9 @@ public class MemberMeetingLikeTest {
     @Autowired
     MeetingService meetingService;
 
+    @Autowired
+    MemberService memberService;
+
     @AfterEach
     void afterEach() {
         memberMeetingLikeRepository.deleteAll();
@@ -75,6 +78,7 @@ public class MemberMeetingLikeTest {
         Meeting meeting2 = meetingRepository.save(EntityUtil.testHealthMeeting(member));
 
         memberMeetingRepository.save(MemberMeeting.builder().meeting(meeting1).member(member).build());
+        memberMeetingRepository.save(MemberMeeting.builder().meeting(meeting2).member(member).build());
 
         meetingService.likeMeeting(member.getId(), meeting1.getId());
         meetingService.likeMeeting(member.getId(), meeting2.getId());
@@ -85,9 +89,9 @@ public class MemberMeetingLikeTest {
 
         assertThat(meetingLikeList.size()).isEqualTo(2);
 
-        MyProfileDto dto = MyProfileDto.of(member, meetingList, meetingLikeList);
+        MyProfileDto dto = memberService.getMyProfileInfo(member.getId());
 
-        assertThat(dto.getLikeMeetingsId().size()).isEqualTo(2);
-        assertThat(dto.getMyMeetingsId().size()).isEqualTo(1);
+        assertThat(dto.getMyMeetings().size()).isEqualTo(2);
+        assertThat(dto.getLikeMeetings().size()).isEqualTo(2);
     }
 }
