@@ -10,14 +10,8 @@ import com.hoppy.app.member.Role;
 import com.hoppy.app.story.domain.story.Story;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,7 +37,10 @@ public class Member {
 
     private String email;
     private String username;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String profileImageUrl;
+
     private String intro;
     private String password;
     private boolean deleted;

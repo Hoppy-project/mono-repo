@@ -40,7 +40,7 @@ public class Meeting {
     @Setter
     private Member owner;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     @Builder.Default
     @Setter
     private String url = "default-url";
