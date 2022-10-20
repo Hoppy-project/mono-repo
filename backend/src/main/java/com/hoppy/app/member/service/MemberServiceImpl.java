@@ -1,7 +1,15 @@
 package com.hoppy.app.member.service;
 
+import com.hoppy.app.like.domain.MemberMeetingLike;
+import com.hoppy.app.like.repository.MemberMeetingLikeRepository;
+import com.hoppy.app.meeting.domain.Meeting;
 import com.hoppy.app.member.domain.Member;
+import com.hoppy.app.member.domain.MemberMeeting;
+import com.hoppy.app.member.dto.LikeMeetingsDto;
+import com.hoppy.app.member.dto.MyMeetingsDto;
+import com.hoppy.app.member.dto.MyProfileDto;
 import com.hoppy.app.member.dto.UpdateMemberDto;
+import com.hoppy.app.member.repository.MemberMeetingRepository;
 import com.hoppy.app.member.repository.MemberRepository;
 import com.hoppy.app.response.error.exception.BusinessException;
 import com.hoppy.app.response.error.exception.ErrorCode;
@@ -18,6 +26,10 @@ import org.springframework.stereotype.Service;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+
+    private final MemberMeetingRepository memberMeetingRepository;
+
+    private final MemberMeetingLikeRepository memberMeetingLikeRepository;
 
     @Override
     public Member findById(long id) {
@@ -98,5 +110,16 @@ public class MemberServiceImpl implements MemberService {
                 .anyMatch(M -> M.getMeetingId() == meetingId);
     }
 
+    @Override
+    public MyProfileDto getMyProfileInfo(Long memberId) {
+        Member member = findById(memberId);
+        List<MemberMeeting> meetingList = memberMeetingRepository.findAllByMember(member);
+        List<MemberMeetingLike> memberMeetingLikes = memberMeetingLikeRepository.findAllByMember(member);
+        List<LikeMeetingsDto> likeMeetingsDtos =
+                memberMeetingLikes.stream().map(LikeMeetingsDto::meetingToDto).collect(Collectors.toList());
+        List<MyMeetingsDto> meetingsDtos =
+                meetingList.stream().map(MyMeetingsDto::meetingToDto).collect(Collectors.toList());
+        return MyProfileDto.of(member, meetingsDtos, likeMeetingsDtos);
+    }
 
 }
