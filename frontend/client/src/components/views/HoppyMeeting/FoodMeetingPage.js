@@ -131,9 +131,10 @@ function FoodMeetingPage() {
             width: "150px",
             fontSize: "13px",
             margin: "9px ",
-            float: "left",
+            textAlign: "left",
             whiteSpace: "nowrap",
             overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           {meeting.title}
