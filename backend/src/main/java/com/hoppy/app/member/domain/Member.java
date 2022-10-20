@@ -38,7 +38,7 @@ public class Member {
     private String email;
     private String username;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String profileImageUrl;
 
     private String intro;
