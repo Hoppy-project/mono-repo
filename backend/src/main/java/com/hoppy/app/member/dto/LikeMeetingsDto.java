@@ -17,14 +17,10 @@ public class LikeMeetingsDto {
     private Long id;
 
     private String title;
-
-    private String url;
-
     public static LikeMeetingsDto meetingToDto(MemberMeetingLike meeting) {
         return LikeMeetingsDto.builder()
                 .id(meeting.getMeetingId())
                 .title(meeting.getMeeting().getTitle())
-                .url(meeting.getMeeting().getUrl())
                 .build();
     }
 }

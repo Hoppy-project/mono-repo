@@ -16,13 +16,10 @@ public class MyMeetingsDto {
 
     private String title;
 
-    private String url;
-
     public static MyMeetingsDto meetingToDto(MemberMeeting meeting) {
         return MyMeetingsDto.builder()
                 .id(meeting.getMeetingId())
                 .title(meeting.getMeeting().getTitle())
-                .url(meeting.getMeeting().getUrl())
                 .build();
     }
 }
