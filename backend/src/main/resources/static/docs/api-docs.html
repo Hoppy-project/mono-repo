@@ -582,7 +582,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">response body</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs">eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5OTk5IiwiUk9MRV8iOiJVU0VSIiwiZXhwIjoxNjY2MDA0MzQwfQ.-h3_gsO3ePY40CJWRkCZY2H-vh9bCCphFCe87IRZhRk</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5OTk5IiwiUk9MRV8iOiJVU0VSIiwiZXhwIjoxNjY2MjY4MDQzfQ.hI1N27ICF9vZXVvEVzNiAVqpRRGWxSfM-6XfFltRxxo</code></pre>
 </div>
 </div>
 </div>
@@ -612,7 +612,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   "status" : 200,
   "message" : "URL 발급 완료",
   "data" : {
-    "url" : "https://hoppyservice.s3.ap-northeast-2.amazonaws.com/test.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20221017T065910Z&amp;X-Amz-SignedHeaders=content-type%3Bhost&amp;X-Amz-Expires=300&amp;X-Amz-Credential=accessKey%2F20221017%2Fap-northeast-2%2Fs3%2Faws4_request&amp;X-Amz-Signature=5c11cd24a6ba87776c4f1f6213c353c296320b04fb4efa2515ea89eb4f4c51f3"
+    "url" : "https://hoppyservice.s3.ap-northeast-2.amazonaws.com/test.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20221020T081414Z&amp;X-Amz-SignedHeaders=content-type%3Bhost&amp;X-Amz-Expires=299&amp;X-Amz-Credential=accessKey%2F20221020%2Fap-northeast-2%2Fs3%2Faws4_request&amp;X-Amz-Signature=7bcc1710c73c72c660b519861452ad6575fe2dceec6d5d6b0128b75af321aab6"
   }
 }</code></pre>
 </div>
@@ -1347,17 +1347,17 @@ Host: localhost:8080</code></pre>
       "liked" : false,
       "likeCount" : 0,
       "replies" : [ {
-        "id" : 2,
-        "authorProfileUrl" : "testProfileUrl",
-        "authorName" : "testName",
-        "content" : "1-content",
-        "liked" : false,
-        "likeCount" : 0
-      }, {
         "id" : 1,
         "authorProfileUrl" : "testProfileUrl",
         "authorName" : "testName",
         "content" : "0-content",
+        "liked" : false,
+        "likeCount" : 0
+      }, {
+        "id" : 2,
+        "authorProfileUrl" : "testProfileUrl",
+        "authorName" : "testName",
+        "content" : "1-content",
         "liked" : false,
         "likeCount" : 0
       } ]
@@ -1704,8 +1704,28 @@ HTTP/1.1 200 OK</pre>
     "profileUrl" : "www.changing-url.com",
     "intro" : "회원 정보 수정 테스트",
     "deleted" : false,
-    "myMeetingsId" : [ 3, 6, 9 ],
-    "likeMeetingsId" : [ ]
+    "myMeetings" : [ {
+      "id" : 3,
+      "title" : "3번 모임",
+      "url" : "https://test3.com"
+    }, {
+      "id" : 6,
+      "title" : "6번 모임",
+      "url" : "https://test6.com"
+    }, {
+      "id" : 9,
+      "title" : "9번 모임",
+      "url" : "https://test9.com"
+    } ],
+    "likeMeetings" : [ {
+      "id" : 4,
+      "title" : "4번 모임",
+      "url" : "https://test4.com"
+    }, {
+      "id" : 8,
+      "title" : "8번 모임",
+      "url" : "https://test8.com"
+    } ]
   }
 }</code></pre>
 </div>
@@ -1737,40 +1757,40 @@ HTTP/1.1 200 OK</pre>
     "content" : "This is 5th Story",
     "username" : "강해상",
     "filename" : "5.jpg",
-    "createdDate" : "2022-10-17T15:58:46.163652",
-    "modifiedDate" : "2022-10-17T15:58:46.163652"
+    "createdDate" : "2022-10-20T17:13:49.283278",
+    "modifiedDate" : "2022-10-20T17:13:49.283278"
   }, {
     "id" : 4,
     "title" : "4th Story",
     "content" : "This is 4th Story",
     "username" : "강해상",
     "filename" : "4.jpg",
-    "createdDate" : "2022-10-17T15:58:46.152635",
-    "modifiedDate" : "2022-10-17T15:58:46.152635"
+    "createdDate" : "2022-10-20T17:13:49.276718",
+    "modifiedDate" : "2022-10-20T17:13:49.276718"
   }, {
     "id" : 3,
     "title" : "3th Story",
     "content" : "This is 3th Story",
     "username" : "강해상",
     "filename" : "3.jpg",
-    "createdDate" : "2022-10-17T15:58:46.138477",
-    "modifiedDate" : "2022-10-17T15:58:46.138477"
+    "createdDate" : "2022-10-20T17:13:49.266234",
+    "modifiedDate" : "2022-10-20T17:13:49.266234"
   }, {
     "id" : 2,
     "title" : "2th Story",
     "content" : "This is 2th Story",
     "username" : "강해상",
     "filename" : "2.jpg",
-    "createdDate" : "2022-10-17T15:58:46.129843",
-    "modifiedDate" : "2022-10-17T15:58:46.129843"
+    "createdDate" : "2022-10-20T17:13:49.262206",
+    "modifiedDate" : "2022-10-20T17:13:49.262206"
   }, {
     "id" : 1,
     "title" : "1th Story",
     "content" : "This is 1th Story",
     "username" : "강해상",
     "filename" : "1.jpg",
-    "createdDate" : "2022-10-17T15:58:46.062991",
-    "modifiedDate" : "2022-10-17T15:58:46.062991"
+    "createdDate" : "2022-10-20T17:13:49.202742",
+    "modifiedDate" : "2022-10-20T17:13:49.202742"
   } ]
 }</code></pre>
 </div>
@@ -1800,7 +1820,7 @@ HTTP/1.1 200 OK</pre>
     "username" : "마석도",
     "profileUrl" : "www.changing-url.com",
     "intro" : "회원 정보 수정 테스트",
-    "meetingsId" : [ 6, 9, 3 ]
+    "meetingsId" : [ 3, 9, 6 ]
   }
 }</code></pre>
 </div>
@@ -1899,8 +1919,8 @@ HTTP/1.1 200 OK</pre>
     "content" : "This is Test code",
     "username" : "최대한",
     "filename" : "example.jpg",
-    "createdDate" : "2022-10-17T15:59:03.500365",
-    "modifiedDate" : "2022-10-17T15:59:03.500365"
+    "createdDate" : "2022-10-20T17:14:06.904404",
+    "modifiedDate" : "2022-10-20T17:14:06.904404"
   }
 }</code></pre>
 </div>
@@ -1936,8 +1956,8 @@ HTTP/1.1 200 OK</pre>
     "content" : "This is updated story",
     "username" : "최대한",
     "filename" : "test_success.wav",
-    "createdDate" : "2022-10-17T15:59:03.240366",
-    "modifiedDate" : "2022-10-17T15:59:03.387181"
+    "createdDate" : "2022-10-20T17:14:06.666758",
+    "modifiedDate" : "2022-10-20T17:14:06.826455"
   }
 }</code></pre>
 </div>
@@ -1995,7 +2015,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.584766"
+      "createdDate" : "2022-10-20T17:14:06.960876"
     }, {
       "id" : 126,
       "memberId" : 7601,
@@ -2007,7 +2027,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : true,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.583455"
+      "createdDate" : "2022-10-20T17:14:06.959822"
     }, {
       "id" : 125,
       "memberId" : 8669,
@@ -2019,7 +2039,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.582383"
+      "createdDate" : "2022-10-20T17:14:06.958723"
     }, {
       "id" : 124,
       "memberId" : 7601,
@@ -2031,7 +2051,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : true,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.580725"
+      "createdDate" : "2022-10-20T17:14:06.957394"
     }, {
       "id" : 123,
       "memberId" : 8669,
@@ -2043,7 +2063,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.57829"
+      "createdDate" : "2022-10-20T17:14:06.955819"
     }, {
       "id" : 122,
       "memberId" : 7601,
@@ -2055,7 +2075,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : true,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.575441"
+      "createdDate" : "2022-10-20T17:14:06.954399"
     }, {
       "id" : 121,
       "memberId" : 8669,
@@ -2067,7 +2087,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.571046"
+      "createdDate" : "2022-10-20T17:14:06.95316"
     }, {
       "id" : 120,
       "memberId" : 7601,
@@ -2079,7 +2099,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : true,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.56813"
+      "createdDate" : "2022-10-20T17:14:06.95172"
     }, {
       "id" : 119,
       "memberId" : 8669,
@@ -2091,7 +2111,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : false,
       "likeCount" : 1,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.565707"
+      "createdDate" : "2022-10-20T17:14:06.949925"
     }, {
       "id" : 118,
       "memberId" : 7601,
@@ -2103,7 +2123,7 @@ GET /api/story?lastId={lastId}</pre>
       "liked" : true,
       "likeCount" : 2,
       "replyCount" : 0,
-      "createdDate" : "2022-10-17T15:59:03.563497"
+      "createdDate" : "2022-10-20T17:14:06.948367"
     } ],
     "lastId" : "118"
   }
@@ -2142,13 +2162,13 @@ GET /api/story?lastId={lastId}</pre>
     "liked" : true,
     "likeCount" : 2,
     "replyCount" : 1,
-    "createdDate" : "2022-10-17T15:59:03.8436",
+    "createdDate" : "2022-10-20T17:14:07.200364",
     "replies" : [ {
       "id" : 1,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
       "content" : "Reply",
-      "createdDate" : "2022-10-17T15:59:04.043",
+      "createdDate" : "2022-10-20T17:14:07.350373",
       "likeCount" : 0,
       "reReplyCount" : 1,
       "reReplies" : [ {
@@ -2156,7 +2176,7 @@ GET /api/story?lastId={lastId}</pre>
         "profileUrl" : "seaworld@daum.net",
         "username" : "김태경",
         "content" : "ReReply",
-        "createdDate" : "2022-10-17T15:59:04.062028",
+        "createdDate" : "2022-10-20T17:14:07.368048",
         "likeCount" : 0
       } ]
     } ]
@@ -2190,7 +2210,7 @@ GET /api/story?lastId={lastId}</pre>
     "liked" : false,
     "likeCount" : 2,
     "replyCount" : 0,
-    "createdDate" : "2022-10-17T15:59:05.433491"
+    "createdDate" : "2022-10-20T17:14:08.288474"
   }
 }</code></pre>
 </div>
@@ -2229,13 +2249,13 @@ GET /api/story?lastId={lastId}</pre>
     "liked" : false,
     "likeCount" : 1,
     "replyCount" : 1,
-    "createdDate" : "2022-10-17T15:59:05.296369",
+    "createdDate" : "2022-10-20T17:14:08.199018",
     "replies" : [ {
       "id" : 36,
       "profileUrl" : "korea88@naver.com",
       "username" : "최대한",
       "content" : "This is Story Reply Test",
-      "createdDate" : "2022-10-17T15:59:05.371468",
+      "createdDate" : "2022-10-20T17:14:08.243776",
       "likeCount" : 0,
       "reReplyCount" : 0,
       "reReplies" : [ ]
