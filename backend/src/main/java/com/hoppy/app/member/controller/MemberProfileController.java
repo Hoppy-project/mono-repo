@@ -5,6 +5,7 @@ import com.hoppy.app.like.repository.MemberMeetingLikeRepository;
 import com.hoppy.app.login.auth.authentication.CustomUserDetails;
 import com.hoppy.app.member.domain.Member;
 import com.hoppy.app.member.domain.MemberMeeting;
+import com.hoppy.app.member.dto.LikeMeetingsDto;
 import com.hoppy.app.member.dto.MyProfileDto;
 import com.hoppy.app.member.dto.UpdateMemberDto;
 import com.hoppy.app.member.dto.UserProfileDto;
@@ -43,10 +44,7 @@ public class MemberProfileController {
 
     @GetMapping
     public ResponseEntity<ResponseDto> showMyProfile(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        Member member = memberService.findById(userDetails.getId());
-        List<MemberMeeting> meetingList = memberMeetingRepository.findAllByMember(member);
-        List<MemberMeetingLike> meetingLikeList = memberMeetingLikeRepository.findAllByMember(member);
-        MyProfileDto myProfileDto = MyProfileDto.of(member, meetingList, meetingLikeList);
+        MyProfileDto myProfileDto = memberService.getMyProfileInfo(userDetails.getId());
         return responseService.successResult(SuccessCode.SHOW_PROFILE_SUCCESS, myProfileDto);
     }
 
