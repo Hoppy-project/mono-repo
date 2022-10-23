@@ -92,9 +92,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DataAccessException.class)
-    protected ResponseEntity<String> handleDataAccessException(final DataAccessException e) {
+    protected ResponseEntity<ErrorResponse> handleDataAccessException(final DataAccessException e) {
         logging(e);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("SQLException: " + e.getMessage());
+        final ErrorResponse response = ErrorResponse.newSQLErrorResponse(e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
