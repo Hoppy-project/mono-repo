@@ -9,6 +9,7 @@ import com.hoppy.app.response.error.exception.ErrorCode;
 import java.nio.file.AccessDeniedException;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -88,6 +89,12 @@ public class GlobalExceptionHandler {
         final ErrorCode errorCode = e.getErrorCode();
         final ErrorResponse response = ErrorResponse.of(errorCode);
         return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    protected ResponseEntity<String> handleDataAccessException(final DataAccessException e) {
+        logging(e);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("SQLException: " + e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
