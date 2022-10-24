@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Heart from "../LandingPage/img/heart.png";
 import HeartFilled from "../LandingPage/img/heart_click.png";
 
-function DailyMeetingPage() {
+function ExerciseMeetingPage() {
   const { Search } = Input;
 
   const onSearch = (value) => console.log(value);
@@ -94,13 +94,14 @@ function DailyMeetingPage() {
 
     const onClickMeeting = (e) => {
       // meeting 클릭 시 해당 모임 페이지로 매칭
-      window.location.href = "/exerciseMeeting/detail";
+      window.location.href = `/exerciseMeeting/${meeting.id}`;
     };
 
     const onClickHeart = (e) => {
       // 하트 색 변경 함수
       setLike(!like);
     };
+
     return (
       <div
         key={index}
@@ -127,11 +128,16 @@ function DailyMeetingPage() {
             display: "inlineBlock",
           }}
         />
+
         <p
           style={{
+            width: "150px",
             fontSize: "13px",
             margin: "9px ",
-            float: "left",
+            textAlign: "left",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           {meeting.title}
@@ -161,7 +167,7 @@ function DailyMeetingPage() {
               onClick={onClickHeart}
               style={{
                 float: "right",
-                marginRight: "10px",
+                marginRight: "5px",
                 marginBottom: "10px",
               }}
             />
@@ -173,8 +179,8 @@ function DailyMeetingPage() {
               style={{
                 width: "23px",
                 float: "right",
-                marginRight: "10px",
-                marginTop: "-3px",
+                marginRight: "5px",
+                marginTop: "-5px",
               }}
             />
           )}
@@ -215,9 +221,9 @@ function DailyMeetingPage() {
             marginRight: "27px",
           }}
         >
-          일상 모임 리스트
-          <span role="img" aria-label="daily">
-            🖼
+          운동 모임 리스트
+          <span role="img" aria-label="exercise">
+            🏃‍♂️
           </span>
         </h3>
         {/* 모임 리스트 조회 */}
@@ -235,4 +241,4 @@ function DailyMeetingPage() {
   );
 }
 
-export default DailyMeetingPage;
+export default ExerciseMeetingPage;

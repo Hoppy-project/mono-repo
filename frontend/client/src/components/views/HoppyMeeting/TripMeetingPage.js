@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Heart from "../LandingPage/img/heart.png";
 import HeartFilled from "../LandingPage/img/heart_click.png";
 
-function MusicMeetingPage() {
+function TripMeetingPage() {
   const { Search } = Input;
 
   const onSearch = (value) => console.log(value);
@@ -20,7 +20,7 @@ function MusicMeetingPage() {
   const [FetchData, setFetchData] = useState("");
   const [NextpagingUrl, setNextpagingUrl] = useState("");
 
-  const categoryNumber = 3; // 음악 카테고리
+  const categoryNumber = 6; // 여행 카테고리
   const token = localStorage.getItem("Authorization");
   const headers = {
     Authorization: token,
@@ -94,7 +94,7 @@ function MusicMeetingPage() {
 
     const onClickMeeting = (e) => {
       // meeting 클릭 시 해당 모임 페이지로 매칭
-      window.location.href = "/exerciseMeeting/detail";
+      window.location.href = `/tripMeeting/${meeting.id}`;
     };
 
     const onClickHeart = (e) => {
@@ -129,9 +129,13 @@ function MusicMeetingPage() {
         />
         <p
           style={{
+            width: "150px",
             fontSize: "13px",
             margin: "9px ",
-            float: "left",
+            textAlign: "left",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           {meeting.title}
@@ -215,9 +219,9 @@ function MusicMeetingPage() {
             marginRight: "27px",
           }}
         >
-          음악 모임 리스트
+          여행 모임 리스트
           <span role="img" aria-label="daily">
-            🎵
+            🗺
           </span>
         </h3>
         {/* 모임 리스트 조회 */}
@@ -235,4 +239,4 @@ function MusicMeetingPage() {
   );
 }
 
-export default MusicMeetingPage;
+export default TripMeetingPage;

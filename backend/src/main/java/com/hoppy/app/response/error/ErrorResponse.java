@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class ErrorResponse {
 
     private String message;
@@ -34,6 +36,9 @@ public class ErrorResponse {
         this.errors = new ArrayList<>();
     }
 
+    public static ErrorResponse newSQLErrorResponse(final String message) {
+        return new ErrorResponse(message, 400, new ArrayList<>(), "SQL");
+    }
 
     public static ErrorResponse of(final ErrorCode code, final BindingResult bindingResult) {
         return new ErrorResponse(code, FieldError.of(bindingResult));

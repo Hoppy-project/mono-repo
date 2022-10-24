@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Heart from "../LandingPage/img/heart.png";
 import HeartFilled from "../LandingPage/img/heart_click.png";
 
-function ExerciseMeetingPage() {
+function MusicMeetingPage() {
   const { Search } = Input;
 
   const onSearch = (value) => console.log(value);
@@ -20,7 +20,7 @@ function ExerciseMeetingPage() {
   const [FetchData, setFetchData] = useState("");
   const [NextpagingUrl, setNextpagingUrl] = useState("");
 
-  const categoryNumber = 1; // 운동 카테고리
+  const categoryNumber = 3; // 음악 카테고리
   const token = localStorage.getItem("Authorization");
   const headers = {
     Authorization: token,
@@ -94,14 +94,13 @@ function ExerciseMeetingPage() {
 
     const onClickMeeting = (e) => {
       // meeting 클릭 시 해당 모임 페이지로 매칭
-      window.location.href = "/exerciseMeeting/detail";
+      window.location.href = `/musicMeeting/${meeting.id}`;
     };
 
     const onClickHeart = (e) => {
       // 하트 색 변경 함수
       setLike(!like);
     };
-
     return (
       <div
         key={index}
@@ -130,9 +129,13 @@ function ExerciseMeetingPage() {
         />
         <p
           style={{
+            width: "150px",
             fontSize: "13px",
             margin: "9px ",
-            float: "left",
+            textAlign: "left",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           {meeting.title}
@@ -162,7 +165,7 @@ function ExerciseMeetingPage() {
               onClick={onClickHeart}
               style={{
                 float: "right",
-                marginRight: "5px",
+                marginRight: "10px",
                 marginBottom: "10px",
               }}
             />
@@ -174,8 +177,8 @@ function ExerciseMeetingPage() {
               style={{
                 width: "23px",
                 float: "right",
-                marginRight: "5px",
-                marginTop: "-5px",
+                marginRight: "10px",
+                marginTop: "-3px",
               }}
             />
           )}
@@ -216,9 +219,9 @@ function ExerciseMeetingPage() {
             marginRight: "27px",
           }}
         >
-          운동 모임 리스트
-          <span role="img" aria-label="exercise">
-            🏃‍♂️
+          음악 모임 리스트
+          <span role="img" aria-label="daily">
+            🎵
           </span>
         </h3>
         {/* 모임 리스트 조회 */}
@@ -236,4 +239,4 @@ function ExerciseMeetingPage() {
   );
 }
 
-export default ExerciseMeetingPage;
+export default MusicMeetingPage;

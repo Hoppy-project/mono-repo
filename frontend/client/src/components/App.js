@@ -19,12 +19,12 @@ import MyPage from "./views/MyPage/MyPage";
 import EditMyPage from "./views/MyPage/EditMyPage.js";
 import MyStoryList from "./views/MyPage/MyStoryList/MyStoryList";
 
-import ArtMeetingPage from "./views/ArtMeetingPage/ArtMeetingPage";
-import DailyMeetingPage from "./views/DailyMeetingPage/DailyMeetingPage";
-import ExerciseMeetingPage from "./views/ExerciseMeetingPage/ExerciseMeetingPage";
-import FoodMeetingPage from "./views/FoodMeetingPage/FoodMeetingPage";
-import MusicMeetingPage from "./views/MusicMeetingPage/MusicMeetingPage";
-import TripMeetingPage from "./views/TripMeetingPage/TripMeetingPage";
+import ArtMeetingPage from "./views/HoppyMeeting/ArtMeetingPage";
+import DailyMeetingPage from "./views/HoppyMeeting/DailyMeetingPage";
+import ExerciseMeetingPage from "./views/HoppyMeeting/ExerciseMeetingPage";
+import FoodMeetingPage from "./views/HoppyMeeting/FoodMeetingPage";
+import MusicMeetingPage from "./views/HoppyMeeting/MusicMeetingPage";
+import TripMeetingPage from "./views/HoppyMeeting/TripMeetingPage";
 
 import HobbyStoryPage from "./views/HobbyStoryPage/HobbyStoryPage";
 import MakeStoryPage from "./views/MakeStoryPage/MakeStoryPage";
@@ -115,16 +115,24 @@ function App() {
           <Route exact path="/tripMeeting" component={TripMeetingPage} />
 
           {/* 모임 id별 상세조회 */}
-          <Route exact path="/artMeeting/detail" component={DetailArt} />
-          <Route exact path="/dailyMeeting/detail" component={DetailDaily} />
+          <Route exact path="/artMeeting/:meetingId" component={DetailArt} />
           <Route
             exact
-            path="/exerciseMeeting/detail"
+            path="/dailyMeeting/:meetingId"
+            component={DetailDaily}
+          />
+          <Route
+            exact
+            path="/exerciseMeeting/:meetingId"
             component={DetailExercise}
           />
-          <Route exact path="/foodMeeting/detail" component={DetailFood} />
-          <Route exact path="/musicMeeting/detail" component={DetailMusic} />
-          <Route exact path="/tripMeeting/detail" component={DetailTrip} />
+          <Route exact path="/foodMeeting/:meetingId" component={DetailFood} />
+          <Route
+            exact
+            path="/musicMeeting/:meetingId"
+            component={DetailMusic}
+          />
+          <Route exact path="/tripMeeting/:meetingId" component={DetailTrip} />
 
           {/* 모임 초대*/}
           <Route exact path="/makeMeeting" component={MakeMeetingPage} />

@@ -43,6 +43,8 @@ function ArtMeetingPage() {
         console.log("response>>>>>", response.data.data);
         setMeetingList(response.data.data.meetingList);
         setNextpagingUrl(response.data.data.nextPagingUrl);
+      } else if (response.data.status === 403) {
+        alert("로그인 후 이용 가능합니다.");
       } else {
         alert("데이터 불러오기를 실패했습니다.");
       }
@@ -94,7 +96,7 @@ function ArtMeetingPage() {
 
     const onClickMeeting = (e) => {
       // meeting 클릭 시 해당 모임 페이지로 매칭
-      window.location.href = "/exerciseMeeting/detail";
+      window.location.href = `/artMeeting/${meeting.id}`;
     };
 
     const onClickHeart = (e) => {
@@ -129,9 +131,13 @@ function ArtMeetingPage() {
         />
         <p
           style={{
+            width: "150px",
             fontSize: "13px",
             margin: "9px ",
-            float: "left",
+            textAlign: "left",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           {meeting.title}
