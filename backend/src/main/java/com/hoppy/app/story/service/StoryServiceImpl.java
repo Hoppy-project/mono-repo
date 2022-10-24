@@ -131,7 +131,8 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     @Transactional
-    public PagingStoryDto pagingStory(Long memberId, Long lastId) {
+    public PagingStoryDto pagingStory (Long memberId, Long lastId) {
+        memberService.findById(memberId);
         lastId = validCheckLastId(lastId);
         List<Story> storyList = storyRepository.findNextStoryOrderByIdDesc(lastId, PageRequest.of(0, 10));
         if(storyList.isEmpty()) {
@@ -144,10 +145,13 @@ public class StoryServiceImpl implements StoryService {
         return PagingStoryDto.of(storyDtoList, nextPageUrl);
     }
 
+    @Override
     public List<StoryDto> listToDtoList(List<Story> storyList) {
         return storyList.stream().map(StoryDto::of).collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional
     public void listToLikeList(List<StoryDto> storyDtoList, Long memberId) {
         for (int i = 0; i < storyDtoList.size(); i++) {
             StoryDto dto = storyDtoList.get(i);
