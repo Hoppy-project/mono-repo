@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Icon, Tabs } from "antd";
+import { Avatar, Button, Icon, Tabs } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useLocation } from "react-router-dom";
 import "./DetailMeetingPage.css";
+import Axios from "axios";
 
 function DetailArt() {
   // const [Path, setPath] = useState([]);
@@ -12,6 +13,17 @@ function DetailArt() {
   const test = Id.slice(findStr, 5);
   // console.log("findStr>>>>>>", findStr);
 
+  const onClickParticipate = (e) => {
+    alert("모임에 가입하시겠습니까?");
+  };
+
+  // useEffect(() => {
+  //   getMeeting();
+  // }, []);
+
+  // async function getMeeting (){
+  //   await Axios.get()
+  // }
   return (
     <div
       style={{
@@ -95,6 +107,21 @@ function DetailArt() {
                 <p className="right-location"> 모임장</p>
               </div>
             </div>
+            <Button
+              shape="circle"
+              onClick={onClickParticipate}
+              style={{
+                background: "#D3BA9C",
+                width: "60px",
+                height: "60px",
+                position: "fixed",
+                right: 0,
+                bottom: 0,
+                margin: "0px 15px 50px 0px",
+              }}
+            >
+              가입하기
+            </Button>
           </Tabs.TabPane>
           {/* 커뮤니티 페이지 */}
           <Tabs.TabPane tab="커뮤니티" key="item-2">
