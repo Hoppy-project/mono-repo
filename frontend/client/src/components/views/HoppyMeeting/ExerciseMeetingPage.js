@@ -94,7 +94,7 @@ function ExerciseMeetingPage() {
 
     const onClickMeeting = (e) => {
       // meeting 클릭 시 해당 모임 페이지로 매칭
-      window.location.href = "/exerciseMeeting/detail";
+      window.location.href = `/exerciseMeeting/${meeting.id}`;
     };
 
     const onClickHeart = (e) => {

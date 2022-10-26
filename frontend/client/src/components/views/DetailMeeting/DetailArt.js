@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { Avatar, Button, Icon, Tabs } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -6,24 +7,41 @@ import "./DetailMeetingPage.css";
 import Axios from "axios";
 
 function DetailArt() {
-  // const [Path, setPath] = useState([]);
+  // 모임 Id 추출
+  const url = useLocation().pathname;
+  const findIndex = url.lastIndexOf("/");
+  const Id = url.slice(findIndex + 1);
+  console.log("Id>>>", Id);
 
-  const Id = useLocation().pathname;
-  const findStr = Id.lastIndexOf("/");
-  const test = Id.slice(findStr, 5);
-  // console.log("findStr>>>>>>", findStr);
+  useEffect(() => {
+    getMeeting();
+  }, []);
 
+  const token = localStorage.getItem("Authorization");
+  const headers = {
+    Authorization: token,
+  };
+
+  async function getMeeting() {
+    await Axios.get(`https://hoppy.kro.kr/api/meeting/${Id}`, {
+      headers,
+      withCredentials: false,
+    })
+      .then((response) => {
+        if (response.data.status === 200) {
+          console.log("response>>>>>>", response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.log("error>>>>>>>", error);
+      });
+  }
+
+  // 모임 가입 버튼 함수
   const onClickParticipate = (e) => {
     alert("모임에 가입하시겠습니까?");
   };
 
-  // useEffect(() => {
-  //   getMeeting();
-  // }, []);
-
-  // async function getMeeting (){
-  //   await Axios.get()
-  // }
   return (
     <div
       style={{
