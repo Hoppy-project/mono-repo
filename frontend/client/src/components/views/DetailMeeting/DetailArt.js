@@ -7,6 +7,8 @@ import "./DetailMeetingPage.css";
 import Axios from "axios";
 
 function DetailArt() {
+  const [Meeting, setMeeting] = useState([]);
+
   // 모임 Id 추출
   const url = useLocation().pathname;
   const findIndex = url.lastIndexOf("/");
@@ -30,6 +32,7 @@ function DetailArt() {
       .then((response) => {
         if (response.data.status === 200) {
           console.log("response>>>>>>", response.data.data);
+          setMeeting(response.data.data);
         }
       })
       .catch((error) => {
@@ -62,13 +65,13 @@ function DetailArt() {
               <div>
                 <Avatar
                   size={27}
-                  src="../LandingPage/img/hoppy.png"
+                  src={Meeting.profileImageUrl}
                   style={{
                     float: "left",
                     marginRight: "8px",
                   }}
                 />
-                <p className="left-location">쿼카님</p>
+                <p className="left-location">{Meeting.ownerName}</p>
                 <Icon
                   type="more"
                   style={{ fontSize: "16px", color: "#A5A5A5", float: "right" }}
@@ -78,10 +81,10 @@ function DetailArt() {
                 shape="square"
                 size={340}
                 style={{ marginBottom: "13px" }}
-                src="../LandingPage/img/hoppy.png"
+                src={Meeting.url}
               />
-              <p className="meeting-text">모임 이름</p>
-              <p className="meeting-text">모임 작성 글</p>
+              <p className="meeting-text">{Meeting.title}</p>
+              <p className="meeting-text">{Meeting.content}</p>
               <div style={{ width: "100%", height: "20px" }}>
                 <button
                   style={{
