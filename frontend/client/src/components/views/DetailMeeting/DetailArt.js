@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useLocation } from "react-router-dom";
 import "./DetailMeetingPage.css";
 import Axios from "axios";
+import FirstDetail from "./FirstDetailPage";
 
 function DetailArt() {
   const [Meeting, setMeeting] = useState([]);
@@ -61,73 +62,7 @@ function DetailArt() {
         <Tabs>
           {/* 정보 페이지 */}
           <Tabs.TabPane tab="정보" key="item-1">
-            <div style={{ width: "90%", margin: "0 auto" }}>
-              <div>
-                <Avatar
-                  size={27}
-                  src={Meeting.profileImageUrl}
-                  style={{
-                    float: "left",
-                    marginRight: "8px",
-                  }}
-                />
-                <p className="left-location">{Meeting.ownerName}</p>
-                <Icon
-                  type="more"
-                  style={{ fontSize: "16px", color: "#A5A5A5", float: "right" }}
-                />
-              </div>
-              <Avatar
-                shape="square"
-                size={340}
-                style={{ marginBottom: "13px" }}
-                src={Meeting.url}
-              />
-              <p className="meeting-text">{Meeting.title}</p>
-              <p className="meeting-text">{Meeting.content}</p>
-              <div style={{ width: "100%", height: "20px" }}>
-                <button
-                  style={{
-                    float: "right",
-                    borderRadius: "20px",
-                    backgroundColor: "#fff",
-                    outline: 0,
-                    border: 0,
-                  }}
-                >
-                  <Icon type="heart" style={{ fontSize: "18px" }} />
-                </button>
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  height: "5px",
-                  marginTop: "5px",
-                  backgroundColor: "#F1E3D2",
-                }}
-              />
-              {/* 모임 참여 멤버들 */}
-              <div style={{ width: "100%", height: "30px", marginTop: "10px" }}>
-                <p className="left-location">모임멤버</p>
-                <p className="right-location">6명</p>
-                <Icon
-                  type="user"
-                  style={{ fontSize: "18px", float: "right" }}
-                />
-              </div>
-              <div style={{ width: "100%", height: "30px", marginTop: "5px" }}>
-                <Avatar
-                  size={27}
-                  src="../LandingPage/img/hoppy.png"
-                  style={{
-                    float: "left",
-                    marginRight: "8px",
-                  }}
-                />
-                <p className="left-location"> 해피쿼카</p>
-                <p className="right-location"> 모임장</p>
-              </div>
-            </div>
+            <FirstDetail Meeting={Meeting} />
             <Button
               shape="circle"
               onClick={onClickParticipate}

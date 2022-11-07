@@ -1,5 +1,10 @@
-.meeting-text{
+.meeting-TitleText{
     text-align: left;
+
+}
+.meeting-ContentText {
+    text-align: left;
+    font-size: 12px;
 }
 
 .left-location{
