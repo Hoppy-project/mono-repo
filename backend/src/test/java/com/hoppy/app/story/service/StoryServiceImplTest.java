@@ -17,6 +17,7 @@ import com.hoppy.app.story.domain.story.Story;
 import com.hoppy.app.story.domain.story.StoryReReply;
 import com.hoppy.app.story.domain.story.StoryReply;
 import com.hoppy.app.story.dto.PagingStoryDto;
+import com.hoppy.app.story.dto.StoryDetailDto;
 import com.hoppy.app.story.dto.StoryReReplyRequestDto;
 import com.hoppy.app.story.dto.StoryReplyRequestDto;
 import com.hoppy.app.story.dto.UploadStoryDto;
@@ -26,6 +27,7 @@ import com.hoppy.app.story.repository.StoryRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -79,6 +81,9 @@ class StoryServiceImplTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    @Autowired
+    EntityManager em;
+
     @AfterEach
     void clean() {
         memberStoryLikeRepository.deleteAll();
@@ -93,6 +98,7 @@ class StoryServiceImplTest {
     void storyLikeTest() {
         Member member = memberRepository.save(Member.builder()
                 .id(8669L)
+                .profileImageUrl("www")
                 .build()
         );
         Story story = storyRepository.save(Story.builder()
@@ -101,8 +107,10 @@ class StoryServiceImplTest {
                 .member(member)
                 .build()
         );
-        
-        memberStoryLikeRepository.save(MemberStoryLike.of(member, story));
+
+        storyService.likeOrDislikeStory(member.getId(), story.getId());
+
+        assertThat(memberStoryLikeRepository.findAll().size()).isEqualTo(1);
     }
 
     @DisplayName("스토리 삭제 테스트")
