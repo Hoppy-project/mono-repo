@@ -36,4 +36,12 @@ public interface StoryReplyRepository extends JpaRepository<StoryReply, Long> {
             @Param("id") Long id,
             @Param("memberId") Long memberId
     );
+
+    @Modifying
+    @Query("delete from StoryReply s where s.story.id =:id")
+    void deleteStoryReplyByStoryId(@Param("id") Long id);
+
+    @Modifying
+    @Query("delete from StoryReReply rr where rr.reply.id =:id")
+    void deleteReReplies(@Param("id") Long id);
 }
